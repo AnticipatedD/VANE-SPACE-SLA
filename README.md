@@ -49,6 +49,20 @@ Vane-Space-SLA is an ultra-modern, production-ready Retrieval-Augmented Generati
 
 ---
 
+📂 The Unified Repository Structure: 
+
+(Vane-Space-SLA)
+├── vane_space_init.py           # The real-time telemetry processing Python script
+├── index.html                   # Core portal dashboard connecting all your projects
+├── terms.html                   # Standard terms of infrastructure usage
+├── privacy.html                 # Data compliance and protection policy
+├── security.html                # Zero-Trust & cryptographic asset protection details
+├── scripts.html                 # Centralized asset inventory of your system scripts
+├── animation.script.js          # Custom script driving the telemetry visuals
+└── extensions-core/             # Specialized isolated engineering folder
+    ├── m2m-oauth-isolation.html # Machine-to-Machine security boundary interface
+    └── voice_agents.py          # Real-time duplex voice telemetry handler
+
 ## 🛠️ Production Technology Stack
 
 *   **Core Execution**: Python 3.10+, LangChain, FastAPI high-performance API routing.
@@ -65,7 +79,5 @@ Vane-Space-SLA is an ultra-modern, production-ready Retrieval-Augmented Generati
 *   **Query Latency**: < 1.8 seconds average processing over massive payload streams.
 *   **Hallucination Prevention**: 96%+ verified accuracy on telemetry verification loops.
 *   **System Uptime**: 99.99% enterprise SLA compliance.
-
 ---
-
-© 2026 MD ABUL HOSSAIN · TARU Global Access
+© 2026 [MD ABUL HOSSAIN:](https://anticipatedd.github.io/mdhossain).All Rights Reserved. [TARU Global Access:](https://taruglobalaccess.com)
