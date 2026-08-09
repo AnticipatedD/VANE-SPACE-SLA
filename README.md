@@ -50,18 +50,27 @@ Vane-Space-SLA is an ultra-modern, production-ready Retrieval-Augmented Generati
 ---
 
 📂 The Unified Repository Structure: 
-
 (Vane-Space-SLA)
-├── vane_space_init.py           # The real-time telemetry processing Python script
-├── index.html                   # Core portal dashboard connecting all your projects
-├── terms.html                   # Standard terms of infrastructure usage
-├── privacy.html                 # Data compliance and protection policy
-├── security.html                # Zero-Trust & cryptographic asset protection details
-├── scripts.html                 # Centralized asset inventory of your system scripts
-├── animation.script.js          # Custom script driving the telemetry visuals
-└── extensions-core/             # Specialized isolated engineering folder
-    ├── m2m-oauth-isolation.html # Machine-to-Machine security boundary interface
-    └── voice_agents.py          # Real-time duplex voice telemetry handler
+├── vane_space_init.py           
+# The real-time telemetry processing Python script
+├── index.html                   
+# Core portal dashboard connecting all your projects
+├── terms.html                   
+# Standard terms of infrastructure usage
+├── privacy.html                 
+# Data compliance and protection policy
+├── security.html                
+# Zero-Trust & cryptographic asset protection details
+├── scripts.html                 
+# Centralized asset inventory of your system scripts
+├── animation.script.js          
+# Custom script driving the telemetry visuals
+└── extensions-core/             
+# Specialized isolated engineering folder
+    ├── m2m-oauth-isolation.html 
+    # Machine-to-Machine security boundary interface
+    └── voice_agents.py          
+    # Real-time duplex voice telemetry handler
 
 ## 🛠️ Production Technology Stack
 
@@ -83,5 +92,5 @@ Vane-Space-SLA is an ultra-modern, production-ready Retrieval-Augmented Generati
 *   **Verification Gate Accuracy**: Dynamically scaling between 92.0% and 99.0% based directly on real-time vector alignment metrics, fully audited by the watsonx.governance pipeline.
 *   **Operational Security Integrity**: Hardened by a cryptographic VANE_BOB_NODE root anchor, eliminating reliance on open-ended prompt probability loops.
 
----
-© 2026 [MD ABUL HOSSAIN](https://anticipatedd.github.io/mdhossain).All Rights Reserved. [TARU Global Access](https://taruglobalaccess.com)
+--- 
+© 2026 MD ABUL HOSSAIN. All Rights Reserved
