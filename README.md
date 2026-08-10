@@ -1,7 +1,12 @@
 # VANE-SPACE-SLA (v1.0) 🛰️
 ### Sovereign Level Agreement Engine: Deterministic Zero-Trust Telemetry RAG for Mission-Critical Spacecraft Operations.
 
-Vane-Space-SLA is an ultra-modern, production-ready Retrieval-Augmented Generation (RAG) and Multi-Gate verification pipeline built specifically to secure automated decision-making in deep space exploration. By pairing the enterprise-grade **IBM Granite Model Family** with an immutable deterministic audit layer, Vane-Space-SLA establishes a cryptographic truth boundary over complex satellite data, eliminating algorithmic hallucinations before critical mission-control actions are executed.
+### Live Site
+- GitHub Pages: [https://anticipatedd.github.io/mdhossain](https://anticipatedd.github.io/mdhossain)
+
+[![Mr. MD ABUL HOSSAIN – Architect of Vane-Space-SLA (v1.0)](images/Md_Abul_Hossain_vane_space_SLA26.jpg)](https://anticipatedd.github.io/mdhossain) 
+
+Vane-Space-SLA  is an ultra-modern, production-ready Retrieval-Augmented Generation (RAG) and Multi-Gate verification pipeline built specifically to secure automated decision-making in deep space exploration. By pairing the enterprise-grade **IBM Granite Model Family** with an immutable deterministic audit layer, Vane-Space-SLA establishes a cryptographic truth boundary over complex satellite data, eliminating algorithmic hallucinations before critical mission-control actions are executed.
 
 ---
 
@@ -94,3 +99,5 @@ Vane-Space-SLA is an ultra-modern, production-ready Retrieval-Augmented Generati
 
 --- 
 © 2026 MD ABUL HOSSAIN. All Rights Reserved
+
+
