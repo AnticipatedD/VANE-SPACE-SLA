@@ -3,397 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vane-Space-SLA Portal Matrix</title>
+    <title>Vane-Space-SLA Enterprise Command Center</title>
     <style>
         :root {
-            --bg-dark: #0a0f1d;
-            --card-bg: #111827;
+            --bg-main: #0b0f19;
+            --bg-card: #111827;
+            --bg-widget: #1f2937;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-red: #ef4444;
+            --accent-orange: #d97706;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
             --border-color: #1f2937;
-            --text-main: #9ca3af;
-            --text-bright: #f3f4f6;
-            --accent-blue: #3b82f6;
-            --accent-green: #10b981;
-            --accent-orange: #f59e0b;
         }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .matrix-container {
-            width: 100%;
-            max-width: 800px;
-        }
-
-        /* Header Styles */
-        .portal-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .portal-header h1 {
-            color: #60a5fa;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-        .portal-header p {
-            font-size: 0.85rem;
-            color: #6b7280;
-            margin: 0;
-        }
-
-        /* Node Identifier Identifier */
-        .node-identifier {
-            background: rgba(17, 24, 39, 0.8);
-            border: 1px solid var(--border-color);
-            padding: 12px 16px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            font-size: 0.85rem;
-        }
-        .node-identifier-title {
-            color: #4b5563;
-            font-weight: bold;
-            display: block;
-            font-size: 0.75rem;
-        }
-
-        /* Main Grid system matching my dashboard design */
-        .widget-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .widget-box {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-top: 3px solid var(--border-color);
-            border-radius: 6px;
-            padding: 20px;
-        }
-
-        /* Top telemetry panel styles */
-        .telemetry-header {
-            color: #60a5fa;
-            font-size: 0.95rem;
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .metrics-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .metric-card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
-            padding: 12px;
-            border-radius: 4px;
-        }
-        .metric-label {
-            font-size: 0.7rem;
-            color: #64748b;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 4px;
-        }
-        .metric-value {
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        .metric-value.active { color: var(--accent-green); }
-        .metric-value.blue { color: #3b82f6; }
-        .metric-value.purple { color: #a855f7; }
-        .metric-value.orange { color: var(--accent-orange); }
-
-        .tags-row {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            font-size: 0.75rem;
-        }
-        .tag {
-            background: #1e293b;
-            padding: 4px 10px;
-            border-radius: 4px;
-            color: #94a3b8;
-        }
-
-        /* Live Terminal stream viewport layout */
-        .terminal-container {
-            background-color: #05070f;
-            border: 1px solid #1e293b;
-            border-radius: 4px;
-            padding: 14px;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 0.8rem;
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg-main); 
+            color: var(--text-primary); 
+            margin: 0; 
+            padding: 16px; 
             line-height: 1.5;
-            height: 160px;
-            overflow-y: auto;
         }
 
-        /* Two column inner section split grid layout */
-        .split-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        @media (max-width: 600px) {
-            .split-grid { grid-template-columns: 1fr; }
+        header { text-align: center; margin-bottom: 30px; padding-top: 10px; }
+        h1 { color: #3b82f6; margin: 0 0 8px 0; font-size: 1.8rem; letter-spacing: 1px; }
+        header p { color: var(--text-secondary); margin: 0; font-size: 0.95rem; }
+
+        .banner-container { max-width: 1200px; margin: 0 auto 25px auto; }
+        .banner-image { 
+            width: 100%; height: auto; min-height: 120px; border-radius: 8px; 
+            border: 1px solid var(--border-color); box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            object-fit: cover; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); display: block;
         }
 
-        .section-title {
-            color: #60a5fa;
-            font-size: 0.95rem;
-            margin-top: 0;
-            margin-bottom: 16px;
-        }
+        .grid-container { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); }
+        .card h2 { color: #3b82f6; margin-top: 0; font-size: 1.3rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+
+        .badge-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .badge-pill { background: #1e293b; border: 1px solid #334155; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+
+        .status-header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        .indicator-node { background: #151f32; border: 1px solid #1e293b; padding: 12px; border-radius: 6px; text-align: center; }
+        .indicator-node span { display: block; font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .indicator-node div { font-size: 1.2rem; font-weight: bold; margin-top: 4px; }
         
-        .panel-text {
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
+        .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; display: inline-block; box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); animation: pulse 1.6s infinite; vertical-align: middle; margin-right: 6px;}
+        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); } }
 
-        /* Buttons styles matching layout graphics */
-        .btn-container {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .btn {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .btn.green {
-            background: var(--accent-green);
-        }
+        .telemetry-terminal { background: #05070c; border: 1px solid #1e293b; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: #34d399; height: 140px; overflow-y: auto; line-height: 1.4; margin-top: 10px; }
 
-        /* Configuration Data block structure styling */
-        .json-block {
-            background-color: #070a13;
-            border: 1px solid #1e293b;
-            border-radius: 4px;
-            padding: 12px;
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: #a1a1aa;
-            white-space: pre-wrap;
-            margin: 10px 0;
-        }
+        .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1 1 auto; text-align: center; background-color: var(--accent-blue); color: #fff; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: background 0.2s ease; }
+        .btn:hover { background-color: #1d4ed8; }
 
-        /* Structural list mapping layout links */
-        .link-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.85rem;
-        }
-        .link-list li {
-            margin-bottom: 10px;
-        }
-        .link-list a {
-            color: #60a5fa;
-            text-decoration: none;
-        }
-        .link-list a:hover {
-            text-decoration: underline;
-        }
+        .widget-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 15px; }
+        .widget-box { background-color: var(--bg-widget); padding: 16px; border-radius: 6px; min-height: 120px; border-top: 4px solid var(--accent-blue); box-sizing: border-box; }
+        .custom-widget-ui { background: #111827; border: 1px solid #2d3748; border-radius: 6px; padding: 12px; margin-top: 10px; font-size: 0.85rem; margin-bottom: 15px; }
 
-        /* Layout Footer */
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 24px 16px;
-            border-top: 1px solid var(--border-color);
-            font-family: sans-serif;
-        }
-        .footer-links {
-            margin-bottom: 12px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            font-size: 0.9rem;
-        }
-        .footer-links a {
-            color: #9ca3af;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: #3b82f6;
-        }
-        .footer-divider {
-            color: #374151;
-        }
-        .copyright {
-            font-size: 0.85em;
-            color: #4b5563;
-            margin: 0;
+        .meta-list { list-style-type: none; padding: 0; margin: 0; }
+        .meta-list li { padding: 10px 0; border-bottom: 1px solid #374151; font-size: 0.9rem; word-break: break-word; }
+        .meta-list li:last-child { border-bottom: none; }
+
+        footer { text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid var(--border-color); }
+        footer a { color: var(--text-secondary); text-decoration: none; margin: 0 8px; }
+
+        @media (min-width: 768px) {
+            body { padding: 30px; }
+            h1 { font-size: 2.3rem; }
+            .grid-container { grid-template-columns: 1fr 1fr; }
+            .span-desktop-2 { grid-column: span 2; }
+            .widget-grid { grid-template-columns: 1fr 1fr; }
+            .btn { flex: 0 1 auto; }
         }
     </style>
 </head>
 <body>
 
-<div class="matrix-container">
-
-    <!-- Top Headline Section -->
-    <div class="portal-header">
-        <h1>Vane-Space-SLA Portal Matrix</h1>
+    <header>
+        <h1>VANE-SPACE-SLA PORTAL MATRIX</h1>
         <p>Verified Principal Investigator Portfolio & Real-Time Security Integration</p>
-    </div>
+    </header>
 
-    <!-- Node Tracker Box -->
-    <div class="node-identifier">
-        <div style="color: #60a5fa; font-size: 1.5rem;">🛡️</div>
-        <div>
-            <span class="node-identifier-title">SECURE NODE IDENTIFIER</span>
-            <span style="color: #f3f4f6; font-weight: 500;">VANE-SPACE-SLA // CORE_MATRIX_V1.0</span>
-        </div>
+    <!-- Enterprise Zero-Trust Node Indicator Header -->
+<div style="max-width: 1200px; margin: 0 auto 25px auto; padding: 20px; background: linear-gradient(135deg, #111827 0%, #1e293b 100%); border: 1px solid #1f2937; border-radius: 8px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+    <div style="background: rgba(37, 99, 235, 0.1); border: 1px solid #2563eb; padding: 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="12 8 12 12 15 14"/>
+        </svg>
     </div>
+    <div style="text-align: left;">
+        <div style="font-size: 0.75rem; text-transform: uppercase; color: #34d399; font-weight: bold; letter-spacing: 1px;">SECURE NODE IDENTIFIER</div>
+        <div style="font-size: 1.1rem; font-weight: bold; color: #f3f4f6; font-family: monospace;">VANE-SPACE // CORE_MATRIX_V1.0</div>
+    </div>
+</div>
 
-    <div class="widget-grid">
-        
-        <!-- Box 1: Telemetry Stream and Metric Overview Panel -->
-        <div class="widget-box" style="border-top-color: var(--accent-green);">
-            <h3 class="telemetry-header">📡 Automated Telemetry Engine & Verified Credentials</h3>
+    <!-- Live Telemetry Monitor & Credentials -->
+    <div class="grid-container" style="margin-bottom: 20px;">
+        <section class="card span-desktop-2" style="border-left: 4px solid var(--accent-green);">
+            <h2>🛸 Automated Telemetry Engine & Verified Credentials</h2>
             
-            <div class="metrics-row">
-                <div class="metric-card">
-                    <span class="metric-label">M2M Gateway</span>
-                    <span class="metric-value active">ACTIVE</span>
+            <div class="status-header-grid">
+                <div class="indicator-node">
+                    <span>M2M Gateway</span>
+                    <div style="color: #34d399;"><span class="pulse-dot"></span>ACTIVE</div>
                 </div>
-                                <div class="metric-card">
-                    <span class="metric-label">IBM Portfolio</span>
-                    <span class="metric-value blue">77 Badges</span>
+                <div class="indicator-node">
+                    <span>IBM Portfolio</span>
+                    <div style="color: #60a5fa;">77 Badges</div>
                 </div>
-                <div class="metric-card">
-                    <span class="metric-label">Microsoft Learn</span>
-                    <span class="metric-value purple">58 Badges</span>
+                <div class="indicator-node">
+                    <span>Microsoft Learn</span>
+                    <div style="color: #a855f7;">58 Badges</div>
                 </div>
-                <div class="metric-card">
-                    <span class="metric-label">Global Trophies</span>
-                    <span class="metric-value orange">10 Awarded</span>
+                <div class="indicator-node">
+                    <span>Global Trophies</span>
+                    <div style="color: #f59e0b;">10 Awarded</div>
                 </div>
-                <div class="metric-card">
-                    <span class="metric-label">Node Latency</span>
-                    <span class="metric-value active" id="latency-val">-- ms</span>
-                </div>
-            </div>
-
-            <div class="tags-row">
-                <div class="tag">🔴 IBM Advanced Certified</div>
-                <div class="tag">🟢 Enterprise Automation Infrastructure</div>
-                <div class="tag">🟡 EU Portal Data Integrator</div>
-            </div>
-
-            <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 6px;">Real-Time System Rule Telemetry Feed:</p>
-            <div class="terminal-container" id="terminal-stream"></div>
-        </div>
-
-                <!-- 🚀 START PASTING SPLIT-GRID CODES HERE -->
-        <div class="split-grid">
-            <!-- Column 1: Operational Stats Info Panel -->
-            <div class="widget-box" style="border-top-color: var(--accent-blue);">
-                <h3 class="section-title">🛸 System Operational Architecture</h3>
-                <div class="panel-text" style="margin-bottom: 8px;"><strong>Framework:</strong> VANE-SPACE-SLA Sovereign Engine (v1.0)</div>
-                <div class="panel-text" style="margin-bottom: 12px;"><strong>Primary Node Verification:</strong> IBM Bob Intermediate Infrastructure</div>
-                <p style="font-size: 0.8rem; color: #64748b; line-height: 1.5; margin: 12px 0 20px 0;">An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
-                <div class="btn-container">
-                    <button class="btn">Explore System Scripts</button>
-                    <button class="btn green">M2M Isolation Gateway</button>
+                <div class="indicator-node">
+                    <span>Node Latency</span>
+                    <div style="color: #34d399;" id="latency-val">42 ms</div>
                 </div>
             </div>
 
-            <!-- Column 2: Feed Sources Panel -->
-            <div class="widget-box" style="border-top-color: var(--accent-blue);">
-                <h3 class="section-title">🇪🇺 Official EU Publications & Streams</h3>
-                <ul class="meta-list">
+            <div class="badge-strip">
+                <div class="badge-pill" style="color: #60a5fa;">🛡️ IBM Advanced Certified</div>
+                <div class="badge-pill" style="color: #34d399;">⚙️ Enterprise Automation Infrastructure</div>
+                <div class="badge-pill" style="color: #f59e0b;">📦 EU Portal Data Integrator</div>
+            </div>
+
+            <strong style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-top: 15px;">Real-Time System Rule Telemetry Feed:</strong>
+            <div class="telemetry-terminal" id="terminal-stream">Initializing secure trace sync...</div>
+        </section>
+    </div>
+
+    <main class="grid-container">
+
+        <!-- CARD 1: VANE-SPACE SYSTEM LOGISTICS -->
+        <section class="card">
+            <h2>🛸 System Operational Architecture</h2>
+            <p><strong>Framework:</strong> Vane-Space Sovereign-SLA Engine (v1.0)</p>
+            <p><strong>Primary Node Verification:</strong> IBM Bob Intermediate Infrastructure</p>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
+            <div class="btn-group">
+                <a href="scripts.html" class="btn">Explore System Scripts</a>
+                <a href="extensions-core/m2m-oauth-isolation.html" class="btn" style="background-color: var(--accent-green);">M2M Isolation Gateway</a>
+            </div>
+        </section>
+              
+        <!-- CARD 2: OFFICIAL EUROPEAN COMMISSION CREDENTIALS -->
+<section class="card">
+    <h2>🇪🇺 Official EU Publications & Streams</h2>
+    <ul class="meta-list">
         <li><strong>Permanent Record:</strong> <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" style="color: #60a5fa;" target="_blank" rel="noopener">EU Publication Detail</a></li>
         <li><strong>Short Registry:</strong> <a href="https://europa.eu" style="color: #60a5fa;" target="_blank" rel="noopener">op.europa.eu/s/AjiB</a></li>
-        <li><strong>Live Verification:</strong> <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" style="color: #34d399;" target="_blank" rel="noopener">My Official EU RSS Feed</a></li>
+        <li><strong>Live Verification:</strong> <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" style="color: #34d399;" target="_blank" rel="noopener">Official EU RSS Feed</a></li>
     </ul>
 </section>
-                </ul>
-            </div>
-        </div>
 
-        <!-- Verification Infrastructure Asset Wrapper Box -->
-        <div class="widget-box" style="border-top-color: var(--accent-orange);">
-            <strong style="display: block; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 12px;">🛡️ Verification Infrastructure (EC Portal Widgets)</strong>
-            <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 16px;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
+        <!-- CARD 3: EU OFFICIAL APP EMBEDDED WIDGETS -->
+        <section class="card span-desktop-2">
+            <h2>🛡️ Verification Infrastructure (EC Portal Widgets)</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
+            
+            <div class="widget-grid">
+                <!-- Wrapper Box 1: Horizon Europe Cellar Asset Integration -->
+                <div class="widget-box" style="border-top-color: var(--accent-orange);">
+                    <strong style="display: block; color: var(--accent-orange); font-size: 0.95rem;">EU Cellar Asset Integration Wrapper</strong> 
+                       <div class="widget-grid">
+    <!-- Wrapper Box 1: Horizon Europe Cellar Asset Integration -->
+   <div class="widget-grid">
+    <!-- Wrapper Box 1: Horizon Europe Cellar Asset Integration -->
+    <div class="widget-box" style="border-top-color: var(--accent-orange);">
+        <strong style="display: block; color: var(--accent-orange); font-size: 0.95rem;">EU Cellar Asset Integration Wrapper</strong>
+        
+        <p>Target Asset: Horizon Europe, Pillar II</p>
+        <p>Global challenges and European industrial competitiveness.</p>
+        <p>Status: Synced via Cellar ID</p>
+        
+        <pre><code>{
+"portalURL": "europa.eu",
+"uuid": "portal2012190f647302dd463383c021521736d419",
+"widgetType": "5",
+"cellarId": "af30723e-f4ce-11eb-aeb9-01aa75ed71a1"
+}</code></pre>
 
-            <div style="border-left: 2px solid var(--accent-orange); padding-left: 14px; margin-bottom: 24px;">
-                <span style="color: var(--accent-orange); font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 8px;">EU Cellar Asset Integration Wrapper</span>
-                <div class="panel-text" style="margin-bottom: 4px;">Target Asset: Horizon Europe, Pillar II</div>
-                <div class="panel-text" style="margin-bottom: 4px;">Global challenges and European industrial competitiveness.</div>
-                <div class="panel-text" style="color: #64748b; font-size: 0.8rem; margin-bottom: 12px;">Status: Synced via Cellar ID</div>
-                
-                <div class="json-block">{
-  "portalURL": "europa.eu",
-  "uuid": "portal2012190f647302dd463383c021521736d419",
-  "widgetType": "5",
-  "cellarId": "af30723e-f4ce-11eb-aeb9-01aa75ed71a1"
-}</div>
-            </div>
-
-            <div style="border-left: 2px solid #1f2937; padding-left: 14px; margin-top: 20px;">
-                <div class="panel-text" style="margin-bottom: 4px; font-weight: bold; color: var(--text-bright);">EC Webmaster Operational Wrapper</div>
-                <div class="panel-text" style="margin-bottom: 4px;">Service Engine: OPWIDGET</div>
-                <div class="panel-text" style="margin-bottom: 4px;">Widget Cluster Identity Ref: #10493</div>
-                <div class="panel-text" style="margin-bottom: 12px;">Lang: Auto-Detect</div>
-                
-                <div class="json-block" style="margin-bottom: 12px;">{"portalURL":"europa.eu","uuid":"portal2012fed768463e104dd79cab9e9477b92022","widgetId":"10493","widgetType":"5"}</div>
-                <div class="json-block">{ "service": "opwidget", "widgetId": "10493", "lang": "auto" }</div>
-            </div>
-        </div>
-
-    </div> <!-- Closes .widget-grid -->
-
-    <!-- System Global Footer Area -->
-    <footer>
-        <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <span class="footer-divider">|</span>
-            <a href="contact.html">Contact Us</a>
-            <span class="footer-divider">|</span>
-            <a href="security.html">Zero-Trust Security Layout</a>
-            <span class="footer-divider">|</span>
-            <a href="privacy.html">Privacy Policy</a>
-            <span class="footer-divider">|</span>
-            <a href="terms.html">Terms of Service</a>
-        </div>
-        <p class="copyright">Vane Enterprise LLC © 2026 MD ABUL HOSSAIN. All Rights Reserved.</p>
-    </footer>
+        <p>EC Webmaster Operational Wrapper</p>
+        <p>Service Engine: OPWIDGET</p>
+        <p>Widget Cluster Identity Ref: #10493</p>
+        <p>Lang: Auto-Detect</p>
+       
+        <pre><code>{"portalURL":"europa.eu","uuid":"portal2012fed768463e104dd79cab9e9477b92022","widgetId":"10493","widgetType":"5"}</code></pre>
+        <pre><code>{ "service": "opwidget", "widgetId": "10493", "lang": "auto" }</code></pre>
+    </div>
+</div> 
+                       
+<footer style="text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid #1f2937; font-family: sans-serif;">
+    <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
+        <a href="about.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">About Us</a>
+        <span style="color: #374151;">|</span>
+        <a href="contact.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Contact Us</a>
+        <span style="color: #374151;">|</span>
+        <a href="security.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Zero-Trust Security Layout</a>
+        <span style="color: #374151;">|</span>
+        <a href="privacy.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Privacy Policy</a>
+        <span style="color: #374151;">|</span>
+        <a href="terms.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Terms of Service</a>
+    </div>
+    <p style="font-size: 0.85em; color: #4b5563; margin: 0;">Vane Enterprise LLC © MD ABUL HOSSAIN 2026. All Rights Reserved.</p>
+</footer>
+                       
+    <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
+        <a href="about.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">About Us</a>
+        <span style="color: #374151;">|</span>
+        <a href="contact.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Contact Us</a>
+        <span style="color: #374151;">|</span>
+        <a href="security.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Zero-Trust Security Layout</a>
+        <span style="color: #374151;">|</span>
+        <a href="privacy.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Privacy Policy</a>
+        <span style="color: #374151;">|</span>
+        <a href="terms.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Terms of Service</a>
+    </div>
+    <p style="font-size: 0.85em; color: #4b5563; margin: 0;">Vane Enterprise LLC © 2026. All Rights Reserved.</p>
+</footer>
 
 
-</div> <!-- Closes .matrix-container -->
-
-<!-- Live Terminal Script Engine Sync Logic -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const terminal = document.getElementById("terminal-stream");
@@ -410,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     function addLogLine() {
-        if (!terminal) return;
+        if (!terminal) return; // Prevents errors if element is missing
         
         const now = new Date().toISOString().slice(11, 19);
         let selectedLog = logs[Math.floor(Math.random() * logs.length)];
@@ -421,20 +258,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         const newLine = document.createElement("div");
-        // Changed color from #ef4444 (red) to #10b981 (green)
-        newLine.innerHTML = `<span style="color: #10b981;">[${now}]</span> <span style="color: #d1d5db; margin-left: 8px;">${selectedLog}</span>`;
+        newLine.innerHTML = `<span style="color: #60a5fa;">[${now}]</span> ${selectedLog}`;
         terminal.appendChild(newLine);
         terminal.scrollTop = terminal.scrollHeight;
         
         if (latencyVal) {
-            const currentLatency = Math.floor(Math.random() * 15) + 38;
+            const currentLatency = Math.floor(Math.random() * 25) + 30;
             latencyVal.textContent = `${currentLatency} ms`;
         }
     }
 
+    // Initial log generation
     for(let i=0; i<3; i++) { 
         setTimeout(addLogLine, i * 400); 
     }
+    // Continuous loop interval
     setInterval(addLogLine, 3200);
 });
 </script>
