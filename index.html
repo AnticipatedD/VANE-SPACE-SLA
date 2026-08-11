@@ -168,27 +168,7 @@
         <section class="card span-desktop-2">
             <h2>🛡️ Verification Infrastructure (EC Portal Widgets)</h2>
             <p style="color: var(--text-secondary); margin-bottom: 15px;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
-<!-- ========================================== -->
-<!-- START OF VANE-SPACE DYNAMIC ADDITIONS BLOCK -->
-<!-- ========================================== -->
-<style>
-    /* Additions for Telemetry & Badge Grid Layouts */
-    .status-header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
-    .indicator-node { background: #151f32; border: 1px solid #1e293b; padding: 12px; border-radius: 6px; text-align: center; font-family: sans-serif; }
-    .indicator-node span { display: block; font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
-    .indicator-node div { font-size: 1.2rem; font-weight: bold; margin-top: 4px; }
-    
-    .pulse-dot { width: 8px; height: 8px; background-color: #059669; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); animation: pulseVane 1.6s infinite; vertical-align: middle; margin-right: 6px;}
-    @keyframes pulseVane { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); } }
 
-    .telemetry-terminal { background: #05070c; border: 1px solid #1e293b; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: #34d399; height: 140px; overflow-y: auto; line-height: 1.4; margin-top: 10px; text-align: left; }
-    .badge-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
-    .badge-pill { background: #1e293b; border: 1px solid #334155; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: #f3f4f6; font-family: sans-serif; }
-    
-    .widget-grid-new { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 15px; }
-    @media (min-width: 768px) { .widget-grid-new { grid-template-columns: 1fr 1fr; } }
-    .custom-widget-ui { background: #111827; border: 1px solid #2d3748; border-radius: 6px; padding: 12px; margin-bottom: 15px; font-size: 0.85rem; font-family: sans-serif; text-align: left; }
-</style>        
 
   <!-- 2. DECORATED PORTAL WIDGET WRAPPERS -->
   <div class="widget-grid-new" style="grid-column: span 2; margin-top: 10px; margin-bottom: 20px;">
@@ -251,6 +231,3 @@
         setInterval(addLogLine, 3200);
     });
 </script>
-<!-- ========================================== -->
-<!-- END OF VANE-SPACE DYNAMIC ADDITIONS BLOCK   -->
-<!-- ========================================== -->   
