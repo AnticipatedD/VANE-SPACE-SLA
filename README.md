@@ -1,7 +1,7 @@
 # VANE-SPACE-SLA (v1.0) 🛰️
 
 ### Live Site 
-- Github Pages: [https://anticipatedd.github.io/Vane-Space-SLA](https://anticipatedd.github.io/Vane-Space-SLA)
+- Github Pages: [https://anticipatedd.github.io/VANE-SPACE-SLA](https://anticipatedd.github.io/VANE-SPACE-SLA/)
 
 ![Vane-Space-SLA Enterprise Cover](Md_Abul_Hossain_vane_space_SLA26.jpg)
 
