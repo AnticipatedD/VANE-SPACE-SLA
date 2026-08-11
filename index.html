@@ -5,27 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vane-Space-SLA Enterprise Command Center</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f3f4f6; margin: 0; padding: 20px; }
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background-color: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); }
-        h1, h2 { color: #3b82f6; margin-top: 0; }
-        .btn { display: inline-block; background-color: #2563eb; color: #fff; padding: 10px 15px; border-radius: 4px; text-decoration: none; font-weight: bold; margin-top: 10px; }
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #111827;
+            --bg-widget: #1f2937;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-red: #ef4444;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --border-color: #1f2937;
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg-main); 
+            color: var(--text-primary); 
+            margin: 0; 
+            padding: 16px; 
+            line-height: 1.5;
+        }
+
+        header {
+            text-align: center; 
+            margin-bottom: 30px;
+            padding-top: 10px;
+        }
+
+        h1 { 
+            color: #3b82f6; 
+            margin: 0 0 8px 0; 
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Banner styling with native CSS fallback if image is missing */
+        .banner-container { 
+            text-align: center; 
+            margin-bottom: 25px; 
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .banner-image { 
+            width: 100%; 
+            height: auto; 
+            min-height: 120px;
+            border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+            object-fit: cover;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            display: block;
+        }
+
+        /* Mobile-First Base Layout (1 Column) */
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        .card { 
+            background-color: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 20px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); 
+        }
+
+        .card h2 { 
+            color: #3b82f6; 
+            margin-top: 0; 
+            font-size: 1.3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* Button Grid Layout for Responsiveness */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn { 
+            flex: 1 1 auto;
+            text-align: center;
+            background-color: var(--accent-blue); 
+            color: #fff; 
+            padding: 12px 20px; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
         .btn:hover { background-color: #1d4ed8; }
-        .widget-box { background-color: #1f2937; padding: 15px; border-radius: 6px; min-height: 100px; margin-top: 15px; border-left: 4px solid #ef4444; }
-        .meta-list { list-style-type: none; padding: 0; }
-        .meta-list li { padding: 8px 0; border-bottom: 1px solid #374151; }
+
+        /* Widget Container Layouts */
+        .widget-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .widget-box { 
+            background-color: var(--bg-widget); 
+            padding: 16px; 
+            border-radius: 6px; 
+            min-height: 120px; 
+            border-left: 4px solid var(--accent-red); 
+            box-sizing: border-box;
+            overflow-x: auto; /* Fallback preservation for wide embeds */
+        }
+
+        .meta-list { list-style-type: none; padding: 0; margin: 0; }
+        .meta-list li { 
+            padding: 10px 0; 
+            border-bottom: 1px solid #374151; 
+            font-size: 0.9rem;
+            word-break: break-word; /* Prevents long registry URLs from breaking the card wide */
+        }
+        .meta-list li:last-child { border-bottom: none; }
+
+        footer { 
+            text-align: center; 
+            margin-top: 50px; 
+            padding: 24px 16px; 
+            border-top: 1px solid var(--border-color); 
+        }
+        footer p { margin: 6px 0; }
+
+        /* Desktop Layout Overrides (Screens wider than 768px) */
+        @media (min-width: 768px) {
+            body { padding: 30px; }
+            h1 { font-size: 2.3rem; }
+            
+            .grid-container { 
+                grid-template-columns: 1fr 1fr; 
+            }
+            
+            .span-desktop-2 { 
+                grid-column: span 2; 
+            }
+            
+            .widget-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .btn { flex: 0 1 auto; }
+        }
     </style>
 </head>
 <body>
 
-    <header style="text-align: center; margin-bottom: 40px;">
+    <header>
         <h1>VANE-SPACE-SLA PORTAL MATRIX</h1>
         <p>Verified Principal Investigator Portfolio & Real-Time Security Integration</p>
     </header>
-<!-- Enterprise Header Banner Image -->
-<div style="text-align: center; margin-bottom: 25px;">
-    <img src="My_VANE_SPACE_SLA1.jpg" alt="Vane-Space-SLA Enterprise Cover Matrix" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #1f2937; box-shadow: 0 8px 16px rgba(0,0,0,0.6);">
-</div>
+
+    <!-- Enterprise Header Banner Image Container -->
+    <div class="banner-container">
+        <img src="My_VANE_SPACE_SLA1.jpg" alt="Vane-Space-SLA Enterprise Cover Matrix" class="banner-image">
+    </div>
 
     <main class="grid-container">
 
@@ -34,32 +190,33 @@
             <h2>🛸 System Operational Architecture</h2>
             <p><strong>Framework:</strong> Vane-Space Sovereign-SLA Engine (v1.0)</p>
             <p><strong>Primary Node Verification:</strong> IBM Bob Intermediate & Event Automation Infrastructure</p>
-            <p>An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
-            <a href="scripts.html" class="btn">Explore System Scripts</a>
-            <a href="extensions-core/m2m-oauth-isolation.html" class="btn" style="background-color: #059669;">M2M Isolation Gateway</a>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
+            <div class="btn-group">
+                <a href="scripts.html" class="btn">Explore System Scripts</a>
+                <a href="extensions-core/m2m-oauth-isolation.html" class="btn" style="background-color: var(--accent-green);">M2M Isolation Gateway</a>
+            </div>
         </section>
 
         <!-- CARD 2: OFFICIAL EUROPEAN COMMISSION CREDENTIALS -->
         <section class="card">
             <h2>🇪🇺 Official EU Publications & Streams</h2>
             <ul class="meta-list">
-                <li><strong>Permanent Record Link:</strong> <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" style="color: #60a5fa;" target="_blank">EU Publication Detail</a></li>
-                <li><strong>Short Registry URL:</strong> <a href="https://op.europa.eu/s/AjiB" style="color: #60a5fa;" target="_blank">op.europa.eu/s/AjiB</a></li>
-                <li><strong>Live Verification Stream:</strong> <a href="http://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==" style="color: #34d399;" target="_blank">Official EU RSS Feed</a></li>
+                <li><strong>Permanent Record:</strong> <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" style="color: #60a5fa;" target="_blank" rel="noopener">EU Publication Detail</a></li>
+                <li><strong>Short Registry:</strong> <a href="https://op.europa.eu/s/AjiB" style="color: #60a5fa;" target="_blank" rel="noopener">op.europa.eu/s/AjiB</a></li>
+                <li><strong>Live Verification:</strong> <a href="http://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==" style="color: #34d399;" target="_blank" rel="noopener">Official EU RSS Feed</a></li>
             </ul>
         </section>
 
         <!-- CARD 3: EU OFFICIAL APP EMBEDDED WIDGETS -->
-        <section class="card" style="grid-column: span 2;">
+        <section class="card span-desktop-2">
             <h2>🛡️ Verification Infrastructure (EC Portal Widgets)</h2>
-            <p>Direct live data integration streams managed via the Publications Office of the European Union.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 0;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
             
-            <div class="grid-container" style="grid-template-columns: 1fr 1fr; padding: 0;">
+            <div class="widget-grid">
                 <!-- Embedded Widget Container 1 -->
                 <div class="widget-box">
-                    <strong>EU Cellar Asset Integration</strong>
+                    <strong style="display: block; margin-bottom: 10px; color: #3b82f6;">EU Cellar Asset Integration</strong>
                     <div id="eu-cellar-widget-target">
-                        <!-- Embedded Widget Code 1 -->
                         <script type='text/javascript' src='https://op.europa.eu/o/opportal-widgets/js/widget/widgetload.js'></script>
                         <script type='application/json'>
                         {
@@ -73,10 +230,9 @@
                 </div>
 
                 <!-- Embedded Widget Container 2 -->
-                <div class="widget-box" style="border-left-color: #2563eb;">
-                    <strong>EC Webmaster Operational Widget</strong>
+                <div class="widget-box" style="border-left-color: var(--accent-blue);">
+                    <strong style="display: block; margin-bottom: 10px; color: #3b82f6;">EC Webmaster Operational Widget</strong>
                     <div id="ec-webmaster-widget-target">
-                        <!-- Embedded Widget Code 2 -->
                         <script type='text/javascript' src='//op.europa.eu/o/opportal-widgets/js/widget/widgetload.js'></script>
                         <script type='application/json'>
                         {"portalURL":"//op.europa.eu","uuid":"portal2012fed768463e104dd79cab9e9477b92022","widgetId":"10493","widgetType":"5"}
@@ -88,8 +244,12 @@
 
     </main>
 
-    <footer style="text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #1f2937;">
-        <p><a href="privacy.html" style="color: #9ca3af;">Privacy Policy</a> | <a href="terms.html" style="color: #9ca3af;">Terms of Service</a> | <a href="security.html" style="color: #9ca3af;">Zero-Trust Security Layout</a></p>
+    <footer>
+        <p>
+            <a href="privacy.html" style="color: var(--text-secondary); text-decoration: none; margin: 0 8px;">Privacy Policy</a> | 
+            <a href="terms.html" style="color: var(--text-secondary); text-decoration: none; margin: 0 8px;">Terms of Service</a> | 
+            <a href="security.html" style="color: var(--text-secondary); text-decoration: none; margin: 0 8px;">Zero-Trust Layout</a>
+        </p>
         <p style="font-size: 0.85em; color: #4b5563;">Vane Enterprise LLC © 2026. All Rights Reserved.</p>
     </footer>
 
