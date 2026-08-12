@@ -1,3 +1,6 @@
+/**
+ * VANE-SPACE-SLA Grounding Protection Engine
+ */
 class StrictPromptBuilder {
     constructor(modelId = "ibm/granite-13b-instruct-v2") {
         this.modelId = modelId;
