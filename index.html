@@ -169,32 +169,87 @@
             <h2>🛡️ Verification Infrastructure (EC Portal Widgets)</h2>
             <p style="color: var(--text-secondary); margin-bottom: 15px;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
             
-            <div class="widget-grid">
-    <!-- Wrapper Box 1: Horizon Europe Cellar Asset Integration -->
-    <div class="widget-box" style="border-top-color: var(--accent-orange);">
-        <strong style="display: block; color: var(--accent-orange); font-size: 0.95rem;">EU Cellar Asset Integration Wrapper</strong>
-        
-        <p>Target Asset: Horizon Europe, Pillar II</p>
-        <p>Global challenges and European industrial competitiveness.</p>
-        <p>Status: Synced via Cellar ID</p>
-        
-        <pre><code>{
-"portalURL": "europa.eu",
-"uuid": "portal2012190f647302dd463383c021521736d419",
-"widgetType": "5",
-"cellarId": "af30723e-f4ce-11eb-aeb9-01aa75ed71a1"
-}</code></pre>
+<!-- ========================================== -->
+<!-- START OF VANE-SPACE DYNAMIC ADDITIONS BLOCK -->
+<!-- ========================================== -->
+<style>
+    /* Additions for Telemetry & Badge Grid Layouts */
+    .status-header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
+    .indicator-node { background: #151f32; border: 1px solid #1e293b; padding: 12px; border-radius: 6px; text-align: center; font-family: sans-serif; }
+    .indicator-node span { display: block; font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
+    .indicator-node div { font-size: 1.2rem; font-weight: bold; margin-top: 4px; }
+    
+    .pulse-dot { width: 8px; height: 8px; background-color: #059669; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); animation: pulseVane 1.6s infinite; vertical-align: middle; margin-right: 6px;}
+    @keyframes pulseVane { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); } }
 
-        <p>EC Webmaster Operational Wrapper</p>
-        <p>Service Engine: OPWIDGET</p>
-        <p>Widget Cluster Identity Ref: #10493</p>
-        <p>Lang: Auto-Detect</p>
-        
-        <pre><code>{"portalURL":"europa.eu","uuid":"portal2012fed768463e104dd79cab9e9477b92022","widgetId":"10493","widgetType":"5"}</code></pre>
-        <pre><code>{ "service": "opwidget", "widgetId": "10493", "lang": "auto" }</code></pre>
+    .telemetry-terminal { background: #05070c; border: 1px solid #1e293b; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: #34d399; height: 140px; overflow-y: auto; line-height: 1.4; margin-top: 10px; text-align: left; }
+    .badge-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+    .badge-pill { background: #1e293b; border: 1px solid #334155; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: #f3f4f6; font-family: sans-serif; }
+    
+    .widget-grid-new { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 15px; }
+    @media (min-width: 768px) { .widget-grid-new { grid-template-columns: 1fr 1fr; } }
+    .custom-widget-ui { background: #111827; border: 1px solid #2d3748; border-radius: 6px; padding: 12px; margin-bottom: 15px; font-size: 0.85rem; font-family: sans-serif; text-align: left; }
+</style>
+
+<!-- 1. LIVE TELEMETRY & CREDENTIAL TALLY CARD -->
+<section class="card" style="grid-column: span 2; border-left: 4px solid #059669; margin-bottom: 20px;">
+    <h2 style="color: #3b82f6; margin-top: 0;">🛸 Automated Telemetry Engine & Verified Credentials</h2>
+    
+    <div class="status-header-grid">
+        <div class="indicator-node">
+            <span>M2M Gateway</span>
+            <div style="color: #34d399;"><span class="pulse-dot"></span>ACTIVE</div>
+        </div>
+        <div class="indicator-node">
+            <span>IBM Portfolio</span>
+            <div style="color: #60a5fa;">77 Badges</div>
+        </div>
+        <div class="indicator-node">
+            <span>Microsoft Learn</span>
+            <div style="color: #a855f7;">58 Badges</div>
+        </div>
+        <div class="indicator-node">
+            <span>Global Trophies</span>
+            <div style="color: #f59e0b;">10 Awarded</div>
+        </div>
+        <div class="indicator-node">
+            <span>Node Latency</span>
+            <div style="color: #34d399;" id="latency-val">42 ms</div>
+        </div>
     </div>
-</div>
 
+    <div class="badge-strip">
+        <div class="badge-pill" style="color: #60a5fa;">🛡️ IBM Advanced Certified</div>
+        <div class="badge-pill" style="color: #34d399;">⚙️ Enterprise Automation Infrastructure</div>
+        <div class="badge-pill" style="color: #f59e0b;">📦 EU Portal Data Integrator</div>
+    </div>
+
+    <strong style="font-size: 0.85rem; color: #9ca3af; display: block; margin-top: 15px; font-family: sans-serif;">Real-Time System Rule Telemetry Feed:</strong>
+    <div class="telemetry-terminal" id="terminal-stream">Initializing secure trace sync...</div>
+</section>
+
+<!-- 2. DECORATED PORTAL WIDGET WRAPPERS -->
+<div class="widget-grid-new" style="grid-column: span 2; margin-top: 10px; margin-bottom: 20px;">
+    <!-- Wrapper Area 1: Cellar Asset -->
+    <div class="widget-box" style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #d97706;">
+        <strong style="display: block; color: #d97706; font-size: 0.95rem; font-family: sans-serif;">EU Cellar Asset Integration Wrapper</strong>
+        <div class="custom-widget-ui">
+            <div style="font-weight: bold; margin-bottom: 4px; color: #f3f4f6;">Target Asset: Horizon Europe, Pillar II</div>
+            <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Global challenges and European industrial competitiveness.</div>
+            <span style="background: rgba(217,119,6,0.15); color: #fbbf24; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Status: Synced via Cellar ID</span>
+        </div>
+    </div>
+
+    <!-- Wrapper Area 2: Webmaster Service -->
+    <div class="widget-box" style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #2563eb;">
+        <strong style="display: block; color: #2563eb; font-size: 0.95rem; font-family: sans-serif;">EC Webmaster Operational Wrapper</strong>
+        <div class="custom-widget-ui">
+            <div style="font-weight: bold; margin-bottom: 4px; color: #f3f4f6;">Service Engine: OPWIDGET</div>
+            <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Widget Cluster Identity Ref: #10493</div>
+            <span style="background: rgba(37,99,235,0.15); color: #60a5fa; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Lang: Auto-Detect</span>
+        </div>
+    </div>
+</div>            
 <footer style="text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid #1f2937; font-family: sans-serif;">
     <div style="margin-bottom: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.9rem;">
         <a href="about.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">About Us</a>
@@ -208,50 +263,45 @@
         <a href="terms.html" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#9ca3af'">Terms of Service</a>
     </div>
     <p style="font-size: 0.85em; color: #4b5563; margin: 0;">Vane Enterprise LLC © 2026 MD ABUL HOSSAIN. All Rights Reserved.</p>
-</footer>
-
+</footer>            
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const terminal = document.getElementById("terminal-stream");
-    const latencyVal = document.getElementById("latency-val");
-    
-    const logs = [
-        "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
-        "Authorization confirmed via M2M OAuth isolation routing map.",
-        "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
-        "Polling cell ID 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1' from EU Cellar cluster.",
-        "Zero-Trust packet verification: Integrity 100% verified.",
-        "Syncing portfolio credentials: 77 IBM items validated.",
-        "Syncing academic pathways: 58 MS Learn tracks parsed successfully."
-    ];
+    document.addEventListener("DOMContentLoaded", () => {
+        const terminal = document.getElementById("terminal-stream");
+        const latencyVal = document.getElementById("latency-val");
+        if(!terminal || !latencyVal) return;
+        
+        const logs = [
+            "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
+            "Authorization confirmed via M2M OAuth isolation routing map.",
+            "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
+            "Polling cell ID 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1' from EU Cellar cluster.",
+            "Zero-Trust packet verification: Integrity 100% verified.",
+            "Syncing portfolio credentials: 77 IBM items validated.",
+            "Syncing academic pathways: 58 MS Learn tracks parsed successfully."
+        ];
 
-    function addLogLine() {
-        if (!terminal) return; // Prevents errors if element is missing
-        
-        const now = new Date().toISOString().slice(11, 19);
-        let selectedLog = logs[Math.floor(Math.random() * logs.length)];
-        
-        if (Math.random() > 0.7) {
-            const randomIp = `10.240.${Math.floor(Math.random()*254)}.${Math.floor(Math.random()*254)}`;
-            selectedLog = `SECURITY AUDIT: Node authorization traffic scanned from interface ${randomIp}`;
-        }
-        
-        const newLine = document.createElement("div");
-        newLine.innerHTML = `<span style="color: #60a5fa;">[${now}]</span> ${selectedLog}`;
-        terminal.appendChild(newLine);
-        terminal.scrollTop = terminal.scrollHeight;
-        
-        if (latencyVal) {
+        function addLogLine() {
+            const now = new Date().toISOString().slice(11, 19);
+            let selectedLog = logs[Math.floor(Math.random() * logs.length)];
+            
+            if (Math.random() > 0.7) {
+                const randomIp = `10.240.${Math.floor(Math.random()*254)}.${Math.floor(Math.random()*254)}`;
+                selectedLog = `SECURITY AUDIT: Node authorization traffic scanned from interface ${randomIp}`;
+            }
+
+            const newLine = document.createElement("div");
+            newLine.innerHTML = `<span style="color: #60a5fa;">[${now}]</span> ${selectedLog}`;
+            terminal.appendChild(newLine);
+            terminal.scrollTop = terminal.scrollHeight;
+
             const currentLatency = Math.floor(Math.random() * 25) + 30;
             latencyVal.textContent = `${currentLatency} ms`;
         }
-    }
 
-    // Initial log generation
-    for(let i=0; i<3; i++) { 
-        setTimeout(addLogLine, i * 400); 
-    }
-    // Continuous loop interval
-    setInterval(addLogLine, 3200);
-});
+        for(let i=0; i<3; i++) { setTimeout(addLogLine, i * 400); }
+        setInterval(addLogLine, 3200);
+    });
 </script>
+<!-- ========================================== -->
+<!-- END OF VANE-SPACE DYNAMIC ADDITIONS BLOCK  -->
+<!-- ========================================== -->           
