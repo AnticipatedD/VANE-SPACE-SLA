@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANE-SPACE-SLA | System Scripts</title>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; font-family: sans-serif; margin: 0; padding: 40px 20px; display: flex; justify-content: center; }
+        .container { max-width: 800px; width: 100%; background-color: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+        h1 { color: #3b82f6; font-size: 24px; margin-top: 0; border-bottom: 1px solid #334155; padding-bottom: 15px; }
+        .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #cbd5e1; }
+        input, textarea, select { width: 100%; background-color: #0f172a; border: 1px solid #475569; border-radius: 6px; color: #f8fafc; padding: 10px; font-size: 14px; box-sizing: border-box; }
+        textarea { resize: vertical; font-family: monospace; }
+        button { background-color: #2563eb; color: white; border: none; padding: 12px 24px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; }
+        button:hover { background-color: #1d4ed8; }
+        .output-box { margin-top: 30px; background-color: #0f172a; border: 1px solid #334155; border-radius: 6px; padding: 15px; }
+        .output-header { font-size: 12px; color: #10b981; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: monospace; font-size: 13px; color: #e2e8f0; line-height: 1.5; }
+        .nav-link { display: inline-block; margin-bottom: 20px; color: #94a3b8; text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: #3b82f6; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="nav-link">← Back to Dashboard</a>
+    <h1>Strict Prompt Builder Sandbox</h1>
+    <p class="subtitle">Constructs isolated prompt sandboxes via decoupled script pipelines execution.</p>
+
+    <div class="form-group">
+        <label for="modelId">Target Model ID</label>
+        <select id="modelId">
+            <option value="ibm/granite-13b-instruct-v2">ibm/granite-13b-instruct-v2</option>
+            <option value="ibm/granite-20b-multilingual">ibm/granite-20b-multilingual</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="userQuery">User Input Query</label>
+        <input type="text" id="userQuery" value="Check system status of server 01.">
+    </div>
+
+    <div class="form-group">
+        <label for="contextBlock">Verified Data Context (One entry per line)</label>
+        <textarea id="contextBlock" rows="4">[SEVONE_TELEMETRY_LOG_ENTRY] Device ID: FIN-PROD-SERVER-01 | CPU Load: 42.8% | Status: SECURE</textarea>
+    </div>
+
+    <button onclick="compilePromptInterface()">Generate Secure Prompt Baseline</button>
+
+    <div class="output-box">
+        <div class="output-header">[GROUNDING PROTECTION ACTIVE]</div>
+        <pre id="outputArea">Compiling modular script stream...</pre>
+    </div>
+</div>
+
+<!-- Decoupled JavaScript engine file loaded here -->
+<script src="strict_prompt_builder.js"></script>
+<script>
+function compilePromptInterface() {
+    const modelId = document.getElementById('modelId').value;
+    const userQuery = document.getElementById('userQuery').value;
+    const contextText = document.getElementById('contextBlock').value;
+    const auditedContexts = contextText.split('\n').filter(line => line.trim() !== '');
+
+    // Instantiate your logic from strict_prompt_builder.js
+    const builder = new StrictPromptBuilder(modelId);
+    const securePrompt = builder.buildGroundedPrompt(userQuery, auditedContexts);
+
+    document.getElementById('outputArea').textContent = securePrompt;
+}
+window.onload = compilePromptInterface;
+</script>
+
+</body>
+</html>
