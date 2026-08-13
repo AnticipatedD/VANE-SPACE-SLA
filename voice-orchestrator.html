@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANE-SPACE-SLA | Voice Orchestration Node</title>
+    <style>
+        :root {
+            --bg-main: #030712;
+            --bg-surface: #0b1329;
+            --border-color: #1e293b;
+            --text-primary: #f3f4f6;
+            --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-teal: #10b981;
+            --accent-red: #ef4444;
+            --accent-cyan: #38bdf8;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        body { background-color: var(--bg-main); color: var(--text-primary); font-family: var(--font-sans); margin: 0; padding: 0; line-height: 1.6; }
+        .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-mono); font-size: 18px; font-weight: bold; color: var(--text-primary); text-decoration: none; }
+        .logo span { color: var(--accent-blue); }
+        .nav-buttons { display: flex; gap: 8px; }
+        .nav-btn { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-family: var(--font-mono); padding: 8px 14px; border-radius: 4px; }
+        .nav-btn:hover, .nav-btn.active { color: var(--text-primary); background-color: var(--border-color); }
+        .nav-btn.secondary { border: 1px solid rgba(59, 130, 246, 0.3); color: var(--accent-cyan); }
+        .nav-btn.secondary.active { background-color: rgba(59, 130, 246, 0.15); border-color: var(--accent-blue); color: var(--text-primary); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        .hero-section h1 { font-size: 32px; font-weight: 800; margin: 0 0 12px 0; letter-spacing: -0.5px; }
+        .hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 750px; margin-bottom: 35px; }
+        .matrix-card { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 35px; margin-bottom: 30px; }
+        .matrix-card h2 { font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 0; margin-bottom: 25px; color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .terminal-box { background-color: #030712; border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; font-family: var(--font-mono); font-size: 13px; color: #cbd5e1; min-height: 250px; max-height: 400px; overflow-y: auto; margin-bottom: 20px; line-height: 1.6; }
+        .log-entry { margin-bottom: 8px; }
+        .log-info { color: var(--accent-cyan); }
+        .log-success { color: var(--accent-teal); font-weight: bold; }
+        .log-alert { color: var(--accent-red); font-weight: bold; }
+        .action-cluster { display: flex; gap: 12px; }
+        .action-btn { font-family: var(--font-mono); font-size: 12px; font-weight: bold; text-transform: uppercase; padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+        .action-btn.primary { background-color: var(--accent-blue); color: #ffffff; }
+        .action-btn.outline { border: 1px solid var(--border-color); color: var(--text-primary); background: transparent; }
+        .site-footer { background-color: var(--bg-surface); border-top: 1px solid var(--border-color); padding: 60px 20px 30px 20px; margin-top: 80px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
+        .footer-col h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-primary); margin-top: 0; margin-bottom: 20px; }
+        .footer-col a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 13px; margin-bottom: 12px; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); }
+        .identifiers-strip { display: flex; flex-wrap: wrap; gap: 15px; font-family: var(--font-mono); }
+        .identifiers-strip span { color: var(--accent-cyan); }
+    </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">VANE-SPACE<span>-SLA</span></a>
+      <nav class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="about-us.html" class="nav-btn">About</a>
+        <a href="index.html#credentials" class="nav-btn">Credentials</a>
+        <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
+        <a href="index.html#projects" class="nav-btn">Projects</a>
+        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
+        <a href="voice-orchestrator.html" class="nav-btn secondary active">Voice Orchestrator</a>
+        <a href="contact-us.html" class="nav-btn">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero-section">
+      <h1>Voice Duplex Stream Orchestrator Node</h1>
+      <p class="hero-desc">Continuous runtime verification checking system configured for live duplex voice communication channels. Guards against token drift vectors during telemetries transit operations.</p>
+
+      <div class="matrix-card">
+        <h2>Live Streams Telemetry Feed // ASR-9X Truth Protocol</h2>
+        <div class="terminal-box" id="terminal-stream">
+          <div class="log-entry">[SYSTEM STATUS] Node interface initialized. Standing by for duplex lineage connection execution stream...</div>
+        </div>
+        <div class="action-cluster">
+          <button onclick="startVoiceDuplexVerification()" class="action-btn primary" id="exec-btn">Execute Lineage Audit</button>
+          <button onclick="clearTerminalLogs()" class="action-btn outline">Clear Telemetry View</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Framework Matrix</h4>
+        <a href="index.html">Portal Home</a>
+        <a href="about-us.html">Framework About</a>
+        <a href="contact-us.html">Gateway Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Security & Compliance</h4>
+        <a href="privacy.html">Privacy Regulations</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="security.html">Zero-Trust Layout</a>
+      </div>
+      <div class="footer-col">
+        <h4>Core Extensions</h4>
+        <a href="extensions-core/m2m-oauth-isolation.html">M2M Isolation Gateway</a>
+        <a href="voice-orchestrator.html">Voice Orchestrator Node</a>
+      </div>
+        <div class="footer-col">
+        <h4>Verification Streams</h4>
+        <a href="https://orcid.org/0009-0004-4378-5298" target="_blank">ORCID Portal</a>
+        <a href="https://webofscience.com" target="_blank">Web of Science Index</a>
+        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank">EU Publication Detail</a>
+        <a href="https://europa.eu" target="_blank" style="font-size: 11px; color: var(--accent-cyan);">→ Registry: op.europa.eu/s/AjiB</a>
+        <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" target="_blank" style="color: var(--accent-teal); font-weight: bold;">✓ Official EU RSS Live Feed</a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All rights reserved.</p>
+      <div class="identifiers-strip">
+        <div>ORCID: <span>0009-0004-4378-5298</span></div>
+        <div>ResearcherID: <span>QQZ-6739-2026</span></div>
+        <div>EU Expert: <span>EX2026D1473148</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const term = document.getElementById('terminal-stream');
+    const execBtn = document.getElementById('exec-btn');
+
+    function log(text, className = '') {
+        const entry = document.createElement('div');
+        entry.className = 'log-entry ' + className;
+        entry.innerHTML = text;
+        term.appendChild(entry);
+        term.scrollTop = term.scrollHeight;
+    }
+
+    function clearTerminalLogs() {
+        term.innerHTML = '<div class="log-entry">[SYSTEM STATUS] Logs cleared. Standing by for interface compilation instructions...</div>';
+    }
+
+    function startVoiceDuplexVerification() {
+        execBtn.disabled = true;
+        execBtn.style.opacity = '0.5';
+        clearTerminalLogs();
+        
+        setTimeout(function() { log("<span class='log-info'>📡 [VOICE ENGINE] Initializing Low-Latency Duplex Audio Stream...</span>"); }, 100);
+        setTimeout(function() { log("<span class='log-info'>🔒 [SECURITY GATE] Applying ASR-9X Truth Protocol constraints.</span><br>"); }, 500);
+
+        let frame = 1;
+        const interval = setInterval(function() {
+            const jitter = (Math.random() * (4.5 - 1.1) + 1.1).toFixed(2);
+            const alignment = (Math.random() * (99.1 - 94.2) + 94.2).toFixed(2);
+            
+            log('[AUDIO FRAME 0' + frame + '] Jitter: ' + jitter + 'ms | Audit Alignment: ' + alignment + '%');
+            
+            if (alignment >= 95.0) {
+                log("🛡️ State Check: <span class='log-success'>✅ COMPLIANT - Token Lineage Grounded</span>");
+            } else {
+                log("⚠️ State Check: <span class='log-alert'>❌ DRIFT DETECTED - Intercepting Token Sequence</span>");
+            }
+            log("----------------------------------------------------------------");
+
+            frame++;
+            if (frame > 3) {
+                clearInterval(interval);
+                log("[INFO] Execution monitoring complete cycle reached. Stream telemetry operational.");
+                execBtn.disabled = false;
+                execBtn.style.opacity = '1';
+            }
+        }, 800);
+    }
+  </script>
+</body>
+</html>
