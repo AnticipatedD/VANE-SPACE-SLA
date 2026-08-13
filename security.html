@@ -2,31 +2,409 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Vane-Space-SLA | Cryptographic Security Matrix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANE-SPACE-SLA | Cryptographic Security Matrix</title>
     <style>
-        body { font-family: sans-serif; background-color: #0b0f19; color: #f3f4f6; padding: 30px; line-height: 1.6; }
-        .wrapper { max-width: 800px; margin: 0 auto; background: #111827; padding: 30px; border-radius: 8px; border: 1px solid #1f2937; }
-        h1, h2 { color: #3b82f6; border-bottom: 1px solid #1f2937; padding-bottom: 10px; }
-        .gate-badge { background-color: #1e3a8a; color: #93c5fd; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+        :root {
+            --bg-main: #030712;
+            --bg-surface: #0b1329;
+            --border-color: #1e293b;
+            --text-primary: #f3f4f6;
+            --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6;
+            --accent-teal: #10b981;
+            --accent-cyan: #38bdf8;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Top Enterprise Header Navigation */
+        .site-header {
+            background-color: rgba(11, 19, 41, 0.85);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent-blue); }
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .nav-btn {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-family: var(--font-mono);
+            padding: 8px 14px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--text-primary);
+            background-color: var(--border-color);
+        }
+        .nav-btn.secondary {
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--accent-cyan);
+        }
+
+        /* Main Workspace Framework Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .matrix-hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+        }
+        .hero-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin-bottom: 35px;
+        }
+
+        /* Anchor System Monitoring Board */
+        .anchor-strip {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .anchor-title {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+        .anchor-value {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            background-color: #030712;
+            padding: 4px 12px;
+            border-radius: 4px;
+            border: 1px solid #1e293b;
+        }
+
+        /* Pipeline Core Layout */
+        .matrix-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+        }
+        .matrix-card h2 {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        /* 4-Gate Pipeline Stack List */
+        .pipeline-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .gate-row {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            align-items: start;
+            gap: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(30, 41, 59, 0.4);
+        }
+        .gate-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .gate-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .gate-info strong {
+            display: block;
+            font-size: 14.5px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .gate-info p {
+            margin: 0;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Compliance Framework Typography Block */
+        .compliance-body {
+            color: var(--text-secondary);
+            font-size: 14.5px;
+            line-height: 1.7;
+        }
+        .compliance-body p {
+            margin: 0 0 16px 0;
+        }
+        .compliance-body p:last-child {
+            margin-bottom: 0;
+        }
+        code {
+            font-family: var(--font-mono);
+            background-color: #030712;
+            color: var(--accent-teal);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #1e293b;
+            font-size: 13px;
+        }
+
+        /* Action Cluster Links */
+        .action-cluster {
+            display: flex;
+            gap: 12px;
+            margin-top: 35px;
+        }
+        .action-btn {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 14px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .action-btn.primary {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+        }
+        .action-btn.primary:hover { background-color: #1d4ed8; }
+        .action-btn.outline {
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .action-btn.outline:hover { background-color: var(--border-color); }
+
+        /* Premium Enterprise Compliance Footer Matrix */
+        .site-footer {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 20px 30px 20px;
+            margin-top: 80px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .footer-col h4 {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+        .footer-col a:hover { color: var(--accent-blue); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .identifiers-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-family: var(--font-mono);
+        }
+        .identifiers-strip span { color: var(--accent-cyan); }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h1>🔐 Cryptographic Zero-Trust Security Specification</h1>
-        <p><strong>System Anchor:</strong> VANE_BOB_NODE_08_2026</p>
-        <p>This protocol details the compliance boundaries governing runtime token interception across deep-space telemetries.</p>
-        
-        <h2>The 4-Gate Anti-Drift Pipeline</h2>
-        <ul>
-            <li><span class="gate-badge">GATE 1</span> <strong>Deterministic Ingestion:</strong> Isolates telemetry frames to block structural data leaks before vector embedding layers.</li>
-            <li><span class="gate-badge">GATE 2</span> <strong>Provider Node Isolation:</strong> Distributes parameters across independent IBM Granite nodes via secure watsonx gateways.</li>
-            <li><span class="gate-badge">GATE 3</span> <strong>Real-Time Stream Telemetry:</strong> Evaluates continuous vector drift using active state-machine verification loops.</li>
-            <li><span class="gate-badge">GATE 4</span> <strong>Deterministic Execution Block:</strong> Mandates 100% auditable source attribution before command transmission.</li>
-        </ul>
-        
-        <h2>Infrastructure Compliance</h2>
-        <p>Telemetry processing paths are hard-locked against probabilistic probability models. System state tracking is fully audited via integrated <code>watsonx.governance</code> pipelines to maintain complete operation history.</p>
-        <p style="text-align: center; color: #4b5563; font-size: 0.85em; margin-top: 40px;">Vane Enterprise LLC | IBM Partner Plus Network</p>
+
+  <!-- Top Enterprise Header Navigation -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">VANE-SPACE<span>-SLA</span></a>
+      <nav class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="about-us.html" class="nav-btn">About</a>
+        <a href="index.html#credentials" class="nav-btn">Credentials</a>
+        <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
+        <a href="index.html#projects" class="nav-btn">Projects</a>
+        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
+        <a href="extensions-core/voice-orchestrator.html" class="nav-btn secondary">Voice Orchestrator</a>
+        <a href="contact-us.html" class="nav-btn">Contact</a>
+      </nav>
     </div>
+  </header>
+
+  <!-- Content Canvas Container -->
+    <main class="container">
+    <section class="matrix-hero">
+      <h1>Cryptographic Zero-Trust Security Specification</h1>
+      <p class="hero-desc">Deterministic protocol configuration governing multi-tenant compliance boundaries and runtime machine isolation metrics across sovereign cloud infrastructures.</p>
+
+      <div class="anchor-strip">
+        <div class="anchor-title">// Hardware Security Verification Module</div>
+        <div class="anchor-value">SYSTEM_ANCHOR :: var(--VANE_BOB_NODE_08_2026)</div>
+      </div>
+
+      <div class="matrix-card">
+        <h2>The 4-Gate Anti-Drift Pipeline</h2>
+        <div class="pipeline-stack">
+          <div class="gate-row">
+            <div class="gate-badge">GATE 01</div>
+            <div class="gate-info">
+              <strong>Deterministic Ingestion</strong>
+              <p>Isolates arriving telemetry frames to strictly block structural data leaks before crossing vector embedding layers.</p>
+            </div>
+          </div>
+          <div class="gate-row">
+            <div class="gate-badge">GATE 02</div>
+            <div class="gate-info">
+              <strong>Provider Node Isolation</strong>
+              <p>Distributes operational inference parameters across independent, decoupled IBM Granite nodes via secure watsonx gateways.</p>
+            </div>
+          </div>
+          <div class="gate-row">
+            <div class="gate-badge">GATE 03</div>
+            <div class="gate-info">
+              <strong>Real-Time Stream Telemetry</strong>
+              <p>Evaluates continuous vector data drift using active runtime state-machine verification loop arrays.</p>
+            </div>
+          </div>
+          <div class="gate-row">
+            <div class="gate-badge">GATE 04</div>
+            <div class="gate-info">
+              <strong>Deterministic Execution Block</strong>
+              <p>Mandates 100% auditable source attribution protocols prior to firing remote core network command transmissions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <h2>Infrastructure Compliance Verification</h2>
+        <div class="compliance-body">
+          <p>Telemetry processing paths within the <code>VANE-SPACE-SLA</code> ecosystem are hard-locked against probabilistic mathematical probability models. This prevents configuration hallucinations across server-to-server micro-segments.</p>
+          <p>System state validation parameters and real-time execution tracking histories are fully audited via integrated <code>watsonx.governance</code> pipelines to maintain complete, unalterable operating records.</p>
+        </div>
+      </div>
+
+      <div class="action-cluster">
+        <a href="contact-us.html" class="action-btn primary">Request Audit Clearance</a>
+        <a href="index.html" class="action-btn outline">Return to Control Index</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Framework Matrix</h4>
+        <a href="index.html">Portal Home</a>
+        <a href="about-us.html">Framework About</a>
+        <a href="contact-us.html">Gateway Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Security & Compliance</h4>
+        <a href="privacy.html">Privacy Regulations</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="security.html">Zero-Trust Layout</a>
+      </div>
+      <div class="footer-col">
+        <h4>Core Extensions</h4>
+        <a href="extensions-core/m2m-oauth-isolation.html">M2M Isolation Gateway</a>
+        <a href="extensions-core/voice-orchestrator.html">Voice Orchestrator Node</a>
+      </div>
+      <div class="footer-col">
+        <h4>Verification Streams</h4>
+        <a href="https://orcid.org" target="_blank">ORCID Portal</a>
+        <a href="https://europa.eu" target="_blank">EU Publication Detail</a>
+        <a href="https://europa.eu&" target="_blank" style="color: var(--accent-teal); font-weight: bold;">✓ Official EU RSS Live Feed</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All rights reserved.</p>
+      <div class="identifiers-strip">
+        <div>ORCID: <span>0009-0004-4378-5298</span></div>
+        <div>ResearcherID: <span>QQZ-6739-2026</span></div>
+        <div>EU Expert: <span>EX2026D1473148</span></div>
+      </div>
+    </div>
+  </footer>
+  <script src="animation_script.js"></script>
 </body>
 </html>
