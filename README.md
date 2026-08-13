@@ -75,7 +75,7 @@ Vane-Space-SLA  is an ultra-modern, production-ready Retrieval-Augmented Generat
 # Specialized isolated engineering folder
     ├── m2m-oauth-isolation.html 
     # Machine-to-Machine security boundary interface
-    └── voice_agents.py          
+    └── voice-orchestrator.html         
     # Real-time duplex voice telemetry handler
 
 ## 🛠️ Production Technology Stack
@@ -100,5 +100,3 @@ Vane-Space-SLA  is an ultra-modern, production-ready Retrieval-Augmented Generat
 
 --- 
 © 2026 MD ABUL HOSSAIN. All Rights Reserved
-
-
