@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | MD ABUL HOSSAIN | VANE-SPACE-SLA</title>
+    
+    <!-- Critical for GitHub Project Pages -->
+    <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
+    
     <style>
         :root {
             --bg-main: #030712;
@@ -20,13 +24,14 @@
         body { background-color: var(--bg-main); color: var(--text-primary); font-family: var(--font-sans); margin: 0; padding: 0; line-height: 1.6; }
         
         .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .logo { font-family: var(--font-mono); font-size: 18px; font-weight: bold; color: var(--text-primary); text-decoration: none; }
         .logo span { color: var(--accent-blue); }
-        .nav-buttons { display: flex; gap: 8px; }
+        .nav-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
         .nav-btn { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-family: var(--font-mono); padding: 8px 14px; border-radius: 4px; }
         .nav-btn:hover, .nav-btn.active { color: var(--text-primary); background-color: var(--border-color); }
         .nav-btn.secondary { border: 1px solid rgba(59, 130, 246, 0.3); color: var(--accent-cyan); }
+        .nav-btn.secondary.active { background-color: rgba(59, 130, 246, 0.15); border-color: var(--accent-blue); color: var(--text-primary); }
         
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
         .contact-hero h1 { font-size: 32px; font-weight: 800; margin: 0 0 12px 0; }
@@ -55,7 +60,8 @@
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
         .footer-col h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-primary); margin-bottom: 20px; }
         .footer-col a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 13px; margin-bottom: 12px; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); }
+        .footer-col a:hover { color: var(--accent-cyan); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); gap: 15px; }
         .identifiers-strip { display: flex; flex-wrap: wrap; gap: 15px; font-family: var(--font-mono); }
         .identifiers-strip span { color: var(--accent-cyan); }
     </style>
@@ -71,7 +77,7 @@
         <a href="index.html#credentials" class="nav-btn">Credentials</a>
         <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
         <a href="index.html#projects" class="nav-btn">Projects</a>
-        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary-active">M2M OAuth</a>
+        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
         <a href="voice-orchestrator.html" class="nav-btn secondary">Voice Orchestrator</a>
         <a href="contact-us.html" class="nav-btn active">Contact</a>
       </nav>
@@ -85,7 +91,7 @@
         Secure routing channels for strategic partnership engineering, validation node orchestration, sovereign cloud alignment queries, and Horizon Europe framework consortium integration.
       </p>
         
-            <!-- Communication Routing Telemetry Matrix Cards -->
+      <!-- Communication Routing Telemetry Matrix Cards -->
       <div class="metrics-container">
         <div class="metric-card">
           <div class="metric-value">// Secure Communications</div>
@@ -120,6 +126,97 @@
         <a href="index.html" class="action-btn outline">Return to Portal Index</a>
         <a href="about-us.html" class="action-btn outline">Read Architectural Journey</a>
       </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Framework Matrix</h4>
+        <a href="index.html">Portal Home</a>
+        <a href="about-us.html">Framework About</a>
+        <a href="contact-us.html">Gateway Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Security & Compliance</h4>
+        <a href="privacy.html">Privacy Regulations</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="security.html">Zero-Trust Layout</a>
+      </div>
+      <div class="footer-col">
+        <h4>Core Extensions</h4>
+        <a href="extensions-core/m2m-oauth-isolation.html">M2M Isolation Gateway</a>
+        <a href="voice-orchestrator.html">Voice Orchestrator Node</a>
+      </div>
+      <div class="footer-col">
+        <h4>Verification Streams</h4>
+        <a href="https://orcid.org/0009-0004-4378-5298" target="_blank">ORCID Portal</a>
+        <a href="https://www.webofscience.com/wos/author/record/QQZ-6739-2026" target="_blank">Web of Science Index</a>
+        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank">EU Publication Detail</a>
+        <a href="https://europa.eu" target="_blank" style="font-size: 11px; color: var(--accent-cyan);">→ Registry: op.europa.eu/s/AjiB</a>
+        <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" target="_blank" style="color: var(--accent-teal); font-weight: bold;">✓ Official EU RSS Live Feed</a>
+      </div>
+    </div>   
+    <div class="footer-bottom">
+      <p>&copy; 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All rights reserved.</p>
+      <div class="identifiers-strip">
+        <div>ORCID: <span>0009-0004-4378-5298</span></div>
+        <div>ResearcherID: <span>QQZ-6739-2026</span></div>
+        <div>EU Expert: <span>EX2026D1473148</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ORCID OAuth Telemetry Script -->
+  <script>
+    const ORCID_CONFIG = {
+        clientId: 'APP-IJCCJ1MVBPCREGTK',
+        redirectUri: 'https://anticipatedd.github.io/VANE-SPACE-SLA',
+        authEndpoint: 'https://orcid.org/oauth/authorize',
+        scope: 'openid'
+    };
+
+    function launchOrcidAuthorization() {
+        const authUrl = ORCID_CONFIG.authEndpoint + 
+            '?client_id=' + ORCID_CONFIG.clientId + 
+            '&response_type=token' + 
+            '&scope=' + ORCID_CONFIG.scope + 
+            '&redirect_uri=' + encodeURIComponent(ORCID_CONFIG.redirectUri);
+        console.log("[OAUTH] Redirecting to sovereign ORCID identification gateway...");
+        window.location.href = authUrl;
+    }
+
+    function processOauthCallback() {
+        const urlHash = window.location.hash;
+        if (!urlHash) return;
+
+        const params = new URLSearchParams(urlHash.substring(1));
+        const accessToken = params.get('access_token');
+        const orcidId = params.get('orcid');
+
+        if (accessToken && orcidId) {
+            console.log("[OAUTH] Token verified. Authenticated ID stream tracking: " + orcidId);
+            
+            const statusCard = document.getElementById('orcid-telemetry-card');
+            const statusText = document.getElementById('orcid-status-text');
+            const authBtn = document.getElementById('orcid-auth-btn');
+
+            if (statusCard && statusText && authBtn) {
+                statusCard.style.borderColor = 'var(--accent-teal)';
+                statusText.innerHTML = '<a href="https://orcid.org/' + orcidId + '" target="_blank" style="color: var(--accent-teal); font-weight: bold;">LIVE SYSTEM ACCESS: ' + orcidId + '</a>';
+                
+                authBtn.style.backgroundColor = 'var(--accent-teal)';
+                authBtn.textContent = "ORCID Token Verified ✓";
+                authBtn.disabled = true;
+            }
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', processOauthCallback);
+  </script>
+</body>
+</html>
     </section>
   </main>
 
