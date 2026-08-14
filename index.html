@@ -57,8 +57,8 @@
         .btn:hover { background-color: #1d4ed8; }
 
         .credentials-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
-        .cred-item { background: #151f32; border: 1px solid #1e293b; border-radius: 6px; padding: 10px 14px; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; }
-        .cred-item span.status { background: rgba(5,150,105,0.15); color: #34d399; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .cred-item { background: #151f32; border: 1px solid #1e293b; border-radius: 6px; padding: 10px 14px; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .cred-item span.status { background: rgba(5,150,105,0.15); color: #34d399; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
 
         .meta-list { list-style-type: none; padding: 0; margin: 0; }
         .meta-list li { padding: 10px 0; border-bottom: 1px solid #374151; font-size: 0.9rem; word-break: break-word; }
@@ -179,15 +179,55 @@
             </ul>
         </section>
 
-        <!-- NEW: Verified Credentials Showcase -->
+        <!-- Verified Credentials Showcase -->
         <section class="card span-desktop-2">
-            <h2>📜 Verified Credentials Showcase (IBM + Microsoft)</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 15px; font-size: 0.9rem;">
-                Live snapshot from IBM Training Transcript (77 courses completed) and Microsoft Learn profile (58 badges • 10 trophies • Level 9).
+            <h2>📜 Verified Credentials Showcase (IBM + Microsoft Learn)</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.9rem;">
+                Live snapshot from IBM Training Transcript (77 achievements) and Microsoft Learn profile 
+                (<strong>58 Badges • 10 Trophies • Level 9</strong>).
+            </p>
+            <p style="color: #94a3b8; font-size: 0.82rem; margin-bottom: 18px; font-family: monospace;">
+                Microsoft Learn Contributor ID: <strong style="color:#38bdf8;">2058ACDDC2B3773F</strong> | Assigned by Microsoft Learn
             </p>
 
             <div class="credentials-grid">
-                <!-- IBM Badges -->
+                <!-- Microsoft Learn Trophies -->
+                <div class="cred-item">
+                    <span>🏆 Optimize business processes with Microsoft 365 Copilot</span>
+                    <span class="status">Trophy</span>
+                </div>
+                <div class="cred-item">
+                    <span>🏆 AI concepts for developers and technology professionals</span>
+                    <span class="status">Trophy</span>
+                </div>
+                <div class="cred-item">
+                    <span>🏆 Automate your workflow with GitHub Actions Part 1 of 2</span>
+                    <span class="status">Trophy</span>
+                </div>
+                <div class="cred-item">
+                    <span>🏆 Introduction to AI Skills for nonprofits</span>
+                    <span class="status">Trophy</span>
+                </div>
+
+                <!-- Microsoft Learn Badges -->
+                <div class="cred-item">
+                    <span>Automate development tasks by using GitHub Actions</span>
+                    <span class="status">Badge</span>
+                </div>
+                <div class="cred-item">
+                    <span>Understand the foundations of generative AI for business leaders</span>
+                    <span class="status">Badge</span>
+                </div>
+                <div class="cred-item">
+                    <span>Manage AD DS domain controllers and FSMO roles</span>
+                    <span class="status">Badge</span>
+                </div>
+                <div class="cred-item">
+                    <span>Introduction to AD DS</span>
+                    <span class="status">Badge</span>
+                </div>
+
+                <!-- IBM Credentials -->
                 <div class="cred-item">
                     <span>IBM Bob Intermediate</span>
                     <span class="status">Active</span>
@@ -201,45 +241,15 @@
                     <span class="status">Active</span>
                 </div>
                 <div class="cred-item">
-                    <span>Kubecost Practitioner Advanced</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
                     <span>watsonx.governance Technical Sales Intermediate</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
-                    <span>Terraform Technical Sales Intermediate</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
-                    <span>IBM API Connect Technical Sales Intermediate</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
-                    <span>SevOne Intermediate + Sales Foundation</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
-                    <span>IBM OpenPages Technical Sales Intermediate</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
-                    <span>watsonx.ai Generative AI Tools Technical Sales Intermediate</span>
-                    <span class="status">Active</span>
-                </div>
-                <div class="cred-item">
-                    <span>Microsoft Learn – 58 Badges + 10 Trophies</span>
-                    <span class="status">Level 9</span>
-                </div>
-                <div class="cred-item">
-                    <span>IBM Power Solutions + Event Automation Series</span>
                     <span class="status">Active</span>
                 </div>
             </div>
 
             <p style="margin-top: 18px; font-size: 0.8rem; color: #64748b;">
-                Full transcript available via IBM Training Portal & Microsoft Learn profile. All badges shown are currently <strong style="color:#34d399;">Active</strong> as of August 2026.
+                Full transcript available via IBM Training Portal & Microsoft Learn profile. 
+                All badges and trophies shown are currently <strong style="color:#34d399;">Active</strong> as of August 2026.
+                Microsoft Learn Level: <strong>9</strong> (79,800 / 106,299 XP).
             </p>
         </section>
 
@@ -315,7 +325,8 @@
           "Polling cell ID 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1' from EU Cellar cluster.",
           "Zero-Trust packet verification: Integrity 100% verified.",
           "Syncing portfolio credentials: 77 IBM items validated.",
-          "Syncing academic pathways: 58 MS Learn tracks + 10 trophies parsed successfully.",
+          "Syncing academic pathways: 58 MS Learn badges + 10 trophies parsed successfully.",
+          "Microsoft Learn Contributor ID 2058ACDDC2B3773F confirmed Active.",
           "IBM Bob Intermediate + watsonx.governance badges confirmed Active."
       ];
 
@@ -348,5 +359,5 @@
       setInterval(addLogLine, 2500);
   });
 </script>
-</body> 
+</body>
 </html>
