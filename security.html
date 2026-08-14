@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANE-SPACE-SLA | Cryptographic Security Matrix</title>
+    
+    <!-- Critical for GitHub Project Pages -->
+    <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
+    
     <style>
         :root {
             --bg-main: #030712;
@@ -19,17 +23,18 @@
         }
         body { background-color: var(--bg-main); color: var(--text-primary); font-family: var(--font-sans); margin: 0; padding: 0; line-height: 1.6; }
         .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .logo { font-family: var(--font-mono); font-size: 18px; font-weight: bold; color: var(--text-primary); text-decoration: none; }
         .logo span { color: var(--accent-blue); }
-        .nav-buttons { display: flex; gap: 8px; }
+        .nav-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
         .nav-btn { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-family: var(--font-mono); padding: 8px 14px; border-radius: 4px; }
         .nav-btn:hover, .nav-btn.active { color: var(--text-primary); background-color: var(--border-color); }
         .nav-btn.secondary { border: 1px solid rgba(59, 130, 246, 0.3); color: var(--accent-cyan); }
+        .nav-btn.secondary.active { background-color: rgba(59, 130, 246, 0.15); border-color: var(--accent-blue); color: var(--text-primary); }
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
         .matrix-hero h1 { font-size: 32px; font-weight: 800; margin: 0 0 12px 0; letter-spacing: -0.5px; }
         .hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 750px; margin-bottom: 35px; }
-        .anchor-strip { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-blue); border-radius: 4px; padding: 16px 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; }
+        .anchor-strip { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-blue); border-radius: 4px; padding: 16px 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .anchor-title { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-secondary); }
         .anchor-value { font-family: var(--font-mono); font-size: 14px; color: var(--accent-cyan); font-weight: bold; background-color: #030712; padding: 4px 12px; border-radius: 4px; border: 1px solid #1e293b; }
         .matrix-card { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 35px; margin-bottom: 30px; }
@@ -42,7 +47,7 @@
         .gate-info p { margin: 0; font-size: 13.5px; color: var(--text-secondary); }
         .compliance-body { color: var(--text-secondary); font-size: 14.5px; line-height: 1.7; }
         code { font-family: var(--font-mono); background-color: #030712; color: var(--accent-teal); padding: 2px 6px; border-radius: 4px; border: 1px solid #1e293b; }
-        .action-cluster { display: flex; gap: 12px; margin-top: 35px; }
+        .action-cluster { display: flex; gap: 12px; margin-top: 35px; flex-wrap: wrap; }
         .action-btn { font-family: var(--font-mono); font-size: 12px; font-weight: bold; text-transform: uppercase; padding: 14px 28px; border-radius: 4px; text-decoration: none; }
         .action-btn.primary { background-color: var(--accent-blue); color: #ffffff; }
         .action-btn.outline { border: 1px solid var(--border-color); color: var(--text-primary); }
@@ -50,7 +55,8 @@
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
         .footer-col h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-primary); margin-bottom: 20px; }
         .footer-col a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 13px; margin-bottom: 12px; }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); }
+        .footer-col a:hover { color: var(--accent-cyan); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); gap: 15px; }
         .identifiers-strip { display: flex; flex-wrap: wrap; gap: 15px; font-family: var(--font-mono); }
         .identifiers-strip span { color: var(--accent-cyan); }
     </style>
@@ -65,12 +71,13 @@
         <a href="index.html#credentials" class="nav-btn">Credentials</a>
         <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
         <a href="index.html#projects" class="nav-btn">Projects</a>
-        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary-active">M2M OAuth</a>
+        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
         <a href="voice-orchestrator.html" class="nav-btn secondary">Voice Orchestrator</a>
         <a href="contact-us.html" class="nav-btn">Contact</a>
       </nav>
     </div>
   </header>
+
   <main class="container">
     <section class="matrix-hero">
       <h1>Cryptographic Zero-Trust Security Specification</h1>
@@ -146,7 +153,7 @@
       </div>
       <div class="footer-col">
         <h4>Core Extensions</h4>
-        <a href="extensions-core/m2m-isolation-gateway.html">M2M Isolation Gateway</a>
+        <a href="extensions-core/m2m-oauth-isolation.html">M2M Isolation Gateway</a>
         <a href="voice-orchestrator.html">Voice Orchestrator Node</a>
       </div>
       <div class="footer-col">
@@ -167,6 +174,5 @@
       </div>
     </div>
   </footer>
-  <script src="animation_script.js"></script>
 </body>
 </html>
