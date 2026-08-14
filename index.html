@@ -81,6 +81,22 @@
     </style>
 </head>
 <body>
+  <!-- Top Enterprise Header Navigation Matrix -->
+  <header class="site-header" style="background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid #1e293b; backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;">
+    <div class="header-inner" style="max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="index.html" class="logo" style="font-family: monospace; font-size: 18px; font-weight: bold; color: #f3f4f6; text-decoration: none; letter-spacing: 0.5px;">VANE-SPACE<span style="color: #3b82f6;">-SLA</span></a>
+      <nav class="nav-buttons" style="display: flex; gap: 8px;">
+        <a href="index.html" class="nav-btn active" style="color: #f3f4f6; background-color: #1e293b; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">Home</a>
+        <a href="about-us.html" class="nav-btn" style="color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">About</a>
+        <a href="index.html#credentials" class="nav-btn" style="color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">Credentials</a>
+        <a href="index.html#eu-publications" class="nav-btn" style="color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">EU Publications</a>
+        <a href="index.html#projects" class="nav-btn" style="color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">Projects</a>
+        <a href="extensions-core/m2m-isolation-gateway.html" class="nav-btn secondary-active" style="border: 1px solid rgba(59, 130, 246, 0.3); color: #38bdf8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">M2M OAuth</a>
+        <a href="voice-orchestrator.html" class="nav-btn secondary" style="border: 1px solid rgba(59, 130, 246, 0.3); color: #38bdf8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">Voice Orchestrator</a>
+        <a href="contact-us.html" class="nav-btn" style="color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px;">Contact</a>
+      </nav>
+    </div>
+  </header>
 
     <header>
         <h1>VANE-SPACE-SLA PORTAL MATRIX</h1>
@@ -142,22 +158,23 @@
 
     <main class="grid-container">
 
-        <!-- CARD 1: VANE-SPACE SYSTEM LOGISTICS -->
-        <section class="card">
+         <!-- CARD 1: VANE-SPACE SYSTEM LOGISTICS -->
+         <section class="card">
             <h2>🛸 System Operational Architecture</h2>
             <p><strong>Framework:</strong> Vane-Space Sovereign-SLA Engine (v1.0)</p>
             <p><strong>Primary Node Verification:</strong> IBM Bob Intermediate Infrastructure</p>
             <p style="color: var(--text-secondary); font-size: 0.95rem;">An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
-            <div class="btn-group">
+            <div class="btn-group" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
                 <a href="scripts.html" class="btn">Explore System Scripts</a>
-                <a href="extensions-core/m2m-oauth-isolation.html" class="btn" style="background-color: var(--accent-green);">M2M Isolation Gateway</a>
+                <a href="extensions-core/m2m-isolation-gateway.html" class="btn" style="background-color: var(--accent-green);">M2M Isolation Gateway</a>
+                <a href="voice-orchestrator.html" class="btn" style="background-color: var(--accent-blue);">Voice Orchestrator Node</a>
             </div>
         </section>
               
         <!-- CARD 2: OFFICIAL EUROPEAN COMMISSION CREDENTIALS -->
-<section class="card">
-    <h2>🇪🇺 Official EU Publications & Streams</h2>
-    <ul class="meta-list">
+        <section class="card">
+           <h2>🇪🇺 Official EU Publications & Streams</h2>
+        <ul class="meta-list">
         <li><strong>Permanent Record:</strong> <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" style="color: #60a5fa;" target="_blank" rel="noopener">EU Publication Detail</a></li>
         <li><strong>Short Registry:</strong> <a href="https://europa.eu" style="color: #60a5fa;" target="_blank" rel="noopener">op.europa.eu/s/AjiB</a></li>
         <li><strong>Live Verification:</strong> <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" style="color: #34d399;" target="_blank" rel="noopener">Official EU RSS Feed</a></li>
@@ -214,20 +231,41 @@
     </div>
 </div>            
 <footer style="text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid #1f2937; font-family: sans-serif;">
-    <div style="font-family: monospace; font-size: 13px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; padding: 20px 0; border-top: 1px solid #1e293b; margin-top: 40px;">
-    <a href="about-us.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">About Us</a>
-    <span style="color: #334155;">|</span>
-    <a href="contact-us.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Contact Us</a>
-    <span style="color: #334155;">|</span>
-    <a href="security.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Zero-Trust Security Layout</a>
-    <span style="color: #334155;">|</span>
-    <a href="privacy.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Privacy Policy</a>
-    <span style="color: #334155;">|</span>
-    <a href="terms.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Terms of Service</a>
-</div>
-    <p style="font-size: 0.85em; color: #4b5563; margin: 0;">Vane Enterprise LLC © 2026 MD ABUL HOSSAIN. All Rights Reserved.</p>
-</footer>            
-<script>
+    <!-- Primary Interface Matrix Links Row -->
+    <div style="font-family: monospace; font-size: 13px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; padding: 10px 0; border-bottom: 1px solid #1e293b; margin-bottom: 16px;">
+        <a href="about-us.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">About Us</a>
+        <span style="color: #334155;">|</span>
+        <a href="contact-us.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Contact Us</a>
+        <span style="color: #334155;">|</span>
+        <a href="security.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Zero-Trust Security Layout</a>
+        <span style="color: #334155;">|</span>
+        <a href="privacy.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Privacy Policy</a>
+        <span style="color: #334155;">|</span>
+        <a href="terms.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Terms of Service</a>
+        <span style="color: #334155;">|</span>
+        <a href="extensions-core/m2m-isolation-gateway.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">M2M Isolation Gateway</a>
+        <span style="color: #334155;">|</span>
+        <a href="voice-orchestrator.html" style="color: #94a3b8; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'">Voice Orchestrator Node</a>
+    </div>
+    <!-- Personal Verification Token Streams Row -->
+    <div style="font-family: monospace; font-size: 12px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center; padding: 10px 0; margin-bottom: 20px;">
+        <a href="https://orcid.org" target="_blank" style="color: #38bdf8; text-decoration: none;">ORCID: 0009-0004-4378-5298</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://webofscience.com" target="_blank" style="color: #38bdf8; text-decoration: none;">ResearcherID: QQZ-6739-2026</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://europa.eu" target="_blank" style="color: #60a5fa; text-decoration: none;">EU Publication Detail</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://europa.eu&" target="_blank" style="color: #10b981; text-decoration: none; font-weight: bold;">✓ Official EU RSS Live Feed</a>
+    </div>
+
+    <!-- Corporate Attribution Metric -->
+    <p style="font-size: 0.82em; color: #4b5563; font-family: monospace; margin: 0 0 4px 0;">EU Expert: EX2026D1473148 // Vane Enterprise LLC</p>
+    <p style="font-size: 0.85em; color: #64748b; margin: 0;">© 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All Rights Reserved.</p>
+</footer>
+
+<!-- Unified Matrix Particle Animation Asset Link -->
+<script src="animation_script.js"></script>
+            
     document.addEventListener("DOMContentLoaded", () => {
         const terminal = document.getElementById("terminal-stream");
         const latencyVal = document.getElementById("latency-val");
