@@ -79,12 +79,13 @@
             outline: none;
             border-color: #2563eb;
         }
-        textarea { resize: vertical; }
+        textarea { resize: vertical; min-height: 80px; }
         
         .action-container {
             display: flex;
             justify-content: flex-start;
             margin-bottom: 30px;
+            gap: 12px;
         }
         button { 
             background-color: #2563eb; 
@@ -101,6 +102,11 @@
             transition: background-color 0.2s;
         }
         button:hover { background-color: #1d4ed8; }
+        button:disabled {
+            background-color: #1e293b;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
         
         .output-panel { 
             background-color: #030712; 
@@ -173,34 +179,70 @@
 
         <div class="field-block">
             <label for="contextBlock">Verified Data Context Baseline (Line delimited)</label>
-            <textarea id="contextBlock" rows="3">[SEVONE_TELEMETRY_LOG_ENTRY] Device ID: FIN-PROD-SERVER-01 | CPU Load: 42.8% | Status: SECURE</textarea>
+            <textarea id="contextBlock" rows="4">[SEVONE_TELEMETRY_LOG_ENTRY] Device ID: FIN-PROD-SERVER-01 | CPU Load: 42.8% | Status: SECURE</textarea>
         </div>
     </div>
 
     <div class="action-container">
-        <button onclick="compilePromptInterface()">Execute Compilation</button>
+        <button onclick="compilePromptInterface()" id="compileBtn">Execute Compilation</button>
     </div>
 
     <div class="output-panel">
-        <div class="panel-status">Grounding Boundary Protection Active</div>
+        <div class="panel-status" id="statusText">Grounding Boundary Protection Active</div>
         <pre id="outputArea">Initializing modular data stream tracking parameters...</pre>
     </div>
 </div>
 
+<!-- Load the Strict Prompt Builder -->
 <script src="strict_prompt_builder.js"></script>
+
 <script>
-function compilePromptInterface() {
-    const modelId = document.getElementById('modelId').value;
-    const userQuery = document.getElementById('userQuery').value;
-    const contextText = document.getElementById('contextBlock').value;
-    const auditedContexts = contextText.split('\n').filter(line => line.trim() !== '');
+    function compilePromptInterface() {
+        const btn = document.getElementById('compileBtn');
+        const outputArea = document.getElementById('outputArea');
+        const statusText = document.getElementById('statusText');
 
-    const builder = new StrictPromptBuilder(modelId);
-    const securePrompt = builder.buildGroundedPrompt(userQuery, auditedContexts);
+        // Check if the class is available
+        if (typeof StrictPromptBuilder === 'undefined') {
+            outputArea.textContent = "ERROR: StrictPromptBuilder class not loaded.\nPlease make sure strict_prompt_builder.js is in the same folder.";
+            statusText.style.color = "#ef4444";
+            statusText.textContent = "Module Load Failure";
+            return;
+        }
 
-    document.getElementById('outputArea').textContent = securePrompt;
-}
-window.onload = compilePromptInterface;
+        btn.disabled = true;
+        statusText.style.color = "#10b981";
+        statusText.textContent = "Compiling Grounded Prompt...";
+
+        try {
+            const modelId = document.getElementById('modelId').value;
+            const userQuery = document.getElementById('userQuery').value;
+            const contextText = document.getElementById('contextBlock').value;
+            
+            const auditedContexts = contextText
+                .split('\n')
+                .map(line => line.trim())
+                .filter(line => line !== '');
+
+            const builder = new StrictPromptBuilder(modelId);
+            const securePrompt = builder.buildGroundedPrompt(userQuery, auditedContexts);
+
+            outputArea.textContent = securePrompt;
+            statusText.textContent = "Grounding Boundary Protection Active • Prompt Compiled Successfully";
+        } catch (error) {
+            outputArea.textContent = "Compilation Error:\n" + error.message;
+            statusText.style.color = "#ef4444";
+            statusText.textContent = "Compilation Failed";
+        } finally {
+            btn.disabled = false;
+        }
+    }
+
+    // Auto-compile on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        // Small delay to ensure the external script has loaded
+        setTimeout(compilePromptInterface, 150);
+    });
 </script>
 
 </body>
