@@ -1,11 +1,19 @@
 /**
  * VANE-SPACE-SLA Grounding Protection Engine
+ * Strict Prompt Builder - JavaScript implementation
  */
 class StrictPromptBuilder {
     constructor(modelId = "ibm/granite-13b-instruct-v2") {
         this.modelId = modelId;
     }
 
+    /**
+     * Builds a strictly grounded prompt that forces the model
+     * to answer only from the provided verified context blocks.
+     * @param {string} userQuery 
+     * @param {string[]} auditedContexts 
+     * @returns {string}
+     */
     buildGroundedPrompt(userQuery, auditedContexts) {
         const systemMandate = 
             "=========================================================================\n" +
@@ -25,4 +33,9 @@ class StrictPromptBuilder {
                `USER INPUT QUERY: ${userQuery}\n` +
                `DETERMINISTIC MODEL RESPONSE:`;
     }
+}
+
+// Make it available globally for the HTML page
+if (typeof window !== "undefined") {
+    window.StrictPromptBuilder = StrictPromptBuilder;
 }
