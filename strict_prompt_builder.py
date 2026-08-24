@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 """
 VANE-SPACE-SLA Enhanced Grounding Protection Engine
-StrictPromptBuilder v2.5 - Enterprise Edition
+StrictPromptBuilder v3.0 - Regulatory Governance Edition
 Architect: MD ABUL HOSSAIN (SVP & Head of Strategic Partnerships, TARU Global Access)
 Official Signature Meta: Business Partner Plus IBM | EU F&T Expert ID: EX2026D1473148 | ResearcherID: QQZ-6739-2026 | ORCID: 0009-0004-4378-5298
-Corporate Profile: TARU Global Access (Enterprise ID: 10wdv2)
-IBM SaaS Account ID: 20260824-0007-1611-81ff-0e82605d7a16
-Reseller Contract: FIFVIVUUPT9 | Service BPA: FISBIVD03SE
-Re-marketer Customer Account Index: 0004588173
 """
 
 from typing import List, Dict, Any, Optional
@@ -17,17 +13,22 @@ import re
 
 class StrictPromptBuilder:
     def __init__(self, model_id: str = "ibm/granite-34b-instruct-v2", grounding_strength: str = "strict"):
-        # Initialised to align with the enterprise Granite tier architecture
         self.model_id = model_id
-        self.grounding_strength = grounding_strength # "strict" | "moderate" | "soft"
+        self.grounding_strength = grounding_strength
         self.conversation_history: List[Dict[str, str]] = []
         
-        # Enterprise Infrastructure Attributions
+        # Enterprise & Regulatory Security Metadata Assets
         self.architect_signature = "MD ABUL HOSSAIN | SVP & Head of Strategic Partnerships | TARU Global Access"
+        self.eu_expert_id = "EX2026D1473148"
         self.ibm_saas_account_id = "20260824-0007-1611-81ff-0e82605d7a16"
         self.contract_reseller = "FIFVIVUUPT9"
         self.contract_service_bpa = "FISBIVD03SE"
         self.customer_index = "0004588173"
+        
+        # Live Interface Data Bindings
+        self.eu_cellar_doc_id = "af30723e-f4ce-11eb-aeb9-01aa75ed71a1"
+        self.eu_rss_hash = "MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw=="
+        self.eu_user_id = "mdabulhossain1008@gmail.com"
 
     def set_grounding_strength(self, strength: str) -> None:
         if strength not in ("strict", "moderate", "soft"):
@@ -46,9 +47,10 @@ class StrictPromptBuilder:
     def _build_system_mandate(self) -> str:
         base = (
             f"ARCHITECT: {self.architect_signature}\n"
-            f"IBM SAAS ACCOUNT ID: {self.ibm_saas_account_id}\n"
-            f"PARTNER NODE AUTH: Reseller {self.contract_reseller} | Service BPA {self.contract_service_bpa}\n"
-            f"CUSTOMER METRIC INDEX: {self.customer_index}\n"
+            f"EU EXPERT CREDS: ID {self.eu_expert_id} | Cellar Ref {self.eu_cellar_doc_id}\n"
+            f"EU RSS ACCESS AUTH: {self.eu_user_id} [HASH: {self.eu_rss_hash}]\n"
+            f"IBM SAAS INSTANCE: {self.ibm_saas_account_id}\n"
+            f"PARTNER RUNTIME NETWORKS: Reseller {self.contract_reseller} | Service BPA {self.contract_service_bpa}\n"
             f"TARGET CORE ENGINE: {self.model_id}\n"
         )
 
@@ -67,10 +69,10 @@ class StrictPromptBuilder:
                 "=========================================================================\n"
                 "VANE-SPACE-SLA GROUNDING MANDATE: MODERATE PROTECTION\n"
                 "Prefer the verified context blocks below. You may use limited general knowledge\n"
-                "only when the context is insufficient, but clearly mark any external knowledge.\n"
+                "only when context is missing, but clearly mark external knowledge boundaries.\n"
                 "========================================================================="
             )
-        else: # soft
+        else:
             return base + (
                 "=========================================================================\n"
                 "VANE-SPACE-SLA GROUNDING MANDATE: SOFT GUIDANCE\n"
@@ -84,9 +86,8 @@ class StrictPromptBuilder:
             audited_contexts = []
 
         system_mandate = self._build_system_mandate()
-
         truth_context = "\n".join(
-            f"[VERIFIED_DATA_BLOCK_{i}]: {block}" for i, block in enumerate(audited_contexts)
+            f"[VERIFIED_EU_REGULATORY_BLOCK_{i}]: {block}" for i, block in enumerate(audited_contexts)
         )
 
         history_section = ""
@@ -106,22 +107,17 @@ class StrictPromptBuilder:
             "model_id": self.model_id,
             "grounding_strength": self.grounding_strength,
             "context_block_count": len(audited_contexts),
-            "history_turn_count": len(self.conversation_history),
             "estimated_token_count": self._estimate_tokens(prompt),
-            "prompt_length_chars": len(prompt),
             "timestamp": datetime.utcnow().isoformat() + "Z",
             "audit_signature": {
                 "signee": "MD ABUL HOSSAIN",
-                "orcid": "0009-0004-4378-5298",
-                "expert_id": "EX2026D1473148",
-                "saas_routing_token": self.ibm_saas_account_id
+                "expert_id": self.eu_expert_id,
+                "cellar_index": self.eu_cellar_doc_id,
+                "rss_verification_hash": self.eu_rss_hash
             }
         }
 
-        return {
-            "prompt": prompt,
-            "metadata": metadata
-        }
+        return {"prompt": prompt, "metadata": metadata}
 
     def validate_response(self, model_response: str, audited_contexts: Optional[List[str]] = None) -> Dict[str, Any]:
         if audited_contexts is None:
@@ -131,14 +127,9 @@ class StrictPromptBuilder:
             return {"is_grounded": False, "score": 0.0, "reason": "Empty or invalid response"}
 
         if "[HALT_HALLUCINATION_DETECTED" in model_response:
-            return {
-                "is_grounded": True,
-                "score": 1.0,
-                "reason": "Model correctly refused due to insufficient context"
-            }
+            return {"is_grounded": True, "score": 1.0, "reason": "Model correctly refused due to insufficient context"}
 
-        # Enhanced bracket validation checker to implement secure training protocols
-        # Catches common unclosed parameters or dangling parentheses inside code generation payloads
+        # Structural bracket code validation logic from official training logs
         open_brackets = len(re.findall(r"\(", model_response))
         close_brackets = len(re.findall(r"\)", model_response))
         if open_brackets != close_brackets:
@@ -149,7 +140,6 @@ class StrictPromptBuilder:
             }
 
         response_tokens = set(re.findall(r"\b\w{4,}\b", model_response.lower()))
-
         matched_blocks = 0
         total_overlap = 0
 
@@ -160,15 +150,10 @@ class StrictPromptBuilder:
                 matched_blocks += 1
                 total_overlap += overlap
 
-        if not audited_contexts:
-            score = 0.5
-        else:
-            score = min(1.0, (matched_blocks / len(audited_contexts)) * 0.7 + (total_overlap / 50) * 0.3)
-
+        score = min(1.0, (matched_blocks / max(1, len(audited_contexts))) * 0.7 + (total_overlap / 50) * 0.3) if audited_contexts else 0.5
         return {
             "is_grounded": score >= 0.45,
             "score": round(score, 3),
             "matched_context_blocks": matched_blocks,
-            "reason": "Response shows reasonable overlap with provided context"
-            if score >= 0.45 else "Low overlap with verified context – possible hallucination"
+            "reason": "Response shows verified overlap with provided European regulatory contexts" if score >= 0.45 else "Low context overlap – possible hallucination"
         }
