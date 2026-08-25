@@ -4,21 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANE-SPACE-SLA | Voice Orchestration Node</title>
-    
-    <!-- Critical for GitHub Project Pages -->
     <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
-    
     <style>
         :root {
-            --bg-main: #030712;
-            --bg-surface: #0b1329;
-            --border-color: #1e293b;
-            --text-primary: #f3f4f6;
-            --text-secondary: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-teal: #10b981;
-            --accent-red: #ef4444;
-            --accent-cyan: #38bdf8;
+            --bg-main: #030712; --bg-surface: #0b1329; --border-color: #1e293b;
+            --text-primary: #f3f4f6; --text-secondary: #94a3b8;
+            --accent-blue: #3b82f6; --accent-teal: #10b981; --accent-cyan: #38bdf8; --accent-red: #ef4444;
             --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
@@ -33,7 +24,7 @@
         .nav-btn.secondary { border: 1px solid rgba(59, 130, 246, 0.3); color: var(--accent-cyan); }
         .nav-btn.secondary.active { background-color: rgba(59, 130, 246, 0.15); border-color: var(--accent-blue); color: var(--text-primary); }
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        .hero-section h1 { font-size: 32px; font-weight: 800; margin: 0 0 12px 0; letter-spacing: -0.5px; }
+        .hero-section h1 { font-size: 32px; font-weight: 800; margin: 0 0 12px 0; }
         .hero-desc { font-size: 15px; color: var(--text-secondary); max-width: 750px; margin-bottom: 35px; }
         .matrix-card { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 35px; margin-bottom: 30px; }
         .matrix-card h2 { font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 0; margin-bottom: 25px; color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
@@ -43,12 +34,12 @@
         .log-success { color: var(--accent-teal); font-weight: bold; }
         .log-alert { color: var(--accent-red); font-weight: bold; }
         .action-cluster { display: flex; gap: 12px; flex-wrap: wrap; }
-        .action-btn { font-family: var(--font-mono); font-size: 12px; font-weight: bold; text-transform: uppercase; padding: 14px 28px; border-radius: 4px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+        .action-btn { font-family: var(--font-mono); font-size: 12px; font-weight: bold; text-transform: uppercase; padding: 14px 28px; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; }
         .action-btn.primary { background-color: var(--accent-blue); color: #ffffff; }
         .action-btn.outline { border: 1px solid var(--border-color); color: var(--text-primary); background: transparent; }
-        .site-footer { background-color: var(--bg-surface); border-top: 1px solid var(--border-color); padding: 60px 20px 30px 20px; margin-top: 80px; }
+        .site-footer { background-color: var(--bg-surface); border-top: 1px solid var(--border-color); padding: 60px 20px 30px; margin-top: 80px; }
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
-        .footer-col h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-primary); margin-top: 0; margin-bottom: 20px; }
+        .footer-col h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-primary); margin-bottom: 20px; }
         .footer-col a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 13px; margin-bottom: 12px; }
         .footer-col a:hover { color: var(--accent-cyan); }
         .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); gap: 15px; }
@@ -76,7 +67,7 @@
   <main class="container">
     <section class="hero-section">
       <h1>Voice Duplex Stream Orchestrator Node</h1>
-      <p class="hero-desc">Continuous runtime verification checking system configured for live duplex voice communication channels. Guards against token drift vectors during telemetries transit operations.</p>
+      <p class="hero-desc">Continuous runtime verification checking system configured for live duplex voice communication channels. Guards against token drift vectors during telemetry transit operations using the ASR-9X Truth Protocol.</p>
 
       <div class="matrix-card">
         <h2>Live Streams Telemetry Feed // ASR-9X Truth Protocol</h2>
@@ -115,8 +106,6 @@
         <a href="https://orcid.org/0009-0004-4378-5298" target="_blank">ORCID Portal</a>
         <a href="https://www.webofscience.com/wos/author/record/QQZ-6739-2026" target="_blank">Web of Science Index</a>
         <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank">EU Publication Detail</a>
-        <a href="https://europa.eu" target="_blank" style="font-size: 11px; color: var(--accent-cyan);">→ Registry: op.europa.eu/s/AjiB</a>
-        <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" target="_blank" style="color: var(--accent-teal); font-weight: bold;">✓ Official EU RSS Live Feed</a>
       </div>
     </div>   
     <div class="footer-bottom">
@@ -150,15 +139,15 @@
         execBtn.style.opacity = '0.5';
         clearTerminalLogs();
         
-        setTimeout(function() { log("<span class='log-info'>📡 [VOICE ENGINE] Initializing Low-Latency Duplex Audio Stream...</span>"); }, 100);
-        setTimeout(function() { log("<span class='log-info'>🔒 [SECURITY GATE] Applying ASR-9X Truth Protocol constraints.</span><br>"); }, 500);
+        setTimeout(() => log("<span class='log-info'>📡 [VOICE ENGINE] Initializing Low-Latency Duplex Audio Stream...</span>"), 100);
+        setTimeout(() => log("<span class='log-info'>🔒 [SECURITY GATE] Applying ASR-9X Truth Protocol constraints.</span><br>"), 500);
 
         let frame = 1;
-        const interval = setInterval(function() {
+        const interval = setInterval(() => {
             const jitter = (Math.random() * (4.5 - 1.1) + 1.1).toFixed(2);
             const alignment = (Math.random() * (99.1 - 94.2) + 94.2).toFixed(2);
             
-            log('[AUDIO FRAME 0' + frame + '] Jitter: ' + jitter + 'ms | Audit Alignment: ' + alignment + '%');
+            log(`[AUDIO FRAME 0${frame}] Jitter: ${jitter}ms | Audit Alignment: ${alignment}%`);
             
             if (alignment >= 95.0) {
                 log("🛡️ State Check: <span class='log-success'>✅ COMPLIANT - Token Lineage Grounded</span>");
