@@ -16,7 +16,7 @@
         body { background-color: var(--bg-main); color: var(--text-primary); font-family: var(--font-sans); margin: 0; padding: 0; line-height: 1.6; }
         .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .logo { font-family: var(--font-mono); font-size: 18px; font-weight: bold; color: var(--text-primary); text-decoration: none; }
+        .logo { font-family: var(--font-mono); font-size: 18px; font-weight: bold; color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
         .logo span { color: var(--accent-blue); }
         .nav-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
         .nav-btn { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-family: var(--font-mono); padding: 8px 14px; border-radius: 4px; }
@@ -47,18 +47,22 @@
         .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); gap: 15px; }
         .identifiers-strip { display: flex; flex-wrap: wrap; gap: 15px; font-family: var(--font-mono); }
         .identifiers-strip span { color: var(--accent-cyan); }
+        .live-indicator { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .live-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #10b981; animation: pulse-glow 1.5s infinite; }
+        @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(0,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); } }
     </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
       <a href="index.html" class="logo">
-  <span class="logo-text">VANE-SPACE-SLA</span>
-  <span class="live-indicator">
-    <span class="live-dot"></span>
-    <span class="live-text">LIVE</span>
-  </span>
+        <span class="logo-text">VANE-SPACE-SLA</span>
+        <span class="live-indicator">
+          <span class="live-dot"></span>
+          <span class="live-text">LIVE</span>
+        </span>
       </a>
+      <nav class="nav-buttons">
         <a href="index.html" class="nav-btn">Home</a>
         <a href="about-us.html" class="nav-btn">About</a>
         <a href="index.html#credentials" class="nav-btn">Credentials</a>
@@ -99,7 +103,7 @@
         </div>
         <div class="metric-card">
           <div class="metric-value">// ORCID Record</div>
-          <div class="metric-label"><a href="https://orcid.org" target="_blank">0009-0004-4378-5298</a></div>
+          <div class="metric-label"><a href="https://orcid.org/0009-0004-4378-5298" target="_blank">0009-0004-4378-5298</a></div>
         </div>
       </div>
 
@@ -141,9 +145,9 @@
       </div>
       <div class="footer-col">
         <h4>Verification Streams</h4>
-        <a href="https://orcid.org" target="_blank">ORCID Portal</a>
-        <a href="https://webofscience.com" target="_blank">Web of Science Index</a>
-        <a href="https://europa.eu" target="_blank">EU Publication Detail</a>
+        <a href="https://orcid.org/0009-0004-4378-5298" target="_blank">ORCID Portal</a>
+        <a href="https://www.webofscience.com/wos/author/record/QQZ-6739-2026" target="_blank">Web of Science Index</a>
+        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank">EU Publication Detail</a>
       </div>
     </div>   
     <div class="footer-bottom">
@@ -155,113 +159,5 @@
       </div>
     </div>
   </footer>
-
-<!-- Embedded CSS Styles for Logo & Live Indicator -->
-<style>
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px; 
-    text-decoration: none;
-  }
-  .logo-text {
-    font-weight: bold;
-    color: inherit; 
-  }
-  
-  /* Flexible Live Badge Container */
-  .live-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  /* Blinking Dot Core Mechanics */
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    animation: pulse-glow 1s infinite; 
-    transition: background-color 0.3s ease;
-  }
-
-  /* Dynamic Health States */
-  /* HEALTHY (Green) */
-  .live-indicator.healthy {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-  }
-  .live-indicator.healthy .live-dot {
-    background-color: #10b981;
-    --pulse-color: rgba(16, 185, 129, 0.7);
-  }
-
-  /* WARNING (Orange) */
-  .live-indicator.warning {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
-  }
-  .live-indicator.warning .live-dot {
-    background-color: #f59e0b;
-    --pulse-color: rgba(245, 158, 11, 0.7);
-  }
-
-  /* CRITICAL (Red) */
-  .live-indicator.critical {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-  }
-  .live-indicator.critical .live-dot {
-    background-color: #ef4444;
-    --pulse-color: rgba(239, 68, 68, 0.7);
-  }
-
-  /* Shared Dynamic Pulse Keyframes */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 var(--pulse-color, rgba(16, 185, 129, 0.7)); }
-    70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
-  }
-</style>
-
-<!-- Background Latency Cycle script for sub-pages -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const liveIndicator = document.querySelector('.live-indicator');
-      const liveText = document.querySelector('.live-text');
-
-      function calculateSubPageLatency() {
-          // Generates tracking matrix value between 41ms and 45ms
-          const currentLatency = Math.floor(Math.random() * (45 - 41) + 41);
-
-          if (liveIndicator) {
-              liveIndicator.classList.remove('healthy', 'warning', 'critical');
-
-              if (currentLatency >= 45) {
-                  liveIndicator.classList.add('critical');
-                  if (liveText) liveText.textContent = "SPIKE";
-              } else if (currentLatency === 44) {
-                  liveIndicator.classList.add('warning');
-                  if (liveText) liveText.textContent = "SPIKE";
-              } else {
-                  liveIndicator.classList.add('healthy');
-                  if (liveText) liveText.textContent = "LIVE";
-              }
-          }
-      }
-
-      // Initialize default values instantly
-      if (liveIndicator) liveIndicator.classList.add('healthy');
-      if (liveText) liveText.textContent = "LIVE";
-
-      calculateSubPageLatency();
-      setInterval(calculateSubPageLatency, 2500);
-  });
-</script>
 </body>
 </html>
