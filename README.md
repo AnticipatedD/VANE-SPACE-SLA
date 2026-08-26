@@ -53,6 +53,8 @@ Vane-Space-SLA  is an ultra-modern, production-ready Retrieval-Augmented Generat
 
 ┌─────────────────────────────────────────────────┐│     Space Telemetry Input / Operator Query      │└────────────────────┬────────────────────────────┘│┌──────────▼──────────┐│   Query Processing  ││   & Tokenization    │└──────────┬──────────┘│┌────────────▼────────────┐│  Data Retrieval Layer   ││  (IBM watsonx.ai Embed) │└────────────┬────────────┘│┌────────────────▼────────────────┐│   Context Assembly              ││   (Aerospace Doc Relevance)     │└────────────┬─────────────────────┘│┌──────────▼──────────┐│  IBM Granite Engine ││  (Insight Generation)│└──────────┬──────────┘│┌────────────▼─────────────────┐│  Hallucination Detection      ││  Multi-Gate SLA Verification ││  - Source / Log Alignment    ││  - Structural Consistency    │└────────────┬──────────────────┘│┌────────▼────────┐│ Confidence Score││ Output Block    │└────────┬────────┘│┌───────▼────────┐│  Final Output  ││ (Audited Insight││  + Traceability)│└────────────────┘
 
+![VANE-SPACE-SLA Concurrent Subagent Architecture](subagent_architecture_diagram.png)
+
 ---
 
 📂 The Unified Repository Structure: 
