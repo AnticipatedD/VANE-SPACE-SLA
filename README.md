@@ -3,7 +3,7 @@
 ### Live Site 
 - Github Pages: [https://anticipatedd.github.io/VANE-SPACE-SLA](https://anticipatedd.github.io/VANE-SPACE-SLA/)
 
-![Vane-Space-SLA Enterprise Cover](Md_Abul_Hossain_vane_space_SLA26.jpg)
+![VANE-SPACE-SLA Concurrent Subagent Architecture](subagent_architecture_diagram.png)
 
 ### Sovereign Level Agreement Engine: Deterministic Zero-Trust Telemetry RAG for Mission-Critical Spacecraft Operations.
 
