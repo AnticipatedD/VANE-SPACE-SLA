@@ -64,7 +64,13 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="logo">VANE-SPACE<span>-SLA</span></a>
+      <a href="index.html" class="logo">
+        <span class="logo-text">VANE-SPACE-SLA</span>
+        <span class="live-indicator">
+          <span class="live-dot"></span>
+          <span class="live-text">LIVE</span>
+        </span>
+      </a>
       <nav class="nav-buttons">
         <a href="index.html" class="nav-btn">Home</a>
         <a href="about-us.html" class="nav-btn">About</a>
@@ -76,9 +82,9 @@
         <a href="contact-us.html" class="nav-btn">Contact</a>
       </nav>
     </div>
-  </header>
+</header>
 
-  <main class="container">
+    <main class="container">
     <section class="matrix-hero">
       <h1>Cryptographic Zero-Trust Security Specification</h1>
       <p class="hero-desc">Deterministic protocol configuration governing multi-tenant compliance boundaries and runtime machine isolation metrics across sovereign cloud infrastructures.</p>
@@ -174,5 +180,111 @@
       </div>
     </div>
   </footer>
+
+<!-- Embedded CSS Styles for Logo & Live Indicator -->
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; 
+    text-decoration: none;
+  }
+  .logo-text {
+    font-weight: bold;
+    color: inherit; 
+  }
+  
+  /* Flexible Live Badge Container */
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* Blinking Dot Core Mechanics */
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse-glow 1s infinite; 
+    transition: background-color 0.3s ease;
+  }
+
+  /* Dynamic Health States */
+  /* HEALTHY (Green) */
+  .live-indicator.healthy {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+  }
+  .live-indicator.healthy .live-dot {
+    background-color: #10b981;
+    --pulse-color: rgba(16, 185, 129, 0.7);
+  }
+
+  /* WARNING (Orange) */
+  .live-indicator.warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+  }
+  .live-indicator.warning .live-dot {
+    background-color: #f59e0b;
+    --pulse-color: rgba(245, 158, 11, 0.7);
+  }
+
+  /* CRITICAL (Red) */
+  .live-indicator.critical {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+  .live-indicator.critical .live-dot {
+    background-color: #ef4444;
+    --pulse-color: rgba(239, 68, 68, 0.7);
+  }
+
+  /* Shared Dynamic Pulse Keyframes */
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 var(--pulse-color, rgba(16, 185, 129, 0.7)); }
+    70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+  }
+</style>
+
+<!-- Background Latency Cycle script for sub-pages -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const liveIndicator = document.querySelector('.live-indicator');
+      const liveText = document.querySelector('.live-text');
+
+      function calculateSubPageLatency() {
+          const currentLatency = Math.floor(Math.random() * (45 - 41) + 41);
+
+          if (liveIndicator) {
+              liveIndicator.classList.remove('healthy', 'warning', 'critical');
+
+              if (currentLatency >= 45) {
+                  liveIndicator.classList.add('critical');
+                  if (liveText) liveText.textContent = "SPIKE";
+              } else if (currentLatency === 44) {
+                  liveIndicator.classList.add('warning');
+                  if (liveText) liveText.textContent = "SPIKE";
+              } else {
+                  liveIndicator.classList.add('healthy');
+                  if (liveText) liveText.textContent = "LIVE";
+              }
+          }
+      }
+
+      if (liveIndicator) liveIndicator.classList.add('healthy');
+      if (liveText) liveText.textContent = "LIVE";
+
+      calculateSubPageLatency();
+      setInterval(calculateSubPageLatency, 2500);
+  });
+</script>
 </body>
 </html>
