@@ -46,7 +46,13 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="logo">VANE-SPACE<span>-SLA</span></a>
+      <a href="index.html" class="logo">
+        <span class="logo-text">VANE-SPACE-SLA</span>
+        <span class="live-indicator">
+          <span class="live-dot"></span>
+          <span class="live-text">LIVE</span>
+        </span>
+      </a>
       <nav class="nav-buttons">
         <a href="index.html" class="nav-btn">Home</a>
         <a href="about-us.html" class="nav-btn">About</a>
@@ -58,9 +64,9 @@
         <a href="contact-us.html" class="nav-btn">Contact</a>
       </nav>
     </div>
-  </header>
+</header>
 
-  <main class="container">
+    <main class="container">
     <section class="matrix-hero">
       <h1>M2M OAuth Isolation Gateway</h1>
       <p class="hero-desc">Cryptographic loop configuration designed to encapsulate server-to-server transaction contexts and prevent parameter leakage pathways.</p>
@@ -114,43 +120,141 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const stream = document.getElementById('isolation-stream');
-        if (!stream) return;
+<!-- Embedded CSS Styles for Logo & Live Indicator -->
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; 
+    text-decoration: none;
+  }
+  .logo-text {
+    font-weight: bold;
+    color: inherit; 
+  }
+  
+  /* Flexible Live Badge Container */
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
 
-        const cryptologs = [
-            "CRITICAL_M2M: Initializing secure enclave wrap sequence...",
-            "OAUTH_GATE: Validating partner tenant identifier [10wdv2]...",
-            "IBM_SAAS: Mapping verified active account instance: 20260824-0007-1611-81ff-0e82605d7a16...",
-            "IBM_CONTRACT: Matching active Reseller credential map [FIFVIVUUPT9]...",
-            "IBM_CONTRACT: Service BPA verification [FISBIVD03SE] active...",
-            "REGULATORY_LOCK: Polling EC Cellar metadata packet matching key 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1'...",
-            "HASH_CHECK: Validating user hash integrity: MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==...",
-            "M2M_ISOLATION: Single-use cryptographic token generated successfully.",
-            "BOUND_CHECK: Watsonx governance audit confirmed loop isolated."
-        ];
+  /* Blinking Dot Core Mechanics */
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse-glow 1s infinite; 
+    transition: background-color 0.3s ease;
+  }
 
-        function outputStreamLine() {
-            const now = new Date();
-            const timeStr = now.toISOString().slice(11, 19);
-            const line = document.createElement('div');
-            line.style.marginBottom = '5px';
-            
-            let chosenLog = cryptologs[Math.floor(Math.random() * cryptologs.length)];
-            
-            if (Math.random() > 0.75) {
-                chosenLog = "LATENCY_TRACE: Active telemetry gate response verified at " + Math.floor(Math.random() * (45 - 41) + 41) + " ms";
-            }
+  /* Dynamic Health States */
+  /* HEALTHY (Green) */
+  .live-indicator.healthy {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+  }
+  .live-indicator.healthy .live-dot {
+    background-color: #10b981;
+    --pulse-color: rgba(16, 185, 129, 0.7);
+  }
 
-            line.innerHTML = "<span style='color: #64748b;'>[" + timeStr + "]</span> <span style='color: #38bdf8;'>◈</span> " + chosenLog;
-            stream.appendChild(line);
-            stream.scrollTop = stream.scrollHeight;
-        }
+  /* WARNING (Orange) */
+  .live-indicator.warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+  }
+  .live-indicator.warning .live-dot {
+    background-color: #f59e0b;
+    --pulse-color: rgba(245, 158, 11, 0.7);
+  }
 
-        outputStreamLine();
-        setInterval(outputStreamLine, 2200);
-    });
-  </script>
+  /* CRITICAL (Red) */
+  .live-indicator.critical {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+  .live-indicator.critical .live-dot {
+    background-color: #ef4444;
+    --pulse-color: rgba(239, 68, 68, 0.7);
+  }
+
+  /* Shared Dynamic Pulse Keyframes */
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 var(--pulse-color, rgba(16, 185, 129, 0.7)); }
+    70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+  }
+</style>
+
+<!-- Telemetry and Stream Execution Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const stream = document.getElementById('isolation-stream');
+      const liveIndicator = document.querySelector('.live-indicator');
+      const liveText = document.querySelector('.live-text');
+      
+      if (!stream) return;
+
+      const cryptologs = [
+          "CRITICAL_M2M: Initializing secure enclave wrap sequence...",
+          "OAUTH_GATE: Validating partner tenant identifier [10wdv2]...",
+          "IBM_SAAS: Mapping verified active account instance: 20260824-0007-1611-81ff-0e82605d7a16...",
+          "IBM_CONTRACT: Matching active Reseller credential map [FIFVIVUUPT9]...",
+          "IBM_CONTRACT: Service BPA verification [FISBIVD03SE] active...",
+          "REGULATORY_LOCK: Polling EC Cellar metadata packet matching key 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1'...",
+          "HASH_CHECK: Validating user hash integrity: MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==...",
+          "M2M_ISOLATION: Single-use cryptographic token generated successfully.",
+          "BOUND_CHECK: Watsonx governance audit confirmed loop isolated."
+      ];
+
+      function outputStreamLine() {
+          const now = new Date();
+          const timeStr = now.toISOString().slice(11, 19);
+          const line = document.createElement('div');
+          line.style.marginBottom = '5px';
+          
+          let generatedLatency = Math.floor(Math.random() * (45 - 41) + 41);
+          let chosenLog = cryptologs[Math.floor(Math.random() * cryptologs.length)];
+          
+          if (Math.random() > 0.75) {
+              chosenLog = "LATENCY_TRACE: Active telemetry gate response verified at " + generatedLatency + " ms";
+          }
+
+          line.innerHTML = "<span style='color: #64748b;'>[" + timeStr + "]</span> <span style='color: #38bdf8;'>◈</span> " + chosenLog;
+          stream.appendChild(line);
+          stream.scrollTop = stream.scrollHeight;
+
+          // Synchronize the header live indicator matching standard architecture telemetry rules
+          if (liveIndicator) {
+              liveIndicator.classList.remove('healthy', 'warning', 'critical');
+
+              if (generatedLatency >= 45) {
+                  liveIndicator.classList.add('critical');
+                  if (liveText) liveText.textContent = "SPIKE";
+              } else if (generatedLatency === 44) {
+                  liveIndicator.classList.add('warning');
+                  if (liveText) liveText.textContent = "SPIKE";
+              } else {
+                  liveIndicator.classList.add('healthy');
+                  if (liveText) liveText.textContent = "LIVE";
+              }
+          }
+      }
+
+      // Initialize presentation layout states instantly
+      if (liveIndicator) liveIndicator.classList.add('healthy');
+      if (liveText) liveText.textContent = "LIVE";
+
+      outputStreamLine();
+      setInterval(outputStreamLine, 2200);
+  });
+</script>
 </body>
-            </html>
+</html>
