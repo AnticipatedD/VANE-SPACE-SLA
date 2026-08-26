@@ -6,8 +6,8 @@
     <title>VANE-SPACE-SLA Enterprise Command Center</title>
     
     <!-- Critical for GitHub Project Pages -->
-    <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">"
-  
+    <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
+    
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -33,7 +33,7 @@
 
         .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid #1e293b; backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .logo { font-family: monospace; font-size: 18px; font-weight: bold; color: #f3f4f6; text-decoration: none; }
+        .logo { font-family: monospace; font-size: 18px; font-weight: bold; color: #f3f4f6; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
         .logo span { color: #3b82f6; }
         .nav-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
         .nav-btn { color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px; }
@@ -82,6 +82,31 @@
             .span-desktop-2 { grid-column: span 2; }
             .credentials-grid { grid-template-columns: 1fr 1fr; }
             .btn { flex: 0 1 auto; }
+        }
+
+        /* Live Indicator Styles */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10b981;
+            animation: pulse-glow 1.5s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
         }
     </style>
 </head>
@@ -210,207 +235,50 @@
               <div class="cred-item"><span>Understand the foundations of generative AI for business leaders</span><span class="status">Badge</span></div>
               <div class="cred-item"><span>Manage AD DS domain controllers and FSMO roles</span><span class="status">Badge</span></div>
               <div class="cred-item"><span>Introduction to AD DS</span><span class="status">Badge</span></div>
-              <div class="cred-item"><span>IBM Bob Intermediate</span><span class="status">Active</span></div>
-              <div class="cred-item"><span>IBM Cloud for VMware Solutions Practitioner Advanced</span><span class="status">Active</span></div>
-              <div class="cred-item"><span>API-led Integration Practitioner Advanced</span><span class="status">Active</span></div>
-              <div class="cred-item"><span>watsonx.governance Technical Sales Intermediate</span><span class="status">Active</span></div>
-          </div>
-
-          <p style="margin-top: 18px; font-size: 0.8rem; color: #64748b;">
-            Full transcript available via IBM Training Portal through 
-            <a href="https://www.credly.com/users/mdahossain/badges/credly" target="_blank">Credly</a> 
-            & <a href="https://learn.microsoft.com/en-gb/users/mdabulhossain-6486/" target="_blank">Microsoft Learn Profile</a> 
-              All badges and trophies shown are currently Active as of August 2026. Microsoft Learn Level: 10 (124,550/155,899 XP).
-            <strong>10</strong> (124,550/155,899 XP) 
-          </p>
-      </section>
-
-      <!-- Verification Infrastructure -->
-      <section class="card span-desktop-2">
-          <h2>🛡️ Verification Infrastructure (EC Portal Widgets)</h2>
-          <p style="color: var(--text-secondary); margin-bottom: 15px;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
-          
-          <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-              <div style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #d97706;">
-                  <strong style="display: block; color: #d97706; font-size: 0.95rem;">EU Cellar Asset Integration Wrapper</strong>
-                  <div style="background: #111827; border: 1px solid #2d3748; border-radius: 6px; padding: 12px; margin-top: 10px; font-size: 0.85rem;">
-                      <div style="font-weight: bold; margin-bottom: 4px;">Target Asset: Horizon Europe, Pillar II</div>
-                      <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Global challenges and European industrial competitiveness.</div>
-                      <span style="background: rgba(217,119,6,0.15); color: #fbbf24; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Status: Synced via Cellar ID</span>
-                  </div>
-              </div>
-
-              <div style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #2563eb;">
-                  <strong style="display: block; color: #2563eb; font-size: 0.95rem;">EC Webmaster Operational Wrapper</strong>
-                  <div style="background: #111827; border: 1px solid #2d3748; border-radius: 6px; padding: 12px; margin-top: 10px; font-size: 0.85rem;">
-                      <div style="font-weight: bold; margin-bottom: 4px;">Service Engine: OPWIDGET</div>
-                      <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Widget Cluster Identity Ref: #10493</div>
-                      <span style="background: rgba(37,99,235,0.15); color: #60a5fa; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Lang: Auto-Detect</span>
-                  </div>
-              </div>
           </div>
       </section>
   </main>
 
-<footer style="text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid #1f2937;">
-    <div style="font-family: monospace; font-size: 13px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; padding: 10px 0; border-bottom: 1px solid #1e293b; margin-bottom: 16px;">
-        <a href="about-us.html" style="color: #94a3b8; text-decoration: none;">About Us</a>
-        <span style="color: #334155;">|</span>
-        <a href="contact-us.html" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
-        <span style="color: #334155;">|</span>
-        <a href="security.html" style="color: #94a3b8; text-decoration: none;">Zero-Trust Security Layout</a>
-        <span style="color: #334155;">|</span>
-        <a href="privacy.html" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a>
-        <span style="color: #334155;">|</span>
-        <a href="terms.html" style="color: #94a3b8; text-decoration: none;">Terms of Service</a>
-        <span style="color: #334155;">|</span>
-        <a href="extensions-core/m2m-oauth-isolation.html" style="color: #94a3b8; text-decoration: none;">M2M Isolation Gateway</a>
-        <span style="color: #334155;">|</span>
-        <a href="voice-orchestrator.html" style="color: #94a3b8; text-decoration: none;">Voice Orchestrator Node</a>
-    </div>
-    
-    <div style="font-family: monospace; font-size: 12px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center; padding: 10px 0; margin-bottom: 20px;">
-        <a href="https://orcid.org/0009-0004-4378-5298" target="_blank" style="color: #38bdf8; text-decoration: none;">ORCID: 0009-0004-4378-5298</a>
-        <span style="color: #334155;">·</span>
-        <a href="https://www.webofscience.com/wos/author/record/QQZ-6739-2026" target="_blank" style="color: #38bdf8; text-decoration: none;">ResearcherID: QQZ-6739-2026</a>
-        <span style="color: #334155;">·</span>
-        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank" style="color: #60a5fa; text-decoration: none;">EU Publication Detail</a>
-        <span style="color: #334155;">·</span>
-        <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" target="_blank" style="color: #10b981; text-decoration: none; font-weight: bold;">✓ Official EU RSS Live Feed</a>
-    </div>
+  <footer>
+      <p>© 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All Rights Reserved.</p>
+      <div style="margin-top: 12px;">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="security.html">Security</a>
+          <a href="about-us.html">About</a>
+          <a href="contact-us.html">Contact</a>
+      </div>
+  </footer>
 
-    <p style="font-size: 0.82em; color: #4b5563; font-family: monospace; margin: 0 0 4px 0;">EU Expert: EX2026D1473148 // Vane Enterprise LLC</p>
-    <p style="font-size: 0.85em; color: #64748b; margin: 0;">© 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All Rights Reserved.</p>
-</footer>
-
-<!-- Embedded CSS Styles for Logo & Live Indicator -->
-<style>
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px; 
-    text-decoration: none;
-  }
-  .logo-text {
-    font-weight: bold;
-    color: inherit; 
-  }
-  
-  /* Flexible Live Badge Container */
-  .live-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  /* Blinking Dot Core Mechanics */
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    /* Blinking speed changed from 1.5s to 1s for a more active pulse */
-    animation: pulse-glow 1s infinite; 
-    transition: background-color 0.3s ease;
-  }
-
-  /* Dynamic Health States */
-  .live-indicator.healthy {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-  }
-  .live-indicator.healthy .live-dot {
-    background-color: #10b981;
-    --pulse-color: rgba(16, 185, 129, 0.7);
-  }
-
-  .live-indicator.warning {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
-  }
-  .live-indicator.warning .live-dot {
-    background-color: #f59e0b;
-    --pulse-color: rgba(245, 158, 11, 0.7);
-  }
-
-  /* Shared Dynamic Pulse Keyframes */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 var(--pulse-color, rgba(16, 185, 129, 0.7)); }
-    70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
-  }
-</style>
-
-<!-- Terminal Stream and System Metrics Scripts -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
       const terminal = document.getElementById('terminal-stream');
       const latencyVal = document.getElementById('latency-val');
-      // Finds the live indicator badge in the header
-      const liveIndicator = document.querySelector('.live-indicator');
       
-      if (!terminal) return;
-
-      const logs = [
-          "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
-          "Authorization confirmed via M2M OAuth isolation routing map.",
-          "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
-          "Polling cell ID 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1' from EU Cellar cluster.",
-          "Zero-Trust packet verification: Integrity 100% verified.",
-          "Syncing portfolio credentials: 84 IBM items validated.",
-          "Syncing academic pathways: 90 MS Learn badges + 17 trophies parsed successfully.",
-          "Microsoft Learn Contributor ID 2058ACDDC2B3773F confirmed Active.",
-          "IBM Bob Intermediate + watsonx.governance badges confirmed Active."
+      const messages = [
+        "Initializing secure trace sync...",
+        "Microsoft Learn Contributor ID 2058ACDDC2B3773F confirmed Active.",
+        "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
+        "Polling cell ID 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1' from EU Cellar cluster.",
+        "SECURITY AUDIT: Node verification handshake successful.",
+        "Authorization confirmed via M2M OAuth isolation routing map.",
+        "IBM Bob Intermediate + watsonx.governance badges confirmed Active.",
+        "Zero-Trust packet verification: Integrity 100% verified."
       ];
 
-      function addLogLine() {
-          const now = new Date();
-          const timeStr = now.toISOString().slice(11, 19);
-          
-          let selectedLog = logs[Math.floor(Math.random() * logs.length)];
-          
-          if (Math.random() > 0.7) {
-              const randomIp = "10.240." + Math.floor(Math.random() * 254) + "." + Math.floor(Math.random() * 254);
-              selectedLog = "SECURITY AUDIT: Node [" + randomIp + "] verification handshake successful.";
-          }
-
-          const logLine = document.createElement('div');
-          logLine.style.marginBottom = '6px';
-          logLine.innerHTML = "<span style='color: #abe0f6;'>[" + timeStr + "]</span> <span style='color: #10b981;'>⚡</span> " + selectedLog;
-          
-          terminal.appendChild(logLine);
+      let i = 0;
+      setInterval(() => {
+        if (terminal) {
+          const time = new Date().toLocaleTimeString();
+          terminal.innerHTML += `<div>[${time}] ⚡ ${messages[i % messages.length]}</div>`;
           terminal.scrollTop = terminal.scrollHeight;
-
-          if (latencyVal) {
-              // Generates random latency between 41ms and 45ms
-              const currentLatency = Math.floor(Math.random() * (45 - 41) + 41);
-              latencyVal.textContent = currentLatency + " ms";
-
-              // Dynamically changes indicator state based on the latency spike threshold
-              if (liveIndicator) {
-                  if (currentLatency > 43) {
-                      liveIndicator.classList.remove('healthy');
-                      liveIndicator.classList.add('warning');
-                  } else {
-                      liveIndicator.classList.remove('warning');
-                      liveIndicator.classList.add('healthy');
-                  }
-              }
-          }
-      }
-
-      // Initialize the indicator default state to healthy on load
-      if (liveIndicator) {
-          liveIndicator.classList.add('healthy');
-      }
-
-      addLogLine();
-      setInterval(addLogLine, 2500);
-  });
-</script>
+          i++;
+        }
+        if (latencyVal) {
+          latencyVal.textContent = (41 + Math.floor(Math.random() * 5)) + " ms";
+        }
+      }, 2800);
+    });
+  </script>
 </body>
 </html>
