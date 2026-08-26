@@ -48,10 +48,20 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any]) -> Dict[str, 
         status_flag = "STOCHASTIC_DRIFT_INTERCEPTED"
         confidence_metric = (vector_drift_score * 0.8) * 100
 
+    # Align status output with the front-end layout indicator criteria
+    measured_latency = round(total_latency_ms, 2)
+    if measured_latency >= 45.00:
+        indicator_status = "CRITICAL / SPIKE"
+    elif 44.00 <= measured_latency < 45.00:
+        indicator_status = "WARNING / SPIKE"
+    else:
+        indicator_status = "HEALTHY / LIVE"
+
     return {
         "timestamp_epoch": time.time(),
         "operational_status": status_flag,
-        "measured_latency_ms": round(total_latency_ms, 2),
+        "indicator_sync_alert": indicator_status,
+        "measured_latency_ms": measured_latency,
         "verifiable_confidence_score": f"{confidence_metric:.2f}%",
         "regulatory_telemetry_trace": {
             "account_id": MISSION_INFRA_CONFIG["saas_account_id"],
