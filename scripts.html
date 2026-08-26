@@ -4,230 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANE-SPACE-SLA | Strict Prompt Builder</title>
-    
-    <!-- Critical for GitHub Project Pages -->
     <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
-    
     <style>
-        body { 
-            background-color: #030712; 
-            color: #f3f4f6; 
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; 
-            margin: 0; 
-            padding: 40px 20px; 
-            display: flex; 
-            justify-content: center; 
-        }
-        .matrix-box { 
-            max-width: 900px; 
-            width: 100%; 
-            background-color: #0b1329; 
-            padding: 35px; 
-            border-radius: 8px; 
-            border: 1px solid #1e293b; 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
-        }
-        .header-section {
-            border-bottom: 1px solid #1e293b;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 { 
-            color: #3b82f6; 
-            font-size: 22px; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0 0 8px 0; 
-        }
-        .subtitle { 
-            color: #64748b; 
-            font-size: 12px; 
-            margin: 0;
-            line-height: 1.6;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-        .field-block {
-            display: flex;
-            flex-direction: column;
-        }
-        label { 
-            font-size: 11px; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: bold; 
-            margin-bottom: 8px; 
-            color: #94a3b8; 
-        }
-        input, textarea, select { 
-            width: 100%; 
-            background-color: #030712; 
-            border: 1px solid #1e293b; 
-            border-radius: 4px; 
-            color: #38bdf8; 
-            padding: 12px; 
-            font-size: 13px; 
-            font-family: inherit;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #2563eb;
-        }
+        body { background-color: #030712; color: #f3f4f6; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; margin: 0; padding: 40px 20px; display: flex; justify-content: center; }
+        .matrix-box { max-width: 900px; width: 100%; background-color: #0b1329; padding: 35px; border-radius: 8px; border: 1px solid #1e293b; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .header-section { border-bottom: 1px solid #1e293b; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #3b82f6; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px 0; }
+        .subtitle { color: #64748b; font-size: 12px; margin: 0; line-height: 1.6; }
+        .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 25px; }
+        .field-block { display: flex; flex-direction: column; }
+        label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 8px; color: #94a3b8; }
+        input, textarea, select { width: 100%; background-color: #030712; border: 1px solid #1e293b; border-radius: 4px; color: #38bdf8; padding: 12px; font-size: 13px; font-family: inherit; box-sizing: border-box; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; }
         textarea { resize: vertical; min-height: 80px; }
-        
-        .action-container {
-            display: flex;
-            justify-content: flex-start;
-            margin-bottom: 30px;
-            gap: 12px;
-        }
-        button { 
-            background-color: #2563eb; 
-            color: #ffffff; 
-            border: none; 
-            padding: 12px 24px; 
-            font-weight: bold; 
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-family: inherit;
-            transition: background-color 0.2s;
-        }
+        .action-container { display: flex; gap: 12px; margin-bottom: 30px; }
+        button { background-color: #2563eb; color: #ffffff; border: none; padding: 12px 24px; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px; cursor: pointer; font-family: inherit; }
         button:hover { background-color: #1d4ed8; }
-        button:disabled {
-            background-color: #1e293b;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        
-        .output-panel { 
-            background-color: #030712; 
-            border: 1px solid #1e293b; 
-            border-radius: 4px; 
-            padding: 20px; 
-        }
-        .panel-status { 
-            font-size: 11px; 
-            color: #10b981; 
-            font-weight: bold; 
-            margin-bottom: 12px; 
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .panel-status::before {
-            content: "";
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #10b981;
-        }
-        pre { 
-            margin: 0; 
-            white-space: pre-wrap; 
-            word-wrap: break-word; 
-            font-size: 12px; 
-            color: #cbd5e1; 
-            line-height: 1.6; 
-        }
-        .nav-back { 
-            display: inline-flex; 
-            margin-bottom: 20px; 
-            color: #475569; 
-            text-decoration: none; 
-            font-size: 11px; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        button:disabled { background-color: #1e293b; cursor: not-allowed; opacity: 0.6; }
+        .output-panel { background-color: #030712; border: 1px solid #1e293b; border-radius: 4px; padding: 20px; }
+        .panel-status { font-size: 11px; color: #10b981; font-weight: bold; margin-bottom: 12px; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+        .panel-status::before { content: ""; display: inline-block; width: 6px; height: 6px; background-color: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
+        pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-size: 12px; color: #cbd5e1; line-height: 1.6; }
+        .nav-back { display: inline-flex; margin-bottom: 20px; color: #475569; text-decoration: none; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
         .nav-back:hover { color: #3b82f6; }
     </style>
 </head>
 <body>
-
 <div class="matrix-box">
     <a href="index.html" class="nav-back">← Return to Portal Matrix</a>
-    
     <div class="header-section">
         <h1>Strict Prompt Builder Sandbox</h1>
         <p class="subtitle">Component isolation utility // Anchoring model grounding protection mechanisms against hallucination vectors.</p>
     </div>
-
     <div class="form-grid">
         <div class="field-block">
             <label for="modelId">Target Model Identifier</label>
             <select id="modelId">
                 <option value="ibm/granite-13b-instruct-v2">ibm/granite-13b-instruct-v2</option>
                 <option value="ibm/granite-20b-multilingual">ibm/granite-20b-multilingual</option>
+                <option value="ibm/granite-34b-instruct-v2">ibm/granite-34b-instruct-v2</option>
             </select>
         </div>
-
         <div class="field-block">
             <label for="userQuery">User Input Query String</label>
             <input type="text" id="userQuery" value="Check system status of server 01.">
         </div>
-
         <div class="field-block">
             <label for="contextBlock">Verified Data Context Baseline (Line delimited)</label>
             <textarea id="contextBlock" rows="4">[SEVONE_TELEMETRY_LOG_ENTRY] Device ID: FIN-PROD-SERVER-01 | CPU Load: 42.8% | Status: SECURE</textarea>
         </div>
     </div>
-
     <div class="action-container">
         <button onclick="compilePromptInterface()" id="compileBtn">Execute Compilation</button>
     </div>
-
     <div class="output-panel">
         <div class="panel-status" id="statusText">Grounding Boundary Protection Active</div>
         <pre id="outputArea">Initializing modular data stream tracking parameters...</pre>
     </div>
 </div>
-
-<!-- Load the Strict Prompt Builder -->
 <script src="strict_prompt_builder.js"></script>
-
 <script>
     function compilePromptInterface() {
         const btn = document.getElementById('compileBtn');
         const outputArea = document.getElementById('outputArea');
         const statusText = document.getElementById('statusText');
-
-        // Check if the class is available
         if (typeof StrictPromptBuilder === 'undefined') {
             outputArea.textContent = "ERROR: StrictPromptBuilder class not loaded.\nPlease make sure strict_prompt_builder.js is in the same folder.";
             statusText.style.color = "#ef4444";
             statusText.textContent = "Module Load Failure";
             return;
         }
-
         btn.disabled = true;
         statusText.style.color = "#10b981";
         statusText.textContent = "Compiling Grounded Prompt...";
-
         try {
             const modelId = document.getElementById('modelId').value;
             const userQuery = document.getElementById('userQuery').value;
             const contextText = document.getElementById('contextBlock').value;
-            
-            const auditedContexts = contextText
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line !== '');
-
+            const auditedContexts = contextText.split('\n').map(line => line.trim()).filter(line => line !== '');
             const builder = new StrictPromptBuilder(modelId);
-            const securePrompt = builder.buildGroundedPrompt(userQuery, auditedContexts);
-
-            outputArea.textContent = securePrompt;
+            const result = builder.buildGroundedPrompt(userQuery, auditedContexts);
+            outputArea.textContent = result.prompt;
             statusText.textContent = "Grounding Boundary Protection Active • Prompt Compiled Successfully";
         } catch (error) {
             outputArea.textContent = "Compilation Error:\n" + error.message;
@@ -237,13 +94,7 @@
             btn.disabled = false;
         }
     }
-
-    // Auto-compile on page load
-    window.addEventListener('DOMContentLoaded', () => {
-        // Small delay to ensure the external script has loaded
-        setTimeout(compilePromptInterface, 150);
-    });
+    window.addEventListener('DOMContentLoaded', () => setTimeout(compilePromptInterface, 150));
 </script>
-
 </body>
 </html>
