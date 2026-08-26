@@ -33,7 +33,15 @@ class VoiceDuplexStreamOrchestrator:
             verification_alignment = round(random.uniform(94.2, 99.1), 2)
             processing_latency = round(random.uniform(41.0, 45.0), 2)
 
-            print(f"[AUDIO FRAME {frame_id:02d}] Jitter: {measured_jitter_ms}ms | Internal Latency: {processing_latency}ms")
+            # Determine real-time infrastructure header sync alerts matching framework guidelines
+            if processing_latency >= 45.00:
+                sync_alert = "CRITICAL / SPIKE"
+            elif 44.00 <= processing_latency < 45.00:
+                sync_alert = "WARNING / SPIKE"
+            else:
+                sync_alert = "HEALTHY / LIVE"
+
+            print(f"[AUDIO FRAME {frame_id:02d}] Jitter: {measured_jitter_ms}ms | Internal Latency: {processing_latency}ms | Alert: [{sync_alert}]")
             
             if verification_alignment >= 95.0:
                 print("🛡️  State Check: ✅ COMPLIANT - Token Lineage Grounded")
@@ -42,11 +50,12 @@ class VoiceDuplexStreamOrchestrator:
                 print("⚠️  State Check: ❌ DRIFT DETECTED - Intercepting Token Sequence")
                 status = "INTERCEPTED_DRIFT"
 
-            print("-" * 60)
+            print("-" * 80)
             audit_metrics[f"frame_{frame_id}"] = {
                 "jitter": measured_jitter_ms,
                 "alignment": verification_alignment,
                 "latency_ms": processing_latency,
+                "indicator_sync_alert": sync_alert,
                 "status_flag": status
             }
 
