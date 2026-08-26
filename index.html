@@ -89,7 +89,13 @@
   <!-- Top Enterprise Header Navigation -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="index.html" class="logo">VANE-SPACE-SLA<span>-VSSLA_V1.0</span></a>
+      <a href="index.html" class="logo">
+        <span class="logo-text">VANE-SPACE-SLA</span>
+        <span class="live-indicator">
+          <span class="live-dot"></span>
+          <span class="live-text">LIVE</span>
+        </span>
+      </a>
       <nav class="nav-buttons">
         <a href="index.html" class="nav-btn active">Home</a>
         <a href="about-us.html" class="nav-btn">About</a>
@@ -275,10 +281,75 @@
     <p style="font-size: 0.85em; color: #64748b; margin: 0;">© 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All Rights Reserved.</p>
 </footer>
 
+<!-- Embedded CSS Styles for Logo & Live Indicator -->
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; 
+    text-decoration: none;
+  }
+  .logo-text {
+    font-weight: bold;
+    color: inherit; 
+  }
+  
+  /* Flexible Live Badge Container */
+  .live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* Blinking Dot Core Mechanics */
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    /* Blinking speed changed from 1.5s to 1s for a more active pulse */
+    animation: pulse-glow 1s infinite; 
+    transition: background-color 0.3s ease;
+  }
+
+  /* Dynamic Health States */
+  .live-indicator.healthy {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+  }
+  .live-indicator.healthy .live-dot {
+    background-color: #10b981;
+    --pulse-color: rgba(16, 185, 129, 0.7);
+  }
+
+  .live-indicator.warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+  }
+  .live-indicator.warning .live-dot {
+    background-color: #f59e0b;
+    --pulse-color: rgba(245, 158, 11, 0.7);
+  }
+
+  /* Shared Dynamic Pulse Keyframes */
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 var(--pulse-color, rgba(16, 185, 129, 0.7)); }
+    70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+  }
+</style>
+
+<!-- Terminal Stream and System Metrics Scripts -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
       const terminal = document.getElementById('terminal-stream');
       const latencyVal = document.getElementById('latency-val');
+      // Finds the live indicator badge in the header
+      const liveIndicator = document.querySelector('.live-indicator');
       
       if (!terminal) return;
 
@@ -313,8 +384,26 @@
           terminal.scrollTop = terminal.scrollHeight;
 
           if (latencyVal) {
-              latencyVal.textContent = Math.floor(Math.random() * (45 - 41) + 41) + " ms";
+              // Generates random latency between 41ms and 45ms
+              const currentLatency = Math.floor(Math.random() * (45 - 41) + 41);
+              latencyVal.textContent = currentLatency + " ms";
+
+              // Dynamically changes indicator state based on the latency spike threshold
+              if (liveIndicator) {
+                  if (currentLatency > 43) {
+                      liveIndicator.classList.remove('healthy');
+                      liveIndicator.classList.add('warning');
+                  } else {
+                      liveIndicator.classList.remove('warning');
+                      liveIndicator.classList.add('healthy');
+                  }
+              }
           }
+      }
+
+      // Initialize the indicator default state to healthy on load
+      if (liveIndicator) {
+          liveIndicator.classList.add('healthy');
       }
 
       addLogLine();
