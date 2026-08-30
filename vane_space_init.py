@@ -1,28 +1,37 @@
 #!/usr/bin/env python3
 """
-VANE-SPACE-SLA - Multi-Gate Telemetry Validation Engine (v2.0)
-Architect: MD ABUL HOSSAIN (SVP & Head of Strategic Partnerships, TARU Global Access)
-Official Signature: IBM Business Partner Plus | EU F&T Expert ID: EX2026D1473148
-ResearcherID: QQZ-6739-2026 | ORCID: 0009-0004-4378-5298
-IBM SaaS Account: 20260824-0007-1611-81ff-0e82605d7a16
+VANE-SPACE-SLA - Multi-Gate Telemetry Validation Engine (Demonstration)
+Author: MD ABUL HOSSAIN
 """
 
+import os
 import time
 import random
 import json
+import logging
 from typing import Dict, Any
+from dotenv import load_dotenv
 
-MISSION_INFRA_CONFIG = {
-    "node_id": "VANE_BOB_NODE_08_2026",
-    "framework": "Vane-Space-SLA (v2.0)",
-    "verification_layer": "IBM Event Automation Pipeline",
-    "saas_account_id": "20260824-0007-1611-81ff-0e82605d7a16",
-    "company_name": "TARU Global Access",
-    "remarketer_customer_number": "0004588173",
-    "eu_cellar_id": "af30723e-f4ce-11eb-aeb9-01aa75ed71a1",
-    "reseller_lic": "FIFVIVUUPT9",
-    "service_bpa": "FISBIVD03SE"
-}
+load_dotenv()
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)-8s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+logger = logging.getLogger("vane_space")
+
+def get_config() -> Dict[str, str]:
+    return {
+        "node_id": "VANE_DEMO_NODE",
+        "framework": "Vane-Space-SLA (Demo)",
+        "saas_account_id": os.getenv("IBM_SAAS_ACCOUNT_ID", "demo-account"),
+        "eu_expert_id": os.getenv("EU_EXPERT_ID", "EX2026D1473148"),
+        "reseller_lic": os.getenv("CONTRACT_RESELLER_ID", "demo-reseller"),
+        "service_bpa": os.getenv("CONTRACT_SERVICE_BPA", "demo-bpa"),
+        "customer_index": os.getenv("CUSTOMER_INDEX", "demo-customer"),
+        "eu_cellar_id": os.getenv("EU_CELLAR_DOC_ID", "demo-cellar"),
+    }
 
 def verify_granite_syntax_gate(code_snippet: str) -> Dict[str, str]:
     if "average = (num1 + num2 + num3 / 3" in code_snippet:
@@ -33,7 +42,10 @@ def verify_granite_syntax_gate(code_snippet: str) -> Dict[str, str]:
         }
     return {"validation_gate": "PASS", "error_detected": "None", "granite_remediation": "None"}
 
-def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any]) -> Dict[str, Any]:
+def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = None) -> Dict[str, Any]:
+    if seed is not None:
+        random.seed(seed)
+
     start_time = time.perf_counter()
     gate_1_leak = random.uniform(0.0, 0.01)
     vector_drift_score = random.uniform(0.92, 0.99)
@@ -44,11 +56,12 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any]) -> Dict[str, 
     if is_source_verified and gate_1_leak < 0.02:
         status_flag = "VERIFIED_TRUTH_BOUND"
         confidence_metric = vector_drift_score * 100
+        logger.info("Telemetry check passed – VERIFIED_TRUTH_BOUND")
     else:
         status_flag = "STOCHASTIC_DRIFT_INTERCEPTED"
         confidence_metric = (vector_drift_score * 0.8) * 100
+        logger.warning("Telemetry check flagged – STOCHASTIC_DRIFT_INTERCEPTED")
 
-    # Align status output with the front-end layout indicator criteria
     measured_latency = round(total_latency_ms, 2)
     if measured_latency >= 45.00:
         indicator_status = "CRITICAL / SPIKE"
@@ -57,6 +70,8 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any]) -> Dict[str, 
     else:
         indicator_status = "HEALTHY / LIVE"
 
+    config = get_config()
+
     return {
         "timestamp_epoch": time.time(),
         "operational_status": status_flag,
@@ -64,45 +79,35 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any]) -> Dict[str, 
         "measured_latency_ms": measured_latency,
         "verifiable_confidence_score": f"{confidence_metric:.2f}%",
         "regulatory_telemetry_trace": {
-            "account_id": MISSION_INFRA_CONFIG["saas_account_id"],
-            "reseller_contract": MISSION_INFRA_CONFIG["reseller_lic"],
-            "service_bpa_id": MISSION_INFRA_CONFIG["service_bpa"],
-            "customer_index": MISSION_INFRA_CONFIG["remarketer_customer_number"],
-            "eu_cellar_target": MISSION_INFRA_CONFIG["eu_cellar_id"]
+            "account_id": config["saas_account_id"],
+            "reseller_contract": config["reseller_lic"],
+            "service_bpa_id": config["service_bpa"],
+            "customer_index": config["customer_index"],
+            "eu_cellar_target": config["eu_cellar_id"]
         },
         "data_lineage_trace": [
-            "IBM_Bob_Node_Telemetry_Ingest",
-            "watsonx_Governance_Audit_Gate",
-            "Event_Automation_Stream_Lock"
+            "Demo_Telemetry_Ingest",
+            "Simulated_Governance_Gate",
+            "Local_Validation_Lock"
         ]
     }
 
 def main() -> None:
-    print(f"=== INITIALIZING ENVIRONMENT: {MISSION_INFRA_CONFIG['framework']} ===")
-    print(f"Architect: MD ABUL HOSSAIN | Partner Entity: {MISSION_INFRA_CONFIG['company_name']}")
-    print(f"IBM SaaS Instance ID: {MISSION_INFRA_CONFIG['saas_account_id']}")
-    print(f"EU F&T Registry Lock ID: EX2026D1473148\n")
+    config = get_config()
+    logger.info(f"Initializing: {config['framework']}")
+    logger.info(f"EU Expert ID: {config['eu_expert_id']}")
 
-    faulty_average_formula = "average = (num1 + num2 + num3 / 3"
-    syntax_audit = verify_granite_syntax_gate(faulty_average_formula)
-    print(f"[GRANITE ERROR CHECK] Automated Scan Status: {syntax_audit['validation_gate']}")
-    if syntax_audit["validation_gate"] == "FAIL":
-        print(f"↳ Intercepted: {syntax_audit['error_detected']}")
-        print(f"↳ Suggestion: {syntax_audit['granite_remediation']}\n")
+    faulty = "average = (num1 + num2 + num3 / 3"
+    syntax_audit = verify_granite_syntax_gate(faulty)
+    logger.info(f"Syntax gate: {syntax_audit['validation_gate']}")
 
-    print("Streaming active spacecraft sensor metrics...\n")
-
-    for transaction_id in range(1, 4):
-        mock_sensor_telemetry = {
-            "stream_id": f"SAT-DSN-BLOCK-{transaction_id:03d}",
-            "solar_current_amps": round(random.uniform(41.5, 45.2), 2),
-            "thermal_coefficient": round(random.uniform(0.012, 0.015), 4)
+    for i in range(1, 4):
+        payload = {
+            "stream_id": f"SAT-DEMO-{i:03d}",
+            "solar_current_amps": round(random.uniform(41.5, 45.2), 2)
         }
-        telemetry_audit_report = run_multi_gate_telemetry_check(mock_sensor_telemetry)
-        print(f"[TRANSACTION {transaction_id:03d}] Inbound Stream: {mock_sensor_telemetry['stream_id']}")
-        print(json.dumps(telemetry_audit_report, indent=2))
-        print("-" * 60)
-        time.sleep(0.5)
+        report = run_multi_gate_telemetry_check(payload)
+        logger.info(f"Transaction {i:03d} → {report['operational_status']}")
 
 if __name__ == "__main__":
     main()
