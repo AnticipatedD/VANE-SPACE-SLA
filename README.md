@@ -39,7 +39,7 @@ pip install -r requirements.txt
 cp .env.example .env
 pytest --cov=. --cov-report=term
 python vane_space_init.py
-
+```
 ---
 
 ## Project Structure
@@ -64,12 +64,6 @@ IBM Business Partner Plus
 European F&T Expert ID: EX2026D1473148 
 Web of Science ResearcherID: QQZ-6739-2026 | ORCID: 0009-0004-4378-5298  
 Microsoft Learn Level 10 (90 badges, 17 trophies)
-
----
-
-## License
-
-MIT
 
 ---
 
