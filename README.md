@@ -84,13 +84,4 @@ MIT
 
 ---
 
-### 2. `requirements.txt`
-
-```txt
-pytest>=8.0.0
-pytest-cov>=5.0.0
-python-dotenv>=1.0.0
-```
----
-
 © 2026 MD ABUL HOSSAIN. All Rights Reserved
