@@ -57,12 +57,19 @@ VANE-SPACE-SLA/
 
 ---
 
-Author
-MD ABUL HOSSAIN
-IBM Business Partner Plus
-European F&T Expert ID: EX2026D1473148
-Web of Science ResearcherID: QQZ-6739-2026 ORCID: 0009-0004-4378-5298
+## Author
+
+**MD ABUL HOSSAIN**  
+IBM Business Partner Plus  
+European F&T Expert ID: EX2026D1473148 
+Web of Science ResearcherID: QQZ-6739-2026 | ORCID: 0009-0004-4378-5298  
 Microsoft Learn Level 10 (90 badges, 17 trophies)
+
+---
+
+## License
+
+MIT
 
 ---
 
