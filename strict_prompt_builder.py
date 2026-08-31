@@ -20,7 +20,7 @@ class StrictPromptBuilder:
         self.grounding_strength = grounding_strength
         self.conversation_history: List[Dict[str, str]] = []
 
-        self.eu_expert_id = os.getenv("EU_EXPERT_ID", "EX2026D1473148")
+        self.eu_expert_id = os.getenv("EU_EXPERT_ID", "MYEUEXPERTID")
         self.ibm_saas_account_id = os.getenv("IBM_SAAS_ACCOUNT_ID", "demo-account")
 
     def set_grounding_strength(self, strength: str) -> None:
