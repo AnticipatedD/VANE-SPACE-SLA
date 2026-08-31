@@ -219,7 +219,7 @@
       <section class="card span-desktop-2">
           <h2>📜 Verified Credentials Showcase (IBM + Microsoft Learn)</h2>
           <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.9rem;">
-              Live snapshot from IBM Training Transcript (84 achievements) and Microsoft Learn profile 
+              Live snapshot from IBM Training Transcript (87 achievements) and Microsoft Learn profile 
               (<strong>90 Badges • 17 Trophies • Level 10</strong>).
           </p>
           <p style="color: #94a3b8; font-size: 0.82rem; margin-bottom: 18px; font-family: monospace;">
@@ -251,34 +251,51 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
       const terminal = document.getElementById('terminal-stream');
       const latencyVal = document.getElementById('latency-val');
       
-      const messages = [
-        "Initializing secure trace sync...",
-        "Microsoft Learn Contributor ID MYMSLEARNCID confirmed Active.",
-        "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
-        "Polling cell ID 'MY-SECURE-IBM-BOB-GATEWAY' from EU Cellar cluster.",
-        "SECURITY AUDIT: Node verification handshake successful.",
-        "Authorization confirmed via M2M OAuth isolation routing map.",
-        "IBM Bob Intermediate + watsonx.governance badges confirmed Active.",
-        "Zero-Trust packet verification: Integrity 100% verified."
+      if (!terminal) return;
+
+      const logs = [
+          "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
+          "Authorization confirmed via M2M OAuth isolation routing map.",
+          "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
+          "Polling cell ID 'MY-IBM-POLLING-CELL-ID' from EU Cellar cluster.",
+          "Zero-Trust packet verification: Integrity 100% verified.",
+          "Syncing portfolio credentials: 84 IBM items validated.",
+          "Syncing academic pathways: 90 MS Learn badges + 17 trophies parsed successfully.",
+          "Microsoft Learn Contributor ID MYMSLEARNCID confirmed Active.",
+          "IBM Bob Intermediate + watsonx.governance badges confirmed Active."
       ];
 
-      let i = 0;
-      setInterval(() => {
-        if (terminal) {
-          const time = new Date().toLocaleTimeString();
-          terminal.innerHTML += `<div>[${time}] ⚡ ${messages[i % messages.length]}</div>`;
+      function addLogLine() {
+          const now = new Date();
+          const timeStr = now.toISOString().slice(11, 19);
+          
+          let selectedLog = logs[Math.floor(Math.random() * logs.length)];
+          
+          if (Math.random() > 0.7) {
+              const randomIp = "10.240." + Math.floor(Math.random() * 254) + "." + Math.floor(Math.random() * 254);
+              selectedLog = "SECURITY AUDIT: Node [" + randomIp + "] verification handshake successful.";
+          }
+
+          const logLine = document.createElement('div');
+          logLine.style.marginBottom = '6px';
+          // Changed timestamp colour to #FED8B1
+          logLine.innerHTML = "<span style='color: #FED8B1;'>[" + timeStr + "]</span> <span style='color: #10b981;'>⚡</span> " + selectedLog;
+          
+          terminal.appendChild(logLine);
           terminal.scrollTop = terminal.scrollHeight;
-          i++;
-        }
-        if (latencyVal) {
-          latencyVal.textContent = (41 + Math.floor(Math.random() * 5)) + " ms";
-        }
-      }, 2800);
-    });
-  </script>
+
+          if (latencyVal) {
+              latencyVal.textContent = Math.floor(Math.random() * (45 - 41) + 41) + " ms";
+          }
+      }
+
+      addLogLine();
+      setInterval(addLogLine, 2500);
+  });
+</script>
 </body>
 </html>
