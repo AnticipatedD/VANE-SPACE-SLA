@@ -6,18 +6,18 @@
  * Designation: SVP & Head of Strategic Partnerships, TARU Global Access
  * Official Signature Meta: 
  * - Business Partner Plus IBM
- * - EU F&T Expert ID: EX2026D1473148
- * - ResearcherID: QQZ-6739-2026 
- * - ORCID: 0009-0004-4378-5298
+ * - EU F&T Expert ID: MYEUEXPERTID
+ * - ResearcherID: MYRESEARCHERID 
+ * - ORCID: MYORCIDiD
  * 
  * IBM SaaS Configuration Parameters:
- * - Enterprise ID: 10wdv2
- * - IBM SaaS Account ID: 20260824-0007-1611-81ff-0e82605d7a16
- * - Reseller Contract: FIFVIVUUPT9
- * - Service BPA: FISBIVD03SE
- * - Remarketer Customer Account Index: 0004588173
- * - Primary Cellar Target Link: af30723e-f4ce-11eb-aeb9-01aa75ed71a1
- * - Secure Verification RSS Hash: MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==
+ * - Enterprise ID: MYEID
+ * - IBM SaaS Account ID: 20260824-MY-IBM-SAAS-CLOUD-ID
+ * - Reseller Contract: MYIBMRLIC
+ * - Service BPA: MYIBMSBPA
+ * - Remarketer Customer Account Index: MYCUSAID
+ * - Primary Cellar Target Link: MY-IBM-PRIMARY-CELLAR-TARGET-LINK
+ * - Secure Verification RSS Hash: MY-SECURE-VERIFIED-RSS-HASH-LINK
  */
 class StrictPromptBuilder {
   constructor(modelId = "ibm/granite-34b-instruct-v2", groundingStrength = "strict") {
@@ -28,13 +28,13 @@ class StrictPromptBuilder {
 
     // Verified Enterprise & Structural Registry Identity Mapping
     this.architectSignature = "MD ABUL HOSSAIN | SVP & Head of Strategic Partnerships | TARU Global Access";
-    this.euExpertId = "EX2026D1473148";
-    this.ibmSaasAccountId = "20260824-0007-1611-81ff-0e82605d7a16";
-    this.contractReseller = "FIFVIVUUPT9";
-    this.contractServiceBpa = "FISBIVD03SE";
-    this.customerIndex = "0004588173";
-    this.euCellarDocId = "af30723e-f4ce-11eb-aeb9-01aa75ed71a1";
-    this.euRssHash = "MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==";
+    this.euExpertId = "MYEUEXPERTID";
+    this.ibmSaasAccountId = "20260824-MY-IBM-SAAS-CLOUD-ID";
+    this.contractReseller = "MYIBMRLIC";
+    this.contractServiceBpa = "MYIBMSBPA";
+    this.customerIndex = "MYCUSAID";
+    this.euCellarDocId = "MY-IBM-PRIMARY-CELLAR-TARGET-LINK";
+    this.euRssHash = "MY-SECURE-VERIFIED-RSS-HASH-LINK";
   }
 
   /**
