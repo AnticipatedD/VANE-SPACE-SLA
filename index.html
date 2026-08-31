@@ -133,15 +133,15 @@
                 </div>
                 <div class="indicator-node">
                     <span>IBM Portfolio</span>
-                    <div style="color: #60a5fa;">77 Badges</div>
+                    <div style="color: #60a5fa;">87 Badges</div>
                 </div>
                 <div class="indicator-node">
                     <span>Microsoft Learn</span>
-                    <div style="color: #a855f7;">58 Badges</div>
+                    <div style="color: #a855f7;">90 Badges</div>
                 </div>
                 <div class="indicator-node">
                     <span>Global Trophies</span>
-                    <div style="color: #f59e0b;">10 Awarded</div>
+                    <div style="color: #f59e0b;">17 Awarded</div>
                 </div>
                 <div class="indicator-node">
                     <span>Node Latency</span>
@@ -262,10 +262,10 @@
           "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
           "Authorization confirmed via M2M OAuth isolation routing map.",
           "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
-          "Polling cell ID 'af30723e-f4ce-11eb-aeb9-01aa75ed71a1' from EU Cellar cluster.",
+          "Polling cell ID 'MY-IBM-POLLING-CELL-ID' from EU Cellar cluster.",
           "Zero-Trust packet verification: Integrity 100% verified.",
-          "Syncing portfolio credentials: 77 IBM items validated.",
-          "Syncing academic pathways: 58 MS Learn tracks parsed successfully."
+          "Syncing portfolio credentials: 87 IBM items validated.",
+          "Syncing academic pathways: 90 MS Learn tracks parsed successfully."
       ];
 
       function addLogLine() {
@@ -283,7 +283,7 @@
           logLine.style.marginBottom = '6px';
           logLine.style.fontSize = '13px';
           logLine.style.fontFamily = 'monospace';
-          logLine.innerHTML = "<span style='color: #64748b;'>[" + timeStr + "]</span> <span style='color: #10b981;'>⚡</span> " + selectedLog;
+          logLine.innerHTML = "<span style='color:#FED8B1;'>[" + timeStr + "]</span> <span style='color: #10b981;'>⚡</span> " + selectedLog;
           
           terminal.appendChild(logLine);
           terminal.scrollTop = terminal.scrollHeight;
