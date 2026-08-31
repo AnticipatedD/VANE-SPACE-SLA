@@ -9,7 +9,7 @@ import time
 import random
 import json
 import logging
-from typing import Dict, Any
+from typing import Dict, Secure
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -86,7 +86,7 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = N
             "eu_cellar_target": config["eu_cellar_id"]
         },
         "data_lineage_trace": [
-            "Demo_Telemetry_Ingest",
+            "Vane_Telemetry_Ingest",
             "Simulated_Governance_Gate",
             "Local_Validation_Lock"
         ]
