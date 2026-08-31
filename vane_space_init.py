@@ -23,14 +23,14 @@ logger = logging.getLogger("vane_space")
 
 def get_config() -> Dict[str, str]:
     return {
-        "node_id": "VANE_DEMO_NODE",
-        "framework": "Vane-Space-SLA (Demo)",
-        "saas_account_id": os.getenv("IBM_SAAS_ACCOUNT_ID", "demo-account"),
-        "eu_expert_id": os.getenv("EU_EXPERT_ID", "EX2026D1473148"),
-        "reseller_lic": os.getenv("CONTRACT_RESELLER_ID", "demo-reseller"),
-        "service_bpa": os.getenv("CONTRACT_SERVICE_BPA", "demo-bpa"),
-        "customer_index": os.getenv("CUSTOMER_INDEX", "demo-customer"),
-        "eu_cellar_id": os.getenv("EU_CELLAR_DOC_ID", "demo-cellar"),
+        "node_id": "VANE_SECURE_NODE",
+        "framework": "Vane-Space-SLA (V1.0)",
+        "saas_account_id": os.getenv("IBM_SAAS_ACCOUNT_ID", "myibm-account"),
+        "eu_expert_id": os.getenv("EU_EXPERT_ID", "MYEUEXPERTID"),
+        "reseller_lic": os.getenv("CONTRACT_RESELLER_ID", "myibm-reseller"),
+        "service_bpa": os.getenv("CONTRACT_SERVICE_BPA", "myibm-bpa"),
+        "customer_index": os.getenv("CUSTOMER_INDEX", "myibm-customer"),
+        "eu_cellar_id": os.getenv("EU_CELLAR_DOC_ID", "myibm-cellar"),
     }
 
 def verify_granite_syntax_gate(code_snippet: str) -> Dict[str, str]:
@@ -103,7 +103,7 @@ def main() -> None:
 
     for i in range(1, 4):
         payload = {
-            "stream_id": f"SAT-DEMO-{i:03d}",
+            "stream_id": f"SAT-SEC03-{i:03d}",
             "solar_current_amps": round(random.uniform(41.5, 45.2), 2)
         }
         report = run_multi_gate_telemetry_check(payload)
