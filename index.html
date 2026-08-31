@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VANE-SPACE-SLA Enterprise Command Center</title>
-    
     <!-- Critical for GitHub Project Pages -->
-    <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
-    
+    <base href="https://github.io">
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -21,61 +19,229 @@
             --text-secondary: #9ca3af;
             --border-color: #1f2937;
         }
-
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background-color: var(--bg-main); 
-            color: var(--text-primary); 
-            margin: 0; 
-            padding: 0; 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
             line-height: 1.5;
         }
-
-        .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid #1e293b; backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .logo { font-family: monospace; font-size: 18px; font-weight: bold; color: #f3f4f6; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
-        .logo span { color: #3b82f6; }
-        .nav-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
-        .nav-btn { color: #94a3b8; text-decoration: none; font-size: 13px; font-family: monospace; padding: 8px 14px; border-radius: 4px; }
-        .nav-btn:hover, .nav-btn.active { color: #f3f4f6; background-color: #1e293b; }
-        .nav-btn.secondary { border: 1px solid rgba(59, 130, 246, 0.3); color: #38bdf8; }
-
-        header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
-        h1 { color: #3b82f6; margin: 0 0 8px 0; font-size: 1.8rem; letter-spacing: 1px; }
-        header p { color: var(--text-secondary); margin: 0; font-size: 0.95rem; }
-
-        .grid-container { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-        .card { background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5); }
-        .card h2 { color: #3b82f6; margin-top: 0; font-size: 1.3rem; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
-
-        .badge-strip { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
-        .badge-pill { background: #1e293b; border: 1px solid #334155; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
-
-        .status-header-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 15px; }
-        .indicator-node { background: #151f32; border: 1px solid #1e293b; padding: 12px; border-radius: 6px; text-align: center; }
-        .indicator-node span { display: block; font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
-        .indicator-node div { font-size: 1.2rem; font-weight: bold; margin-top: 4px; }
-        
-        .pulse-dot { width: 8px; height: 8px; background-color: var(--accent-green); border-radius: 50%; display: inline-block; box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); animation: pulse 1.6s infinite; vertical-align: middle; margin-right: 6px;}
-        @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); } }
-
-        .telemetry-terminal { background: #05070c; border: 1px solid #1e293b; border-radius: 6px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: #6ee7b7; height: 140px; overflow-y: auto; line-height: 1.4; margin-top: 10px; }
-
-        .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-        .btn { flex: 1 1 auto; text-align: center; background-color: var(--accent-blue); color: #fff; padding: 12px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: background 0.2s ease; }
+        .site-header {
+            background-color: rgba(11, 19, 41, 0.85);
+            border-bottom: 1px solid #1e293b;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .logo {
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #f3f4f6;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo span {
+            color: #3b82f6;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 13px;
+            font-family: monospace;
+            padding: 8px 14px;
+            border-radius: 4px;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            color: #f3f4f6;
+            background-color: #1e293b;
+        }
+        .nav-btn.secondary {
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #38bdf8;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        h1 {
+            color: #3b82f6;
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        header p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5);
+        }
+        .card h2 {
+            color: #3b82f6;
+            margin-top: 0;
+            font-size: 1.3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+        .badge-strip {
+            display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0;
+        }
+        .badge-pill {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .status-header-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .indicator-node {
+            background: #151f32;
+            border: 1px solid #1e293b;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .indicator-node span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .indicator-node div {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+            animation: pulse 1.6s infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+        }
+        .telemetry-terminal {
+            background: #05070c;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #6ee7b7;
+            height: 140px;
+            overflow-y: auto;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+        .btn-group {
+            display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;
+        }
+        .btn {
+            flex: 1 1 auto;
+            text-align: center;
+            background-color: var(--accent-blue);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
         .btn:hover { background-color: #1d4ed8; }
-
-        .credentials-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
-        .cred-item { background: #151f32; border: 1px solid #1e293b; border-radius: 6px; padding: 10px 14px; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-        .cred-item span.status { background: rgba(5,150,105,0.15); color: #34d399; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
-
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .cred-item {
+            background: #151f32;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .cred-item span.status {
+            background: rgba(5,150,105,0.15);
+            color: #34d399;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
         .meta-list { list-style-type: none; padding: 0; margin: 0; }
-        .meta-list li { padding: 10px 0; border-bottom: 1px solid #374151; font-size: 0.9rem; word-break: break-word; }
+        .meta-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #374151;
+            font-size: 0.9rem;
+            word-break: break-word;
+        }
         .meta-list li:last-child { border-bottom: none; }
-
-        footer { text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid var(--border-color); }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 24px 16px;
+            border-top: 1px solid var(--border-color);
+        }
         footer a { color: var(--text-secondary); text-decoration: none; margin: 0 8px; }
-
         @media (min-width: 768px) {
             h1 { font-size: 2.3rem; }
             .grid-container { grid-template-columns: 1fr 1fr; }
@@ -83,8 +249,6 @@
             .credentials-grid { grid-template-columns: 1fr 1fr; }
             .btn { flex: 0 1 auto; }
         }
-
-        /* Live Indicator Styles */
         .live-indicator {
             display: inline-flex;
             align-items: center;
@@ -111,191 +275,242 @@
     </style>
 </head>
 <body>
-  <!-- Top Enterprise Header Navigation -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-text">VANE-SPACE-SLA</span>
-        <span class="live-indicator">
-          <span class="live-dot"></span>
-          <span class="live-text">LIVE</span>
-        </span>
-      </a>
-      <nav class="nav-buttons">
-        <a href="index.html" class="nav-btn active">Home</a>
-        <a href="about-us.html" class="nav-btn">About</a>
-        <a href="index.html#credentials" class="nav-btn">Credentials</a>
-        <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
-        <a href="index.html#projects" class="nav-btn">Projects</a>
-        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
-        <a href="voice-orchestrator.html" class="nav-btn secondary">Voice Orchestrator</a>
-        <a href="contact-us.html" class="nav-btn">Contact</a>
-      </nav>
-    </div>
-  </header>
+    <!-- Top Enterprise Header Navigation -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-text">VANE-SPACE-SLA</span>
+                <span class="live-indicator">
+                    <span class="live-dot"></span>
+                    <span class="live-text">LIVE</span>
+                </span>
+            </a>
+            <nav class="nav-buttons">
+                <a href="index.html" class="nav-btn active">Home</a>
+                <a href="about-us.html" class="nav-btn">About</a>
+                <a href="index.html#credentials" class="nav-btn">Credentials</a>
+                <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
+                <a href="index.html#projects" class="nav-btn">Projects</a>
+                <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
+                <a href="voice-orchestrator.html" class="nav-btn secondary">Voice Orchestrator</a>
+                <a href="contact-us.html" class="nav-btn">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-  <header>
+    <header>
         <h1>VANE-SPACE-SLA PORTAL MATRIX</h1>
         <p>Verified Principal Investigator Portfolio & Real-Time Security Integration</p>
-  </header>
+    </header>
 
-  <!-- Official Corporate Partnership Operational Registry Mapping -->
-  <div style="max-width: 1200px; margin: 0 auto 25px auto; padding: 20px; background-color: #0b1329; border: 1px solid #1e293b; border-radius: 8px; font-family: monospace; font-size: 12px; color: #94a3b8; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; text-align: left;">
-          <div><span style="color: #38bdf8;">PARTNER:</span> TARU Global Access (Enterprise ID)</div>
-          <div><span style="color: #38bdf8;">IBM SAAS ACCOUNT:</span> 20260824-MY-IBM-SAAS-CLOUD-ID</div>
-          <div><span style="color: #38bdf8;">IBM RESELLER LIC:</span> MYIBMRLIC</div>
-          <div><span style="color: #38bdf8;">SERVICE BPA ID:</span> MYIBMBPAID</div>
-          <div><span style="color: #38bdf8;">CUSTOMER ACCOUNT:</span> MYCUSACCID</div>
-          <div><span style="color: #38bdf8;">ARCHITECT AUTH:</span> MD ABUL HOSSAIN (SVP)</div>
-      </div>
-  </div>
+        <!-- Official Corporate Partnership Operational Registry Mapping -->
+        <div style="max-width: 1200px; margin: 0 auto 25px auto; padding: 20px; background-color: #0b1329; border: 1px solid #1e293b; border-radius: 8px; font-family: monospace; font-size: 12px; color: #94a3b8; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; text-align: left;">
+                <div><span style="color: #38bdf8;">PARTNER:</span> TARU Global Access (Enterprise ID)</div>
+                <div><span style="color: #38bdf8;">IBM SAAS ACCOUNT:</span> 20260824-MY-IBM-SAAS-CLOUD-ID</div>
+                <div><span style="color: #38bdf8;">IBM RESELLER LIC:</span> MYIBMRLIC</div>
+                <div><span style="color: #38bdf8;">SERVICE BPA ID:</span> MYIBMBPAID</div>
+                <div><span style="color: #38bdf8;">CUSTOMER ACCOUNT:</span> MYCUSACCID</div>
+                <div><span style="color: #38bdf8;">ARCHITECT AUTH:</span> MD ABUL HOSSAIN (SVP)</div>
+            </div>
+        </div>
 
-  <!-- Live Telemetry Monitor & Credentials -->
-  <div class="grid-container" style="margin-bottom: 20px;">
-      <section class="card span-desktop-2" style="border-left: 4px solid var(--accent-green);" id="credentials">
-          <h2>🛸 Automated Telemetry Engine & Verified Credentials</h2>
-          
-          <div class="status-header-grid">
-              <div class="indicator-node">
-                  <span>M2M Gateway</span>
-                  <div style="color: #34d399;"><span class="pulse-dot"></span>ACTIVE</div>
-              </div>
-              <div class="indicator-node">
-                  <span>IBM Portfolio</span>
-                  <div style="color: #60a5fa;">84 Achievements</div>
-              </div>
-              <div class="indicator-node">
-                  <span>Microsoft Learn</span>
-                  <div style="color: #a855f7;">90 Badges</div>
-              </div>
-              <div class="indicator-node">
-                  <span>Global Trophies</span>
-                  <div style="color: #f59e0b;">17 Trophies</div>
-              </div>
-              <div class="indicator-node">
-                  <span>Node Latency</span>
-                  <div style="color: #34d399;" id="latency-val">42 ms</div>
-              </div>
-          </div>
+        <!-- Live Telemetry Monitor & Credentials -->
+        <div class="grid-container" style="margin-bottom: 20px;">
+            <section class="card span-desktop-2" style="border-left: 4px solid var(--accent-green);" id="credentials">
+                <h2>🛸 Automated Telemetry Engine & Verified Credentials</h2>
+                <div class="status-header-grid">
+                    <div class="indicator-node">
+                        <span>M2M Gateway</span>
+                        <div style="color: #34d399;"><span class="pulse-dot"></span>ACTIVE</div>
+                    </div>
+                    <div class="indicator-node">
+                        <span>IBM Portfolio</span>
+                        <div style="color: #60a5fa;">84 Achievements</div>
+                    </div>
+                    <div class="indicator-node">
+                        <span>Microsoft Learn</span>
+                        <div style="color: #a855f7;">90 Badges</div>
+                    </div>
+                    <div class="indicator-node">
+                        <span>Global Trophies</span>
+                        <div style="color: #f59e0b;">17 Trophies</div>
+                    </div>
+                    <div class="indicator-node">
+                        <span>Node Latency</span>
+                        <div style="color: #34d399;" id="latency-val">42 ms</div>
+                    </div>
+                </div>
+                <div class="badge-strip">
+                    <div class="badge-pill" style="color: #60a5fa;">🛡️ IBM Advanced Certified</div>
+                    <div class="badge-pill" style="color: #34d399;">⚙️ Enterprise Automation Infrastructure</div>
+                    <div class="badge-pill" style="color: #f59e0b;">📦 EU Portal Data Integrator</div>
+                    <div class="badge-pill" style="color: #a855f7;">🏆 Microsoft Learn Level 10</div>
+                </div>
+                <strong style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-top: 15px;">Real-Time System Rule Telemetry Feed:</strong>
+                <div class="telemetry-terminal" id="terminal-stream">Initializing secure trace sync...</div>
+            </section>
+        </div>
 
-          <div class="badge-strip">
-              <div class="badge-pill" style="color: #60a5fa;">🛡️ IBM Advanced Certified</div>
-              <div class="badge-pill" style="color: #34d399;">⚙️ Enterprise Automation Infrastructure</div>
-              <div class="badge-pill" style="color: #f59e0b;">📦 EU Portal Data Integrator</div>
-              <div class="badge-pill" style="color: #a855f7;">🏆 Microsoft Learn Level 10</div>
-          </div>
+        <!-- Verified Credentials Showcase -->
+        <section class="card span-desktop-2">
+            <h2>📜 Verified Credentials Showcase (IBM + Microsoft Learn)</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.9rem;">
+                Live snapshot from IBM Training Transcript (87 achievements) and Microsoft Learn profile (<strong>90 Badges • 17 Trophies • Level 10</strong>).
+            </p>
+            <p style="color: #94a3b8; font-size: 0.82rem; margin-bottom: 18px; font-family: monospace;">
+                Microsoft Learn Contributor ID: <strong style="color:#38bdf8;">MYMSLEARNCID</strong> | Assigned by Microsoft Learn
+            </p>
+            <div class="credentials-grid">
+                <div class="cred-item"><span>🏆 Optimize business processes with Microsoft 365 Copilot</span><span class="status">Trophy</span></div>
+                <div class="cred-item"><span>🏆 AI concepts for developers and technology professionals</span><span class="status">Trophy</span></div>
+                <div class="cred-item"><span>🏆 Automate your workflow with GitHub Actions Part 1 of 2</span><span class="status">Trophy</span></div>
+                <div class="cred-item"><span>🏆 Introduction to AI Skills for nonprofits</span><span class="status">Trophy</span></div>
+                <div class="cred-item"><span>Automate development tasks by using GitHub Actions</span><span class="status">Badge</span></div>
+                <div class="cred-item"><span>Understand the foundations of generative AI for business leaders</span><span class="status">Badge</span></div>
+                <div class="cred-item"><span>Manage AD DS domain controllers and FSMO roles</span><span class="status">Badge</span></div>
+                <div class="cred-item"><span>Introduction to AD DS</span><span class="status">Badge</span></div>
+            </div>
+        </section>
+    </main>
 
-          <strong style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-top: 15px;">Real-Time System Rule Telemetry Feed:</strong>
-          <div class="telemetry-terminal" id="terminal-stream">Initializing secure trace sync...</div>
-      </section>
-  </div>
+    <main class="grid-container">
+        <!-- CARD 1: System Architecture -->
+        <section class="card" id="projects">
+            <h2>🛸 System Operational Architecture</h2>
+            <p><strong>Framework:</strong> Vane-Space Sovereign-SLA Engine (v2.0)</p>
+            <p><strong>Primary Node Verification:</strong> IBM Bob Intermediate Infrastructure</p>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
+            <div class="btn-group">
+                <a href="scripts.html" class="btn">Explore System Scripts</a>
+                <a href="extensions-core/m2m-oauth-isolation.html" class="btn" style="background-color: var(--accent-green);">M2M Isolation Gateway</a>
+                <a href="voice-orchestrator.html" class="btn">Voice Orchestrator Node</a>
+            </div>
+        </section>
 
-  <main class="grid-container">
-      <!-- CARD 1: System Architecture -->
-      <section class="card" id="projects">
-          <h2>🛸 System Operational Architecture</h2>
-          <p><strong>Framework:</strong> Vane-Space Sovereign-SLA Engine (v2.0)</p>
-          <p><strong>Primary Node Verification:</strong> IBM Bob Intermediate Infrastructure</p>
-          <p style="color: var(--text-secondary); font-size: 0.95rem;">An ultra-modern, zero-trust orchestration framework built to bridge deterministic system rules with probabilistic telemetry streams.</p>
-          <div class="btn-group">
-              <a href="scripts.html" class="btn">Explore System Scripts</a>
-              <a href="extensions-core/m2m-oauth-isolation.html" class="btn" style="background-color: var(--accent-green);">M2M Isolation Gateway</a>
-              <a href="voice-orchestrator.html" class="btn">Voice Orchestrator Node</a>
-          </div>
-      </section>
-            
-      <!-- CARD 2: EU Publications -->
-      <section class="card" id="eu-publications">
-         <h2>🇪🇺 Official EU Publications & Streams</h2>
-          <ul class="meta-list">
-              <li><strong>Permanent Record:</strong> <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" style="color: #60a5fa;" target="_blank" rel="noopener">EU Publication Detail</a></li>
-              <li><strong>Short Registry:</strong> <a href="https://europa.eu" style="color: #60a5fa;" target="_blank" rel="noopener">op.europa.eu/s/AjiB</a></li>
-              <li><strong>Live Verification:</strong> <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" style="color: #34d399;" target="_blank" rel="noopener">Official EU RSS Feed</a></li>
-          </ul>
-      </section>
+        <!-- CARD 2: EU Publications -->
+        <section class="card" id="eu-publications">
+            <h2>🇪🇺 Official EU Publications & Streams</h2>
+            <ul class="meta-list">
+                <li><strong>Permanent Record:</strong> <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" style="color: #60a5fa;" target="_blank" rel="noopener">EU Publication Detail</a></li>
+                <li><strong>Short Registry:</strong> <a href="https://europa.eu" style="color: #60a5fa;" target="_blank" rel="noopener">op.europa.eu/s/AjiB</a></li>
+                <li><strong>Live Verification:</strong> <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" style="color: #34d399;" target="_blank" rel="noopener">Official EU RSS Feed</a></li>
+            </ul>
+        </section>
 
-      <!-- Verified Credentials Showcase -->
-      <section class="card span-desktop-2">
-          <h2>📜 Verified Credentials Showcase (IBM + Microsoft Learn)</h2>
-          <p style="color: var(--text-secondary); margin-bottom: 12px; font-size: 0.9rem;">
-              Live snapshot from IBM Training Transcript (87 achievements) and Microsoft Learn profile 
-              (<strong>90 Badges • 17 Trophies • Level 10</strong>).
-          </p>
-          <p style="color: #94a3b8; font-size: 0.82rem; margin-bottom: 18px; font-family: monospace;">
-              Microsoft Learn Contributor ID: <strong style="color:#38bdf8;">MYMSLEARNCID</strong> | Assigned by Microsoft Learn
-          </p>
+        <!-- CARD 3: EU OFFICIAL APP EMBEDDED WIDGETS -->
+        <section class="card span-desktop-2">
+            <h2>🛡️ Verification Infrastructure (EC Portal Widgets)</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 15px;">Direct live data integration streams managed via the Publications Office of the European Union.</p>
+            <div class="widget-grid" style="grid-column: span 2; margin-top: 10px; margin-bottom: 20px;">
+                <!-- Wrapper Area 1: Cellar Asset -->
+                <div class="widget-box" style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #d97706;">
+                    <strong style="display: block; color: #d97706; font-size: 0.95rem; font-family: sans-serif;">EU Cellar Asset Integration Wrapper</strong>
+                    <div class="custom-widget-ui">
+                        <div style="font-weight: bold; margin-bottom: 4px; color: #f3f4f6;">Target Asset: Horizon Europe, Pillar II</div>
+                        <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Global challenges and European industrial competitiveness.</div>
+<!-- Wrapper Area 1: Cellar Asset -->
+<div class="widget-box" style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #d97706;">
+    <strong style="display: block; color: #d97706; font-size: 0.95rem; font-family: sans-serif;">EU Cellar Asset Integration Wrapper</strong>
+    <div class="custom-widget-ui">
+        <div style="font-weight: bold; margin-bottom: 4px; color: #f3f4f6;">Target Asset: Horizon Europe, Pillar II</div>
+        <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Global challenges and European industrial competitiveness.</div>
+        <span style="background: rgba(217,119,6,0.15); color: #fbbf24; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Status: Synced via Cellar ID</span>
+    </div>
+</div>
 
-          <div class="credentials-grid">
-              <div class="cred-item"><span>🏆 Optimize business processes with Microsoft 365 Copilot</span><span class="status">Trophy</span></div>
-              <div class="cred-item"><span>🏆 AI concepts for developers and technology professionals</span><span class="status">Trophy</span></div>
-              <div class="cred-item"><span>🏆 Automate your workflow with GitHub Actions Part 1 of 2</span><span class="status">Trophy</span></div>
-              <div class="cred-item"><span>🏆 Introduction to AI Skills for nonprofits</span><span class="status">Trophy</span></div>
-              <div class="cred-item"><span>Automate development tasks by using GitHub Actions</span><span class="status">Badge</span></div>
-              <div class="cred-item"><span>Understand the foundations of generative AI for business leaders</span><span class="status">Badge</span></div>
-              <div class="cred-item"><span>Manage AD DS domain controllers and FSMO roles</span><span class="status">Badge</span></div>
-              <div class="cred-item"><span>Introduction to AD DS</span><span class="status">Badge</span></div>
-          </div>
-      </section>
-  </main>
+<!-- Wrapper Area 2: Webmaster Service -->
+<div class="widget-box" style="background-color: #1f2937; padding: 16px; border-radius: 6px; border-top: 4px solid #2563eb;">
+    <strong style="display: block; color: #2563eb; font-size: 0.95rem; font-family: sans-serif;">EC Webmaster Operational Wrapper</strong>
+    <div class="custom-widget-ui">
+        <div style="font-weight: bold; margin-bottom: 4px; color: #f3f4f6;">Service Engine: OPWIDGET</div>
+        <div style="color: #9ca3af; font-size: 0.8rem; margin-bottom: 6px;">Widget Cluster Identity Ref: #10493</div>
+        <span style="background: rgba(37,99,235,0.15); color: #60a5fa; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold;">Lang: Auto-Detect</span>
+    </div>
+</div>
+</div>
+</section>
+</main>
 
-  <footer>
-      <p>© 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All Rights Reserved.</p>
-      <div style="margin-top: 12px;">
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
-          <a href="security.html">Security</a>
-          <a href="about-us.html">About</a>
-          <a href="contact-us.html">Contact</a>
-      </div>
-  </footer>
+<footer style="text-align: center; margin-top: 50px; padding: 24px 16px; border-top: 1px solid #1f2937; font-family: sans-serif;">
+    <!-- Primary Interface Matrix Links Row -->
+    <div style="font-family: monospace; font-size: 13px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; padding: 10px 0; border-bottom: 1px solid #1e293b; margin-bottom: 16px;">
+        <a href="about-us.html" style="color: #94a3b8; text-decoration: none;">About Us</a>
+        <span style="color: #334155;">|</span>
+        <a href="contact-us.html" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
+        <span style="color: #334155;">|</span>
+        <a href="security.html" style="color: #94a3b8; text-decoration: none;">Zero-Trust Security Layout</a>
+        <span style="color: #334155;">|</span>
+        <a href="privacy.html" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a>
+        <span style="color: #334155;">|</span>
+        <a href="terms.html" style="color: #94a3b8; text-decoration: none;">Terms of Service</a>
+        <span style="color: #334155;">|</span>
+        <a href="extensions-core/m2m-oauth-isolation.html" style="color: #94a3b8; text-decoration: none;">M2M Isolation Gateway</a>
+        <span style="color: #334155;">|</span>
+        <a href="voice-orchestrator.html" style="color: #94a3b8; text-decoration: none;">Voice Orchestrator Node</a>
+    </div>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const terminal = document.getElementById('terminal-stream');
-      const latencyVal = document.getElementById('latency-val');
-      
-      if (!terminal) return;
+    <!-- Personal Verification Token Streams Row -->
+    <div style="font-family: monospace; font-size: 12px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center; padding: 10px 0; margin-bottom: 20px;">
+        <a href="https://orcid.org/0009-0004-4378-5298" target="_blank" style="color: #38bdf8; text-decoration: none;">ORCID: 0009-0004-4378-5298</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://www.webofscience.com/wos/author/record/QQZ-6739-2026" target="_blank" style="color: #38bdf8; text-decoration: none;">ResearcherID: QQZ-6739-2026</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank" style="color: #60a5fa; text-decoration: none;">EU Publication Detail</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank" style="color: #60a5fa; text-decoration: none;">op.europa.eu/s/AjiB</a>
+        <span style="color: #334155;">·</span>
+        <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" target="_blank" style="color: #10b981; text-decoration: none; font-weight: bold;">✓ Official EU RSS Live Feed</a>
+    </div>
 
-      const logs = [
-          "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
-          "Authorization confirmed via M2M OAuth isolation routing map.",
-          "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
-          "Polling cell ID 'MY-IBM-POLLING-CELL-ID' from EU Cellar cluster.",
-          "Zero-Trust packet verification: Integrity 100% verified.",
-          "Syncing portfolio credentials: 84 IBM items validated.",
-          "Syncing academic pathways: 90 MS Learn badges + 17 trophies parsed successfully.",
-          "Microsoft Learn Contributor ID MYMSLEARNCID confirmed Active.",
-          "IBM Bob Intermediate + watsonx.governance badges confirmed Active."
-      ];
+    <!-- Corporate Attribution Metric -->
+    <p style="font-size: 0.82em; color: #4b5563; font-family: monospace; margin: 0 0 4px 0;">EU Expert: MYEUEXPERTID // Vane Enterprise LLC</p>
+    <p style="font-size: 0.85em; color: #64748b; margin: 0;">© 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All Rights Reserved.</p>
+</footer>
 
-      function addLogLine() {
-          const now = new Date();
-          const timeStr = now.toISOString().slice(11, 19);
-          
-          let selectedLog = logs[Math.floor(Math.random() * logs.length)];
-          
-          if (Math.random() > 0.7) {
-              const randomIp = "10.240." + Math.floor(Math.random() * 254) + "." + Math.floor(Math.random() * 254);
-              selectedLog = "SECURITY AUDIT: Node [" + randomIp + "] verification handshake successful.";
-          }
+<!-- Real-Time Telemetry Processing Stream Node -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const terminal = document.getElementById('terminal-stream');
+        const latencyVal = document.getElementById('latency-val');
+        if (!terminal) return;
 
-          const logLine = document.createElement('div');
-          logLine.style.marginBottom = '6px';
-          // Changed timestamp colour to #FED8B1
-          logLine.innerHTML = "<span style='color: #FED8B1;'>[" + timeStr + "]</span> <span style='color: #10b981;'>⚡</span> " + selectedLog;
-          
-          terminal.appendChild(logLine);
-          terminal.scrollTop = terminal.scrollHeight;
+        const logs = [
+            "Establishing encrypted Handshake with IBM Bob intermediate gateway...",
+            "Authorization confirmed via M2M OAuth isolation routing map.",
+            "Pulling RSS Feed descriptor metadata matching hash verification matrix...",
+            "Polling cell ID 'MY-IBM-POLLING-CELL-ID' from EU Cellar cluster.",
+            "Zero-Trust packet verification: Integrity 100% verified.",
+            "Syncing portfolio credentials: 87 IBM items validated.",
+            "Syncing academic pathways: 90 MS Learn tracks parsed successfully."
+        ];
 
-          if (latencyVal) {
-              latencyVal.textContent = Math.floor(Math.random() * (45 - 41) + 41) + " ms";
-          }
-      }
+        function addLogLine() {
+            const now = new Date();
+            const timeStr = now.toISOString().slice(11, 19);
+            let selectedLog = logs[Math.floor(Math.random() * logs.length)];
 
-      addLogLine();
-      setInterval(addLogLine, 2500);
-  });
+            if (Math.random() > 0.7) {
+                const randomIp = `10.240.${Math.floor(Math.random() * 254)}.${Math.floor(Math.random() * 254)}`;
+                selectedLog = `SECURITY AUDIT: Node [${randomIp}] verification handshake successful.`;
+            }
+
+            const logLine = document.createElement('div');
+            logLine.style.marginBottom = '6px';
+            logLine.style.fontSize = '13px';
+            logLine.style.fontFamily = 'monospace';
+            logLine.innerHTML = `<span style='color: #64748b;'>[${timeStr}]</span> <span style='color: #10b981;'>⚡</span> ${selectedLog}`;
+            terminal.appendChild(logLine);
+            terminal.scrollTop = terminal.scrollHeight;
+
+            if (latencyVal) {
+                latencyVal.textContent = `${Math.floor(Math.random() * (45 - 41) + 41)} ms`;
+            }
+        }
+
+        addLogLine();
+        setInterval(addLogLine, 2500);
+    });
 </script>
 </body>
 </html>
