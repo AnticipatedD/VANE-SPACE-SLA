@@ -1,4 +1,9 @@
 import random
+# Step 1: Added bare module import test to catch initialization-time ImportErrors
+def test_vane_space_init_imports_cleanly():
+    import vane_space_init
+    assert vane_space_init is not None
+
 from vane_space_init import run_multi_gate_telemetry_check, verify_granite_syntax_gate
 
 def test_syntax_gate_fail():
