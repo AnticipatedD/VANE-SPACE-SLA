@@ -27,6 +27,7 @@ All external AI and infrastructure services are **intentionally simulated** so t
 This is **not** a production RAG system, and it does **not** call real IBM watsonx, Milvus, FAISS, Redis, or PostgreSQL services.
 
 ---
+
 ## Quick Start (Fresh Clone)
 
 ```bash
@@ -55,7 +56,7 @@ python vane_space_init.py
 - All tests must pass locally before opening a PR.
 - Coverage gate is enforced both locally and in CI (`--cov-fail-under=70`).
 - Prefer small, focused commits that include both the change and its tests.
-
+```
 ---
 
 ## Project Structure
@@ -87,27 +88,5 @@ ORCID: 0009-0004-4378-5298.
 ## License
 [MIT License](license.md)
 
-### Alerts
-Alerts, also sometimes known as callouts or admonitions, are a Markdown extension based on the blockquote syntax that you can use to emphasize critical information. On GitHub, they are displayed with distinctive colors and icons to indicate the significance of the content.
-
-Use alerts only when they are crucial for user success and limit them to one or two per article to prevent overloading the reader. Additionally, you should avoid placing alerts consecutively. Alerts cannot be nested within other elements.
-
-To add an alert, use a special blockquote line specifying the alert type, followed by the alert information in a standard blockquote. Five types of alerts are available:
-
-> [!NOTE]
-> Useful information that users should know, even when skimming content.
-
-> [!TIP]
-> Helpful advice for doing things better or more easily.
-
-> [!IMPORTANT]
-> Key information users need to know to achieve their goal.
-
-> [!WARNING]
-> Urgent info that needs immediate user attention to avoid problems.
-
-> [!CAUTION]
-> Advises about risks or negative outcomes of certain actions.. 
-
 ---
-© 2026 MD ABUL HOSSAIN. All Rights Reserved
+© 2026 MD ABUL HOSSAIN. All Rights Reserved.
