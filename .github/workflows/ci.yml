@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-# Ensures that mid-flight builds cancel if you push a new commit to the same branch
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -22,7 +21,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install ruff mypy pytest pytest-cov python-dotenv
@@ -32,6 +31,17 @@ jobs:
 
       - name: Run Type Checker (Mypy)
         run: mypy . --ignore-missing-imports
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Run JavaScript Formatter Check
+        run: npx prettier --check strict_prompt_builder.js --allow-empty-files
 
   test:
     needs: lint-and-typecheck
@@ -48,7 +58,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          # Ensure test tools are present even if unpinned in requirements
           pip install pytest pytest-cov python-dotenv
 
       - name: Run tests with coverage gate
