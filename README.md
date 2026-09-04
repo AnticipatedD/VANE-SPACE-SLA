@@ -27,19 +27,35 @@ All external AI and infrastructure services are **intentionally simulated** so t
 This is **not** a production RAG system, and it does **not** call real IBM watsonx, Milvus, FAISS, Redis, or PostgreSQL services.
 
 ---
-
-## Quick Start
+## Quick Start (Fresh Clone)
 
 ```bash
 git clone https://github.com/AnticipatedD/VANE-SPACE-SLA.git
 cd VANE-SPACE-SLA
+
+# Create and activate virtual environment
 python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Copy environment template
 cp .env.example .env
-pytest --cov=. --cov-report=term
+
+# Run the full test suite (must pass with ≥ 70% coverage)
+pytest --cov=. --cov-report=term-missing --cov-fail-under=70
+
+# Run the main entry point
 python vane_space_init.py
-```
+
+```markdown
+## Development & Testing
+
+- All tests must pass locally before opening a PR.
+- Coverage gate is enforced both locally and in CI (`--cov-fail-under=70`).
+- Prefer small, focused commits that include both the change and its tests.
+
 ---
 
 ## Project Structure
