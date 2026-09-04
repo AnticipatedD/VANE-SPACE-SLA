@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Automated dependency monitoring for Python modules (Requirements)
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+
+  # Automated dependency monitoring for JavaScript modules (Package.json)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
