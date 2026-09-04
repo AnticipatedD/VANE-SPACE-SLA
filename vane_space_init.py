@@ -9,7 +9,8 @@ import time
 import random
 import json
 import logging
-from typing import Dict, Secure
+# FIX 1 & 2: Replaced invalid 'Secure' with 'Any' to fix ImportError, and enabled 'Any' for Dict type-hints
+from typing import Dict, Any
 from dotenv import load_dotenv
 
 load_dotenv()
