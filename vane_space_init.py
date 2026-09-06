@@ -3,7 +3,21 @@
 VANE-SPACE-SLA - Multi-Gate Telemetry Validation Engine (Demonstration)
 Author: MD ABUL HOSSAIN
 """
+import os
 
+def validate_env():
+    """Basic check that required environment variables are not empty."""
+    required = [
+        "IBM_SAAS_ACCOUNT_ID",
+        "EU_EXPERT_ID",
+        "VANE_ACCOUNT_ID",
+    ]
+    missing = [var for var in required if not os.getenv(var)]
+    if missing:
+        raise ValueError(f"Missing or empty required environment variables: {', '.join(missing)}") 
+        if __name__ == "__main__":
+    validate_env()
+    
 import os
 import time
 import random
