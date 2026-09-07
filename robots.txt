@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /VANE-SPACE-SLA/
+
+# Link directly to your custom subdomain sitemap path
+Sitemap: https://anticipatedd.github.io/VANE-SPACE-SLA 
