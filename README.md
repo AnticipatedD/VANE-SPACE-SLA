@@ -15,22 +15,6 @@ All external AI and infrastructure services are **intentionally simulated** so t
 
 ---
 
-![VANE-SPACE-SLA_Lighthouse_Graphics](https://www.desmos.com/calculator/tcci857vxg)  
-
-
-# Project Graph Analysis
-
-Here is the live interactive visualization for this project:
-
-![Performance](https://githubusercontent.com)
-
-![Accessibility](https://githubusercontent.com)
-
-![Best_Practices](https://githubusercontent.com)
-
-![SEO](https://githubusercontent.com)
-
-
 ## What This Project Does
 
 - Simulates multi-gate validation
