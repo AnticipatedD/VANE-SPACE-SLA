@@ -15,6 +15,21 @@ All external AI and infrastructure services are **intentionally simulated** so t
 
 ---
 
+![VANE-SPACE-SLA Lighthouse Graphics.jpg](https://www.desmos.com/3d/gsv6roqtrg)  
+
+
+# Project Graph Analysis
+
+Here is the live interactive visualization for this project:
+
+![VSSLA_Performance-graph.png](https://www.desmos.com/calculator/tcci857vxg)
+
+![VSSLA_Accessibility.png](https://www.desmos.com/geometry/kprnzy78us)
+
+![VSSLA_3D_Best_Practices.jpg](https://www.desmos.com/3d/vpl98u1jlx)
+
+![VSSLA_SEO.png](https://www.desmos.com/calculator/vftuvjwtnl)
+
 ## What This Project Does
 
 - Simulates multi-gate telemetry validation
