@@ -15,24 +15,25 @@ All external AI and infrastructure services are **intentionally simulated** so t
 
 ---
 
-![VANE-SPACE-SLA Lighthouse Graphics.jpg](https://www.desmos.com/3d/gsv6roqtrg)  
+![VANE-SPACE-SLA_Lighthouse_Graphics](https://www.desmos.com/calculator/tcci857vxg)  
 
 
 # Project Graph Analysis
 
 Here is the live interactive visualization for this project:
 
-![VSSLA_Performance-graph.png](https://www.desmos.com/calculator/tcci857vxg)
+![Performance](https://githubusercontent.com)
 
-![VSSLA_Accessibility.png](https://www.desmos.com/geometry/kprnzy78us)
+![Accessibility](https://githubusercontent.com)
 
-![VSSLA_3D_Best_Practices.jpg](https://www.desmos.com/3d/vpl98u1jlx)
+![Best_Practices](https://githubusercontent.com)
 
-![VSSLA_SEO.png](https://www.desmos.com/calculator/vftuvjwtnl)
+![SEO](https://githubusercontent.com)
+
 
 ## What This Project Does
 
-- Simulates multi-gate telemetry validation
+- Simulates multi-gate validation
 - Provides a strict / moderate / soft prompt grounding builder
 - Uses environment variables (no hardcoded secrets)
 - Includes structured logging
@@ -50,7 +51,7 @@ git clone https://github.com/AnticipatedD/VANE-SPACE-SLA.git
 cd VANE-SPACE-SLA
 
 python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
+source .venv/bin/activate         # Windows: .venv\Scripts\activate
 
 pip install -r requirements.txt
 cp .env.example .env
