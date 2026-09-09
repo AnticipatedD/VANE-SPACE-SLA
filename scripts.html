@@ -3,98 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VANE-SPACE-SLA | Strict Prompt Builder</title>
+    <title>System Scripts - VANE-SPACE-SLA</title>
     <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
     <style>
-        body { background-color: #030712; color: #f3f4f6; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; margin: 0; padding: 40px 20px; display: flex; justify-content: center; }
-        .matrix-box { max-width: 900px; width: 100%; background-color: #0b1329; padding: 35px; border-radius: 8px; border: 1px solid #1e293b; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-        .header-section { border-bottom: 1px solid #1e293b; padding-bottom: 20px; margin-bottom: 30px; }
-        h1 { color: #3b82f6; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px 0; }
-        .subtitle { color: #64748b; font-size: 12px; margin: 0; line-height: 1.6; }
-        .form-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 25px; }
-        .field-block { display: flex; flex-direction: column; }
-        label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; margin-bottom: 8px; color: #94a3b8; }
-        input, textarea, select { width: 100%; background-color: #030712; border: 1px solid #1e293b; border-radius: 4px; color: #38bdf8; padding: 12px; font-size: 13px; font-family: inherit; box-sizing: border-box; }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: #2563eb; }
-        textarea { resize: vertical; min-height: 80px; }
-        .action-container { display: flex; gap: 12px; margin-bottom: 30px; }
-        button { background-color: #2563eb; color: #ffffff; border: none; padding: 12px 24px; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 4px; cursor: pointer; font-family: inherit; }
-        button:hover { background-color: #1d4ed8; }
-        button:disabled { background-color: #1e293b; cursor: not-allowed; opacity: 0.6; }
-        .output-panel { background-color: #030712; border: 1px solid #1e293b; border-radius: 4px; padding: 20px; }
-        .panel-status { font-size: 11px; color: #10b981; font-weight: bold; margin-bottom: 12px; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
-        .panel-status::before { content: ""; display: inline-block; width: 6px; height: 6px; background-color: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
-        pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font-size: 12px; color: #cbd5e1; line-height: 1.6; }
-        .nav-back { display: inline-flex; margin-bottom: 20px; color: #475569; text-decoration: none; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-back:hover { color: #3b82f6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #f3f4f6; line-height: 1.6; }
+        .header { background: rgba(11, 19, 41, 0.95); border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 18px; font-weight: bold; color: #f3f4f6; text-decoration: none; }
+        .nav { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { color: #94a3b8; text-decoration: none; padding: 8px 14px; border-radius: 4px; transition: all 0.2s; font-size: 13px; }
+        .nav a:hover { color: #f3f4f6; background: #1e293b; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        h1 { color: #3b82f6; margin-bottom: 20px; font-size: 2.5rem; }
+        h2 { color: #60a5fa; margin-top: 30px; margin-bottom: 15px; }
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 24px; margin-bottom: 20px; }
+        .script-item { background: #1f2937; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #3b82f6; }
+        .script-item h3 { color: #60a5fa; margin-bottom: 10px; }
+        .script-item p { color: #9ca3af; margin-bottom: 10px; }
+        .script-item code { background: #05070c; padding: 2px 6px; border-radius: 3px; color: #6ee7b7; font-family: monospace; }
+        .btn { display: inline-block; background: #3b82f6; color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; margin-top: 10px; transition: background 0.2s; }
+        .btn:hover { background: #2563eb; }
+        footer { text-align: center; padding: 24px; border-top: 1px solid #1f2937; color: #64748b; margin-top: 50px; }
     </style>
 </head>
 <body>
-<div class="matrix-box">
-    <a href="index.html" class="nav-back">← Return to Portal Matrix</a>
-    <div class="header-section">
-        <h1>Strict Prompt Builder Sandbox</h1>
-        <p class="subtitle">Component isolation utility // Anchoring model grounding protection mechanisms against hallucination vectors.</p>
-    </div>
-    <div class="form-grid">
-        <div class="field-block">
-            <label for="modelId">Target Model Identifier</label>
-            <select id="modelId">
-                <option value="ibm/granite-13b-instruct-v2">ibm/granite-13b-instruct-v2</option>
-                <option value="ibm/granite-20b-multilingual">ibm/granite-20b-multilingual</option>
-                <option value="ibm/granite-34b-instruct-v2">ibm/granite-34b-instruct-v2</option>
-            </select>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">VANE-SPACE-SLA</a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="about-us.html">About</a>
+                <a href="contact-us.html">Contact</a>
+                <a href="scripts.html" style="color: #f3f4f6; background: #1e293b;">Scripts</a>
+                <a href="security.html">Security</a>
+            </nav>
         </div>
-        <div class="field-block">
-            <label for="userQuery">User Input Query String</label>
-            <input type="text" id="userQuery" value="Check system status of server 01.">
+    </header>
+
+    <div class="container">
+        <h1>🛠️ System Scripts & Utilities</h1>
+        
+        <div class="card">
+            <h2>Quick Start Installation</h2>
+            <div class="script-item">
+                <h3>Setup Virtual Environment</h3>
+                <code>python -m venv .venv && source .venv/bin/activate</code>
+                <p>Creates isolated Python environment for dependency management</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>Install Dependencies</h3>
+                <code>pip install -r requirements.txt</code>
+                <p>Installs pytest, pytest-cov, python-dotenv, ruff, mypy</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>Configure Environment</h3>
+                <code>cp .env.example .env</code>
+                <p>Copy example environment variables for local development</p>
+            </div>
         </div>
-        <div class="field-block">
-            <label for="contextBlock">Verified Data Context Baseline (Line delimited)</label>
-            <textarea id="contextBlock" rows="4">[SEVONE_TELEMETRY_LOG_ENTRY] Device ID: FIN-PROD-SERVER-01 | CPU Load: 42.8% | Status: SECURE</textarea>
+        
+        <div class="card">
+            <h2>Testing & Quality Assurance</h2>
+            <div class="script-item">
+                <h3>Run Full Test Suite</h3>
+                <code>pytest --cov=. --cov-report=term-missing --cov-fail-under=70</code>
+                <p>Execute all tests with 70% minimum coverage enforcement</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>Code Linting</h3>
+                <code>ruff check .</code>
+                <p>Static analysis with Ruff for code quality</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>Type Checking</h3>
+                <code>mypy . --ignore-missing-imports</code>
+                <p>Type safety verification with MyPy</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Core Modules</h2>
+            <div class="script-item">
+                <h3>Telemetry Validator</h3>
+                <code>python telemetry_validator.py</code>
+                <p>Run multi-gate telemetry validation engine with 5-gate architecture</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>Voice Agents System</h3>
+                <code>python voice_agents.py</code>
+                <p>Launch voice orchestration with concurrent agent processing</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>M2M OAuth Gateway</h3>
+                <code>python m2m_oauth_gateway.py</code>
+                <p>Initialize machine-to-machine authentication layer</p>
+            </div>
+            
+            <div class="script-item">
+                <h3>Voice Orchestrator Node</h3>
+                <code>python voice_orchestrator.py</code>
+                <p>Start central orchestration hub for voice processing</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Continuous Integration</h2>
+            <p>GitHub Actions workflows automatically run on push/PR:</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Linting (Ruff) + Type Checking (MyPy)</li>
+                <li>Test execution with coverage reporting</li>
+                <li>Code quality gates (70%+ coverage required)</li>
+                <li>JavaScript formatting checks (Prettier)</li>
+            </ul>
         </div>
     </div>
-    <div class="action-container">
-        <button onclick="compilePromptInterface()" id="compileBtn">Execute Compilation</button>
-    </div>
-    <div class="output-panel">
-        <div class="panel-status" id="statusText">Grounding Boundary Protection Active</div>
-        <pre id="outputArea">Initializing modular data stream tracking parameters...</pre>
-    </div>
-</div>
-<script src="strict_prompt_builder.js"></script>
-<script>
-    function compilePromptInterface() {
-        const btn = document.getElementById('compileBtn');
-        const outputArea = document.getElementById('outputArea');
-        const statusText = document.getElementById('statusText');
-        if (typeof StrictPromptBuilder === 'undefined') {
-            outputArea.textContent = "ERROR: StrictPromptBuilder class not loaded.\nPlease make sure strict_prompt_builder.js is in the same folder.";
-            statusText.style.color = "#ef4444";
-            statusText.textContent = "Module Load Failure";
-            return;
-        }
-        btn.disabled = true;
-        statusText.style.color = "#10b981";
-        statusText.textContent = "Compiling Grounded Prompt...";
-        try {
-            const modelId = document.getElementById('modelId').value;
-            const userQuery = document.getElementById('userQuery').value;
-            const contextText = document.getElementById('contextBlock').value;
-            const auditedContexts = contextText.split('\n').map(line => line.trim()).filter(line => line !== '');
-            const builder = new StrictPromptBuilder(modelId);
-            const result = builder.buildGroundedPrompt(userQuery, auditedContexts);
-            outputArea.textContent = result.prompt;
-            statusText.textContent = "Grounding Boundary Protection Active • Prompt Compiled Successfully";
-        } catch (error) {
-            outputArea.textContent = "Compilation Error:\n" + error.message;
-            statusText.style.color = "#ef4444";
-            statusText.textContent = "Compilation Failed";
-        } finally {
-            btn.disabled = false;
-        }
-    }
-    window.addEventListener('DOMContentLoaded', () => setTimeout(compilePromptInterface, 150));
-</script>
+    
+    <footer>
+        <p>&copy; 2026 VANE-SPACE-SLA. All Rights Reserved.</p>
+        <p>Orchestrated by MD ABUL HOSSAIN</p>
+    </footer>
 </body>
 </html>

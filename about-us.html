@@ -3,280 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | MD ABUL HOSSAIN | VANE-SPACE-SLA</title>
-    
+    <title>About Us - VANE-SPACE-SLA</title>
     <base href="https://anticipatedd.github.io/VANE-SPACE-SLA/">
-    
     <style>
-        :root {
-            --bg-main: #030712;
-            --bg-surface: #0b1329;
-            --border-color: #1e293b;
-            --text-primary: #f3f4f6;
-            --text-secondary: #94a3b8;
-            --accent-blue: #3b82f6;
-            --accent-teal: #10b981;
-            --accent-cyan: #38bdf8;
-            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        body { background-color: var(--bg-main); color: var(--text-primary); font-family: var(--font-sans); margin: 0; padding: 0; line-height: 1.6; }
-        .site-header { background-color: rgba(11, 19, 41, 0.85); border-bottom: 1px solid var(--border-color); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .logo { font-family: var(--font-mono); font-size: 18px; font-weight: bold; color: var(--text-primary); text-decoration: none; }
-        .logo span { color: var(--accent-blue); }
-        .nav-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
-        .nav-btn { color: var(--text-secondary); text-decoration: none; font-size: 13px; font-family: var(--font-mono); padding: 8px 14px; border-radius: 4px; }
-        .nav-btn:hover, .nav-btn.active { color: var(--text-primary); background-color: var(--border-color); }
-        .nav-btn.secondary { border: 1px solid rgba(59, 130, 246, 0.3); color: var(--accent-cyan); }
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        .profile-hero h1 { font-size: 32px; font-weight: 800; margin: 0 0 12px 0; }
-        .role-tagline { font-size: 16px; color: var(--accent-cyan); margin: 0 0 24px 0; }
-        .badge-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; font-family: var(--font-mono); }
-        .telemetry-badge { background: rgba(17, 30, 56, 0.5); border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 4px; font-size: 11px; color: var(--text-secondary); }
-        .telemetry-badge span { color: var(--accent-teal); }
-        .matrix-card { background-color: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; padding: 30px; margin-bottom: 25px; }
-        .matrix-card h3 { font-family: var(--font-mono); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-top: 0; margin-bottom: 20px; color: var(--accent-blue); }
-        .matrix-card p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.7; margin: 0 0 16px 0; }
-        .focus-list { list-style: none; padding: 0; margin: 0; }
-        .focus-item { position: relative; padding-left: 24px; margin-bottom: 14px; font-size: 14px; color: var(--text-secondary); }
-        .focus-item::before { content: "▹"; position: absolute; left: 0; color: var(--accent-teal); font-weight: bold; }
-        .action-cluster { display: flex; gap: 12px; margin-top: 35px; flex-wrap: wrap; }
-        .action-btn { font-family: var(--font-mono); font-size: 12px; font-weight: bold; text-transform: uppercase; padding: 14px 28px; border-radius: 4px; text-decoration: none; }
-        .action-btn.primary { background-color: var(--accent-blue); color: #ffffff; }
-        .action-btn.outline { border: 1px solid var(--border-color); color: var(--text-primary); }
-        .site-footer { background-color: var(--bg-surface); border-top: 1px solid var(--border-color); padding: 60px 20px 30px 20px; margin-top: 60px; }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
-        .footer-col h4 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--text-primary); margin-bottom: 20px; }
-        .footer-col a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 13px; margin-bottom: 12px; }
-        .footer-col a:hover { color: var(--accent-cyan); }
-        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 12px; color: var(--text-secondary); gap: 15px; }
-        .identifiers-strip { display: flex; flex-wrap: wrap; gap: 15px; font-family: var(--font-mono); }
-        .identifiers-strip span { color: var(--accent-cyan); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #f3f4f6; line-height: 1.6; }
+        .header { background: rgba(11, 19, 41, 0.95); border-bottom: 1px solid #1e293b; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 18px; font-weight: bold; color: #f3f4f6; text-decoration: none; }
+        .nav { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav a { color: #94a3b8; text-decoration: none; padding: 8px 14px; border-radius: 4px; transition: all 0.2s; font-size: 13px; }
+        .nav a:hover { color: #f3f4f6; background: #1e293b; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        h1 { color: #3b82f6; margin-bottom: 20px; font-size: 2.5rem; }
+        h2 { color: #60a5fa; margin-top: 30px; margin-bottom: 15px; border-bottom: 1px solid #1e293b; padding-bottom: 10px; }
+        .card { background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 24px; margin-bottom: 20px; }
+        .team-member { background: #1f2937; padding: 20px; border-radius: 8px; margin-bottom: 15px; }
+        .team-member h3 { color: #60a5fa; margin-bottom: 8px; }
+        .team-member p { color: #9ca3af; font-size: 0.9rem; }
+        footer { text-align: center; padding: 24px; border-top: 1px solid #1f2937; color: #64748b; margin-top: 50px; }
     </style>
 </head>
 <body>
-
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-text">VANE-SPACE-SLA</span>
-        <span class="live-indicator">
-          <span class="live-dot"></span>
-          <span class="live-text">LIVE</span>
-        </span>
-      </a>
-      <nav class="nav-buttons">
-        <a href="index.html" class="nav-btn">Home</a>
-        <a href="about-us.html" class="nav-btn active">About</a>
-        <a href="index.html#credentials" class="nav-btn">Credentials</a>
-        <a href="index.html#eu-publications" class="nav-btn">EU Publications</a>
-        <a href="index.html#projects" class="nav-btn">Projects</a>
-        <a href="extensions-core/m2m-oauth-isolation.html" class="nav-btn secondary">M2M OAuth</a>
-        <a href="voice-orchestrator.html" class="nav-btn secondary">Voice Orchestrator</a>
-        <a href="contact-us.html" class="nav-btn">Contact</a>
-      </nav>
-    </div>
-</header> 
-
-  <!-- Official Corporate Partnership Operational Registry Mapping -->
-  <div style="max-width: 1200px; margin: 30px auto 25px auto; padding: 20px; background-color: #0b1329; border: 1px solid #1e293b; border-radius: 8px; font-family: monospace; font-size: 12px; color: #94a3b8; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; text-align: left;">
-          <div><span style="color: #38bdf8;">PARTNER:</span> TARU Global Access (Enterprise ID)</div>
-          <div><span style="color: #38bdf8;">IBM SAAS ACCOUNT:</span> 20260824-MY-IBM-SAAS-CLOUD-ID</div>
-          <div><span style="color: #38bdf8;">IBM RESELLER LIC:</span> MYIBMRLIC</div>
-          <div><span style="color: #38bdf8;">SERVICE BPA ID:</span> MYIBMBPAID</div>
-          <div><span style="color: #38bdf8;">CUSTOMER ACCOUNT:</span> MYCUSACCID</div>
-          <div><span style="color: #38bdf8;">ARCHITECT AUTH:</span> MD ABUL HOSSAIN (SVP)</div>
-      </div>
-  </div>
-
-  <main class="container">
-    <section class="profile-hero">
-      <h1>About the Principal Architect</h1>
-      <p class="role-tagline">MD ABUL HOSSAIN — Founder & Architecture of the VANE-SPACE-SLA Engineering Initiative</p>
-      
-      <div class="badge-grid">
-        <div class="telemetry-badge">Sovereign Architecture Framework: <span>VANE-SPACE-SLA</span></div>
-        <div class="telemetry-badge">European F&T Expert ID: <span>MYEUEXPERTID</span></div>
-        <div class="telemetry-badge">IBM Business Partner Plus</div>
-        <div class="telemetry-badge">Web of Science: <span>QQZ-6739-2026</span></div>
-      </div>
-
-      <div class="matrix-card">
-        <h3>// The VANE-SPACE-SLA Mission</h3>
-        <p>
-          The VANE-SPACE-SLA repository is a technical deployment blueprint designed to solve a critical vulnerability in modern cross-border computing: compliance drift and security hallucinations within multi-tenant AI pipelines.
-        </p>
-        <p>
-          As SVP & Head of Strategic Partnerships at TARU Global Access, my research directly supports Horizon Europe initiatives under Pillar II (Global Challenges and European Industrial Competitiveness). This architecture translates high-level European data sovereignty regulations into strict, mathematical infrastructure constraints.
-        </p>
-        <p>
-          Leveraging 87 active IBM credentials, 90 Microsoft badges, and deep technical competencies across VMware networks, Kubecost billing telemetry, and watsonx environments, I built this framework to provide deterministic verification parameters for machine-to-machine transactions.
-        </p>
-      </div>
-
-      <div class="matrix-card">
-        <h3>// Engineering & Framework Focus</h3>
-        <ul class="focus-list">
-          <li class="focus-item"><strong>Strict Grounding Protection:</strong> Implementing deterministic boundary controls within watsonx.ai environments to eliminate hallucination vectors.</li>
-          <li class="focus-item"><strong>M2M OAuth Isolation:</strong> Securing server-to-server data contracts across decentralized multi-cloud nodes without relying on persistent external authorities.</li>
-          <li class="focus-item"><strong>Zero-Trust Telemetry Mapping:</strong> Real-time tracing of sovereign data workflows designed for high-compliance European regulatory landscapes.</li>
-          <li class="focus-item"><strong>Strategic Consortium Alignment:</strong> Bridging raw open-source automation assets with high-level enterprise and institutional requirements.</li>
-        </ul>
-        
-        <div class="action-cluster">
-          <a href="contact-us.html" class="action-btn primary">Request Architecture Briefing</a>
-          <a href="index.html#projects" class="action-btn outline">Test Script Sandboxes</a>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">VANE-SPACE-SLA</a>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="about-us.html" style="color: #f3f4f6; background: #1e293b;">About</a>
+                <a href="contact-us.html">Contact</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="security.html">Security</a>
+            </nav>
         </div>
-      </div>
-    </section>
-  </main>
+    </header>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-col">
-        <h4>Framework Matrix</h4>
-        <a href="index.html">Portal Home</a>
-        <a href="about-us.html">Framework About</a>
-        <a href="contact-us.html">Gateway Contact</a>
-      </div>
-      <div class="footer-col">
-        <h4>Security & Compliance</h4>
-        <a href="privacy.html">Privacy Regulations</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="security.html">Zero-Trust Layout</a>
-      </div>
-      <div class="footer-col">
-        <h4>Core Extensions</h4>
-        <a href="extensions-core/m2m-oauth-isolation.html">M2M Isolation Gateway</a>
-        <a href="voice-orchestrator.html">Voice Orchestrator Node</a>
-      </div>
-      <div class="footer-col">
-        <h4>Verification Streams</h4>
-        <a href="https://orcid.org/0009-0004-4378-5298" target="_blank">ORCID Portal</a>
-        <a href="https://www.webofscience.com/wos/author/record/QQZ-6739-2026" target="_blank">Web of Science Index</a>
-        <a href="https://op.europa.eu/publication-detail/-/publication/af30723e-f4ce-11eb-aeb9-01aa75ed71a1" target="_blank">EU Publication Detail</a>
-        <a href="https://europa.eu" target="_blank" style="font-size: 11px; color: var(--accent-cyan);">→ Registry: op.europa.eu/s/AjiB</a>
-        <a href="https://op.europa.eu/o/opportal-service/rss/savedDocument?userid=mdabulhossain1008@gmail.com&hash=MTAxNTc7MTAxODQ7MTc4NTgzOTkyMjI5Mw==&" target="_blank" style="color: var(--accent-teal); font-weight: bold;">✓ Official EU RSS Live Feed</a>
-      </div>
-    </div>   
-    <div class="footer-bottom">
-      <p>&copy; 2026 VANE-SPACE-SLA Project. Orchestrated by MD ABUL HOSSAIN. All rights reserved.</p>
-      <div class="identifiers-strip">
-        <div>ORCID: <span>0009-0004-4378-5298</span></div>
-        <div>ResearcherID: <span>QQZ-6739-2026</span></div>
-        <div>EU Expert: <span>MYEUEXPERTID</span></div>
-      </div>
+    <div class="container">
+        <h1>About VANE-SPACE-SLA</h1>
+        
+        <div class="card">
+            <h2>Project Overview</h2>
+            <p>VANE-SPACE-SLA is a deterministic, zero-trust anomaly detection and telemetry validation engine designed for mission-critical spacecraft operations. This portfolio project demonstrates advanced concepts in multi-gate telemetry validation, strict prompt grounding, and sovereign AI trust layers.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Core Architecture</h2>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Multi-Gate Telemetry Validation:</strong> 5-gate architecture for deterministic data validation</li>
+                <li><strong>Voice Agents Module:</strong> Orchestrated voice processing with concurrent request handling</li>
+                <li><strong>M2M OAuth Gateway:</strong> Zero-trust authentication and isolation for machine-to-machine communication</li>
+                <li><strong>Strict Prompt Builder:</strong> LLM prompt grounding to eliminate hallucinations</li>
+                <li><strong>Telemetry Engine:</strong> Real-time anomaly detection and statistical analysis</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>Leadership Team</h2>
+            <div class="team-member">
+                <h3>MD ABUL HOSSAIN</h3>
+                <p><strong>Founder & Principal Architect</strong></p>
+                <p>IBM Business Partner Plus | European F&T Expert</p>
+                <p>Microsoft Learn Level 10 | 96 Badges, 17 Trophies</p>
+                <p>Enterprise architecture engineer specializing in mission-critical infrastructure for Fortune 500 tech giants</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Credentials & Recognition</h2>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>IBM Certified Professional: Advanced Enterprise Architecture (ID: EX2026D1473148)</li>
+                <li>Web of Science Researcher ID: QQZ-6739-2026</li>
+                <li>ORCID: 0009-0004-4378-5298</li>
+                <li>Microsoft Learn: Level 10 (96 Badges, 17 Trophies)</li>
+                <li>European Commission Expert Registry: MYEUEXPERTID</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>Technical Stack</h2>
+            <p><strong>Languages:</strong> Python 3.11+, JavaScript, TypeScript</p>
+            <p><strong>Frameworks:</strong> FastAPI, Kubernetes, Istio Service Mesh</p>
+            <p><strong>Cloud:</strong> AWS, GCP, Azure (multi-region)</p>
+            <p><strong>Security:</strong> OAuth 2.0, mTLS, HMAC-SHA256, RSA-4096</p>
+            <p><strong>Testing:</strong> pytest, pytest-cov (70%+ coverage gate)</p>
+        </div>
     </div>
-  </footer>
-
-<!-- Embedded CSS Styles for Logo & Live Indicator -->
-<style>
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px; 
-    text-decoration: none;
-  }
-  .logo-text {
-    font-weight: bold;
-    color: inherit; 
-  }
-  
-  /* Flexible Live Badge Container */
-  .live-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  /* Blinking Dot Core Mechanics */
-  .live-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    animation: pulse-glow 1s infinite; 
-    transition: background-color 0.3s ease;
-  }
-
-  /* Dynamic Health States */
-  /* HEALTHY (Green) */
-  .live-indicator.healthy {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-  }
-  .live-indicator.healthy .live-dot {
-    background-color: #10b981;
-    --pulse-color: rgba(16, 185, 129, 0.7);
-  }
-
-  /* WARNING (Orange) */
-  .live-indicator.warning {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
-  }
-  .live-indicator.warning .live-dot {
-    background-color: #f59e0b;
-    --pulse-color: rgba(245, 158, 11, 0.7);
-  }
-
-  /* CRITICAL (Red) */
-  .live-indicator.critical {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-  }
-  .live-indicator.critical .live-dot {
-    background-color: #ef4444;
-    --pulse-color: rgba(239, 68, 68, 0.7);
-  }
-
-  /* Shared Dynamic Pulse Keyframes */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 var(--pulse-color, rgba(16, 185, 129, 0.7)); }
-    70% { box-shadow: 0 0 0 6px rgba(0, 0, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
-  }
-</style>
-
-<!-- Background Latency Cycle script for sub-pages -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const liveIndicator = document.querySelector('.live-indicator');
-      const liveText = document.querySelector('.live-text');
-
-      function calculateSubPageLatency() {
-          // Generates tracking matrix value between 41ms and 45ms
-          const currentLatency = Math.floor(Math.random() * (45 - 41) + 41);
-
-          if (liveIndicator) {
-              liveIndicator.classList.remove('healthy', 'warning', 'critical');
-
-              if (currentLatency >= 45) {
-                  liveIndicator.classList.add('critical');
-                  if (liveText) liveText.textContent = "SPIKE";
-              } else if (currentLatency === 44) {
-                  liveIndicator.classList.add('warning');
-                  if (liveText) liveText.textContent = "SPIKE";
-              } else {
-                  liveIndicator.classList.add('healthy');
-                  if (liveText) liveText.textContent = "LIVE";
-              }
-          }
-      }
-
-      // Initialize default values instantly
-      if (liveIndicator) liveIndicator.classList.add('healthy');
-      if (liveText) liveText.textContent = "LIVE";
-
-      calculateSubPageLatency();
-      setInterval(calculateSubPageLatency, 2500);
-  });
-</script>
+    
+    <footer>
+        <p>&copy; 2026 VANE-SPACE-SLA. All Rights Reserved.</p>
+        <p>Orchestrated by MD ABUL HOSSAIN</p>
+    </footer>
 </body>
 </html>
