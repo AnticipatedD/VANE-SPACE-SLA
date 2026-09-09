@@ -1,0 +1,20 @@
+name: Update Lighthouse Badges
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+  workflow_dispatch: # Allows you to run it manually
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Generate Lighthouse Badges
+        uses: MyActionWay/lighthouse-badger-action@v2.4
+        with:
+          urls: 'https://github.io'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
