@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  vane-space-sla-core:
+    build:
+      context: ..
+      dockerfile: manifests/Dockerfile
+    container_name: vane-space-sla-runtime
+    environment:
+      - M2M_SIGNING_KEY=${M2M_SIGNING_KEY:-default-fallback-testing-key-value-matrix}
+    volumes:
+      - ..:/app
+    command: >
+      bash -c "pytest --cov=. --cov-report=term-missing --cov-fail-under=70 tests/"
