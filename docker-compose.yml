@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    environment:
+      - NODE_ENV=development
+      - M2M_SIGNING_KEY=secret_key_demo
+    volumes:
+      - .:/app
