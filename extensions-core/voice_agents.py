@@ -8,13 +8,15 @@ import os
 import time
 import random
 import json
-import sys
 import logging
 from typing import Dict, Any
 
-# Configure structured logging to replace raw print statements
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger("VANE-SPACE-SLA")
+# Configure consistent logging format
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+)
+logger = logging.getLogger("VANE-SPACE-SLA.voice_agents")
 
 try:
     import pyttsx3
@@ -33,7 +35,7 @@ class VoiceDuplexStreamOrchestrator:
         self.contract_service = os.environ.get("VANE_CONTRACT_SERVICE", "Ref_SCR_Account_ID")
         self.customer_number = os.environ.get("VANE_CUSTOMER_NUMBER", "Ref_SC_NID")
         self.eu_cellar_reference = os.environ.get("VANE_EU_CELLAR_REF", "never-exposed-your-real-accountID")
-        self.eu_rss_hash = os.environ.get("VANE_EU_RSS_HASH", "Reference to the publically available RSS feed link from EU")
+        self.eu_rss_hash = os.environ.get("VANE_EU_RSS_HASH", "Reference to the publicly available RSS feed link from EU")
         
         self.enable_speech = enable_speech and TTS_AVAILABLE
         self.engine = None
@@ -139,10 +141,10 @@ class VoiceDuplexStreamOrchestrator:
 
 
 if __name__ == "__main__":
-    logger.info("=== VANE-SPACE-SLA Voice Orchestrator (Real Audio Mode) ===\n")
+    logger.info("=== VANE-SPACE-SLA Voice Orchestrator (Real Audio Mode) ===")
     orchestrator = VoiceDuplexStreamOrchestrator(enable_speech=False)
     metrics = orchestrator.execute_as_agent_mode(frame_count=2)
     
-    logger.info("\n--- BEGIN IBM BOB 2.0 EXPORT REPORT ---")
+    logger.info("--- BEGIN IBM BOB 2.0 EXPORT REPORT ---")
     print(orchestrator.generate_bob_report_payload(run_metrics=metrics))
     logger.info("--- END IBM BOB 2.0 EXPORT REPORT ---")
