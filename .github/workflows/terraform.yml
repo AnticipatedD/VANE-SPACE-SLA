@@ -17,3 +17,8 @@ jobs:
       - run: terraform fmt -check
       - run: terraform init -backend=false
       - run: terraform validate
+      - name: Run tfsec Security Scanner
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          soft_fail: true
