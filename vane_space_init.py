@@ -1,29 +1,14 @@
 #!/usr/bin/env python3
 """
 VANE-SPACE-SLA - Multi-Gate Telemetry Validation Engine (Demonstration)
-Author: MD ABUL HOSSAIN
+Author: MD ABUL HOSSAIN (SVP & Head of Strategic Partnerships, TARU Global Access)
 """
-import os
 
-def validate_env():
-    """Basic check that required environment variables are not empty."""
-    required = [
-        "IBM_SAAS_ACCOUNT_ID",
-        "EU_EXPERT_ID",
-        "VANE_ACCOUNT_ID",
-    ]
-    missing = [var for var in required if not os.getenv(var)]
-    if missing:
-        raise ValueError(f"Missing or empty required environment variables: {', '.join(missing)}") 
-        if __name__ == "__main__":
-    validate_env()
-    
 import os
 import time
 import random
 import json
 import logging
-# FIX 1 & 2: Replaced invalid 'Secure' with 'Any' to fix ImportError, and enabled 'Any' for Dict type-hints
 from typing import Dict, Any
 from dotenv import load_dotenv
 
@@ -35,6 +20,19 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 logger = logging.getLogger("vane_space")
+
+
+def validate_env():
+    """Basic check that required environment variables are not empty."""
+    required = [
+        "IBM_SAAS_ACCOUNT_ID",
+        "EU_EXPERT_ID",
+        "VANE_ACCOUNT_ID",
+    ]
+    missing = [var for var in required if not os.getenv(var)]
+    if missing:
+        raise ValueError(f"Missing or empty required environment variables: {', '.join(missing)}")
+
 
 def get_config() -> Dict[str, str]:
     return {
@@ -48,6 +46,7 @@ def get_config() -> Dict[str, str]:
         "eu_cellar_id": os.getenv("EU_CELLAR_DOC_ID", "myibm-cellar"),
     }
 
+
 def verify_granite_syntax_gate(code_snippet: str) -> Dict[str, str]:
     if "average = (num1 + num2 + num3 / 3" in code_snippet:
         return {
@@ -56,6 +55,7 @@ def verify_granite_syntax_gate(code_snippet: str) -> Dict[str, str]:
             "granite_remediation": "Refactor to: average = (num1 + num2 + num3) / 3"
         }
     return {"validation_gate": "PASS", "error_detected": "None", "granite_remediation": "None"}
+
 
 def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = None) -> Dict[str, Any]:
     if seed is not None:
@@ -107,7 +107,9 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = N
         ]
     }
 
+
 def main() -> None:
+    validate_env()
     config = get_config()
     logger.info(f"Initializing: {config['framework']}")
     logger.info(f"EU Expert ID: {config['eu_expert_id']}")
@@ -123,6 +125,7 @@ def main() -> None:
         }
         report = run_multi_gate_telemetry_check(payload)
         logger.info(f"Transaction {i:03d} → {report['operational_status']}")
+
 
 if __name__ == "__main__":
     main()
