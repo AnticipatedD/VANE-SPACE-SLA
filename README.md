@@ -81,7 +81,7 @@ VANE-SPACE-SLA/
 * **ID:** EX2026D1473148
 * **Web of Science ResearcherID:** QQZ-6739-2026
 * **ORCID:** 0009-0004-4378-5298
-* **Microsoft Learn:** Level 10 (96 Badges, 17 Trophies)
+* **Microsoft Learn:** Level 13 (234 Badges, 43 Trophies)
 
 ---
 
