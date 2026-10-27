@@ -1,12 +1,10 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: "For using this software, please cite it as below with your correct verified information."
 authors:
-- family-names: "YOUR_NAME_HERE"
-  given-names: "YOUR_NAME_HERE"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Lisa"
-  given-names: "Mona"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Hossain"
+  given-names: "Md_Abul"
+  orcid: "https://orcid.org/0009-0004-4378-5298"
+
 title: "VANE-SPACE-SLA"
 version: 1.0.0
 doi: 10.5281/zenodo.1234
