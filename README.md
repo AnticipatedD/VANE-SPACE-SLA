@@ -4,7 +4,12 @@
 *Demonstration / Portfolio Project*
 
 A lightweight, self-contained Python toolkit that demonstrates multi-gate telemetry validation and strict prompt grounding concepts.  
-All external AI and infrastructure services are **intentionally simulated** so the project remains fully runnable without any paid or external dependencies.
+
+All external AI and infrastructure services are **intentionally simulated** so the project remains fully runnable without any paid or external dependencies. 
+
+<a href="https://launchnest.io/p/vane-space-sla-enterprise-command-center" target="_blank">
+  <img src="https://launchnest.io/badge/vane-space-sla-enterprise-command-center.svg?variant=featured" alt="VANE-SPACE-SLA Enterprise Command Center on LaunchNest" width="220" height="56" />
+</a>
 
 ---
 
