@@ -5,7 +5,7 @@ import os
 @dataclass
 class Config:
     node_id: str = "default-node"
-    framework: str = "Vane-Space-SLA"
+    framework: str = "VANE-SPACE-SLA"
     saas_account_id: Optional[str] = None
     eu_expert_id: Optional[str] = None
 
