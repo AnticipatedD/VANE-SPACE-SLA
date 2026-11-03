@@ -44,7 +44,9 @@ cd VANE-SPACE-SLA
 
 # Create virtual environment and install locked dependencies
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate
+
+# On Windows: .venv\Scripts\activate
 pip install -r requirements-lock.txt
 ```
 
@@ -61,7 +63,7 @@ python src/agent_orchestrator.py "Enhance telemetry packet validation with crypt
 ```
 
 # Running the Test Suite
-The test suite utilizes pytest, pytest-cov, and pytest-mock to ensure high test coverage and robust unit validation:
+The test suite utilizes `pytest`, `pytest-cov`, and `pytest-mock` to ensure high test coverage and robust unit validation:
 ```bash
 pytest --cov=src --cov-report=term-missing --cov-fail-under=70 -v tests/
 
@@ -107,10 +109,10 @@ VANE-SPACE-SLA/
 - Prefer small, focused commits that include both the change and its tests.
 ~/VANE-SPACE-SLA $ python src/agent_orchestrator.py "Enhance telemetry packet validation with cryptographic verification"
 
-=== [Agent 1: Code Architect] ===
-This architectural implementation strategy details a deterministic, cryptographically verified telemetry ingestion pipeline designed for resource-constrained mobile edge runtimes and high-throughput zero-trust ingestion gateways.
-
 ---
+
+### [Agent 1: Code Architect]
+This architectural implementation strategy details a deterministic, cryptographically verified telemetry ingestion pipeline designed for resource-constrained mobile edge runtimes and high-throughput zero-trust ingestion gateways.
 
 ### 1. Threat Model & Deterministic Invariants
 
@@ -141,14 +143,14 @@ To balance extreme compression on edge networks with cross-platform verification
 
 ```
 +-----------------------------------------------------------------------+
-|                         HEADER (48 Bytes)                             |
+|         HEADER (48 Bytes)                             |
 +-----------------------------------------------------------------------+
 | Magic (2B) | Protocol Ver (2B) | Edge Node ID (UUIDv4 - 16B)          |
 | Monotonic Sequence ID (uint64 - 8B)                                   |
 | Timestamp UTC (uint64 - Epoch Microseconds - 8B)                      |
 | Parent Packet Digest (SHA-256 truncated - 12B)                        |
 +-----------------------------------------------------------------------+
-|                         AI GOVERNANCE MANIFEST                        |
+|        AI GOVERNANCE MANIFEST                        |
 +-----------------------------------------------------------------------+
 | Model Digest (BLAKE3-256 - 32B)                                       |
 | Inference Execution Seed (uint64 - 8B)                                |
@@ -156,7 +158,7 @@ To balance extreme compression on edge networks with cross-platform verification
 | Output Tensor Digest (BLAKE3-256 - 32B)                               |
 | Execution Flags (Bitfield - uint32 - 4B)                              |
 +-----------------------------------------------------------------------+
-|                         TELEMETRY PAYLOAD                             |
+|         TELEMETRY PAYLOAD                             |
 +-----------------------------------------------------------------------+
 | Canonical CBOR Encoded Map (Arbitrary System Metrics)                |
 +-----------------------------------------------------------------------+
@@ -243,7 +245,9 @@ For edge nodes transmitting out-of-order over unreliable networks (UDP/QUIC), st
 | **Secure Enclave Latency** | Hardware signing introduces bottlenecks during rapid bursts. | Edge telemetry engine batches events into a internal micro-Merkle tree; signs only the Merkle root per dispatch interval, attaching inclusions proofs to payloads. |
 | **Corrupted Serializer Output** | Heterogeneous architectures encoding maps with divergent key orders. | Enforce strict lexicographical key sorting in schema serializers (dCBOR rules) via CI integration tests that assert cross-platform golden binary test vectors. |
 
-=== [Agent 2: Security Auditor] ===
+---
+
+### [Agent 2: Security Auditor]
 
 # ZERO-TRUST ARCHITECTURAL AUDIT & VULNERABILITY ASSESSMENT
 
