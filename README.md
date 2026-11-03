@@ -1,11 +1,15 @@
 # VANE-SPACE-SLA (v1.0) 🛰️
 
-**Deterministic Multi-Gate Telemetry Validation & Strict Prompt Grounding Toolkit**  
-*Demonstration / Portfolio Project*
+**Mission-Critical AI Assurance & Deterministic Zero-Trust Telemetry Engine**
 
-A lightweight, self-contained Python toolkit that demonstrates multi-gate telemetry validation and strict prompt grounding concepts.  
+---
 
-All external AI and infrastructure services are **intentionally simulated** so the project remains fully runnable without any paid or external dependencies. 
+## Executive Overview
+
+`VANE-SPACE-SLA` is an enterprise-grade Python and Rust zero-trust telemetry, prompt-grounding, and agentic orchestration toolkit. Designed for resource-constrained edge environments and high-throughput ingestion gateways, the engine bridges probabilistic AI outputs with deterministic cryptographic verification.
+
+* **Primary Stack:** Python 3.11+, Rust (Ed25519 cryptography, dCBOR serialization), and the official `google-genai` SDK (`gemini-2.5-flash` / `gemini-2.5-pro`).
+* **Architecture:** Deterministic Zero-Trust Telemetry Pipeline featuring sliding-window anti-replay protection, causal hash-chaining, and multi-agent architectural auditing.
 
 <a href="https://launchnest.io/p/vane-space-sla-enterprise-command-center" target="_blank">
   <img src="https://launchnest.io/badge/vane-space-sla-enterprise-command-center.svg?variant=featured" alt="VANE-SPACE-SLA Enterprise Command Center on LaunchNest" width="220" height="56" />
@@ -20,6 +24,52 @@ All external AI and infrastructure services are **intentionally simulated** so t
 
 ---
 
+## Core Features & Modules
+
+1. **Deterministic Telemetry Evaluation (`src/main.py`)**: Validates real-time packet payloads against strict Pydantic schemas and cryptographic signatures.
+2. **Automated Code Health Auditing (`src/repo_audit.py`)**: Recursively scans repository source files, filters build artifacts and virtual environments, and leverages Gemini models to generate structural health reports.
+3. **Multi-Agent Orchestration (`src/agent_orchestrator.py`)**: Executes structured multi-persona pipelines (Code Architect & Security Auditor) with live token streaming and robust error handling.
+4. **Rust Verification Core (`telemetry_core.rs`)**: Implements strict canonical serialization (dCBOR), sliding-window replay bitmasks, and hardware-anchored key attestation.
+
+---
+
+## Installation & Environment Setup
+
+Ensure `Termux` (ARM64) or the target Linux/macOS environment has Python 3.11+ installed. The repository relies strictly on locked dependency pins via `requirements-lock.txt`.
+
+```bash
+# Clone the repository
+git clone [https://github.com/AnticipatedD/VANE-SPACE-SLA.git](https://github.com/AnticipatedD/VANE-SPACE-SLA.git)
+cd VANE-SPACE-SLA
+
+# Create virtual environment and install locked dependencies
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements-lock.txt
+```
+
+# Execution & Testing
+Export your Gemini API key before executing audit or orchestration utilities:
+```bash
+export GEMINI_API_KEY="your_api_key_here"
+
+# Run automated repository health audit
+python src/repo_audit.py src --model gemini-2.5-flash
+
+# Run multi-agent architectural pipeline
+python src/agent_orchestrator.py "Enhance telemetry packet validation with cryptographic verification" --model gemini-2.5-flash
+```
+
+# Running the Test Suite
+The test suite utilizes pytest, pytest-cov, and pytest-mock to ensure high test coverage and robust unit validation:
+```bash
+pytest --cov=src --cov-report=term-missing --cov-fail-under=70 -v tests/
+
+# CI/CD Pipeline & Code Quality Automated quality gates are enforced via GitHub Actions (`.github/workflows/ci.yml`), executing:Linting: ruff check src/ tests/Type Checking: mypy src/ 
+Testing & Coverage: pytest with strict coverage threshold gating ($\ge 70\%$).
+```
+---
+
 ## What This Project Does
 
 - Simulates multi-gate validation
@@ -29,43 +79,6 @@ All external AI and infrastructure services are **intentionally simulated** so t
 - Comes with a pytest test suite
 - Has GitHub Actions CI with coverage gate
 
-This is a production RAG system and does call real IBM watsonx, Milvus, FAISS, Redis, or PostgreSQL services.
-
----
-
-## Quick Start
-
-```bash
-git clone https://github.com/AnticipatedD/VANE-SPACE-SLA.git
-cd VANE-SPACE-SLA
-
-python -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
-
-pip install -r requirements.txt
-cp .env.example .env
-
-# Run tests (must pass with ≥ 70% coverage)
-pytest --cov=. --cov-report=term-missing --cov-fail-under=70
-
-# Run the main entry point
-python vane_space_init.py
-
-# Export your Gemini API key
-export GEMINI_API_KEY="your_actual_api_key_here"
-
-# Create/update your audit and orchestrator files inside src/
-# (Paste the code blocks here)
-
-# Test your new tools
-python src/repo_audit.py
-python src/agent_orchestrator.py "Enhance telemetry packet validation with cryptographic verification"
-
-# Commit and push your updates to GitHub
-git add src/repo_audit.py src/agent_orchestrator.py
-git commit -m "feat: add automated repo audit and multi-agent orchestrator using Gemini 3.8 Flash"
-git push origin main
-```
 ---
 
 ## Project Structure
@@ -165,7 +178,7 @@ On mobile edge clients (iOS/Android), signatures must be anchored to Hardware Se
 *   **High-Throughput / Local Runtime:** **Ed25519 (RFC 8032)** for local isolated micro-runtimes or embedded Linux edge nodes where hardware P-256 acceleration is absent.
 
 ```
-       EDGE NODE                                       INGEST GATEWAY
+       EDGE NODE INGEST GATEWAY
 +------------------------+                   +-------------------------------+
 |  Telemetry Collector   |                   |   Envoy / eBPF Zero-Trust     |
 +-----------+------------+                   +---------------+---------------+
@@ -230,9 +243,8 @@ For edge nodes transmitting out-of-order over unreliable networks (UDP/QUIC), st
 | **Secure Enclave Latency** | Hardware signing introduces bottlenecks during rapid bursts. | Edge telemetry engine batches events into a internal micro-Merkle tree; signs only the Merkle root per dispatch interval, attaching inclusions proofs to payloads. |
 | **Corrupted Serializer Output** | Heterogeneous architectures encoding maps with divergent key orders. | Enforce strict lexicographical key sorting in schema serializers (dCBOR rules) via CI integration tests that assert cross-platform golden binary test vectors. |
 
-========================================
-
 === [Agent 2: Security Auditor] ===
+
 # ZERO-TRUST ARCHITECTURAL AUDIT & VULNERABILITY ASSESSMENT
 
 **Audit Target:** Deterministic Edge-to-Gateway Telemetry Pipeline
