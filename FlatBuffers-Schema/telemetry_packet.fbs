@@ -1,0 +1,30 @@
+```flatbuffers                                             namespace Governance.Telemetry;
+                                                           enum DevicePlatform : uint8 {
+    Unknown = 0,                                               iOS_SE = 1,
+    Android_StrongBox = 2,
+    Linux_TPM = 3
+}
+
+struct DeterministicDigest {
+    hash: [uint8: 32]; // SHA-256 of the prior packet (Merkle Link)
+}
+
+table AIStateSnapshot {
+    model_version_major: uint16;                               model_version_minor: uint16;
+    model_hash: [uint8: 32];
+    input_tensor_digest: [uint8: 32];                          output_tensor_digest: [uint8: 32];
+    inference_duration_ns: uint64;
+    quantization_drift_score: float32; // Deterministic IEEE 754-2008 representation                                  }
+
+table TelemetryPayload {
+    device_id: [uint8: 16];              // UUIDv4 (raw binary)                                                           platform: DevicePlatform;                                  sequence_id: uint64;                 // Strictly monotonic sequence counter
+    timestamp_utc_epoch_ms: uint64;
+    previous_packet_hash: DeterministicDigest;
+    state: AIStateSnapshot;
+}
+                                                           table VerifiableTelemetryEnvelope {                            payload: [uint8] (required);         // Serialized TelemetryPayload bytes                                             signature: [uint8: 64] (required);   // Ed25519 signature or IEEE P1363 ECDSA P-256 (r || s)
+    public_key: [uint8: 32] (required);  // Raw public key coordinates
+}
+
+root_type VerifiableTelemetryEnvelope;
+```
