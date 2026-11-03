@@ -1,23 +1,25 @@
-### Verification & Canonicalization Engine:
-```rust
-use ed25519_dalek::{Signature, VerifyingKey, Signer, SigningKey};
+use ed25519_dalek::{Signature, VerifyingKey};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use std::io::Cursor;
 use thiserror::Error;
 
+pub const MAX_TELEMETRY_PAYLOAD_SIZE: usize = 4096;
+pub const DIGEST_LEN: usize = 32;
+
 #[derive(Error, Debug)]
-pub enum TelemetryError {
-    #[error("Serialization failure")]
+pub enum ZeroTrustError {
+    #[error("CBOR canonical serialization failure")]
     SerializationError,
-    #[error("Cryptographic signature invalid")]
+    #[error("Cryptographic signature mismatch")]
     InvalidSignature,
-    #[error("Packet replay detected or out of sequence")]
-    SequenceViolation,
-    #[error("Invalid parent digest linkage")]
+    #[error("Packet replay detected or out of window range")]
+    ReplayDetected,
+    #[error("Causal hash-chain validation failed")]
     BrokenHashChain,
-    #[error("Malformed payload length")]
-    MalformedPayload,
+    #[error("Payload exceeds maximum authorized MTU")]
+    PayloadTooLarge,
+    #[error("Malformed fixed-buffer allocation")]
+    MalformedBuffer,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
@@ -36,7 +38,8 @@ pub struct TelemetryHeader {
     pub node_id: [u8; 16],
     pub sequence_id: u64,
     pub timestamp_micros: u64,
-    pub parent_digest: [u8; 12],
+    /// Upgraded from 12 bytes to 32 bytes to mitigate SEC-02 collision risks
+    pub parent_digest: [u8; DIGEST_LEN],
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
@@ -51,94 +54,105 @@ pub struct TelemetryPacket {
 pub struct WireEnvelope {
     pub packet: TelemetryPacket,
     pub key_id: [u8; 8],
-    #[serde(with = "serde_bytes")]
-    pub signature: Vec<u8>,
+    /// Enforce fixed array to prevent heap exhaustion allocation bombs (SEC-05)
+    pub signature: [u8; 64],
 }
 
-impl TelemetryPacket {
-    /// Produces a deterministic canonical byte stream using dCBOR
-    pub fn to_canonical_bytes(&self) -> Result<Vec<u8>, TelemetryError> {
-        let mut buffer = Vec::with_capacity(512);
-        ciborium::ser::into_writer(&self, &mut buffer)
-            .map_err(|_| TelemetryError::SerializationError)?;
-        Ok(buffer)
-    }
-
-    /// Computes deterministic hash for ledger continuity
-    pub fn digest(&self) -> Result<[u8; 32], TelemetryError> {
-        let canonical_bytes = self.to_canonical_bytes()?;
-        let mut hasher = Sha256::new();
-        hasher.update(&canonical_bytes);
-        Ok(hasher.finalize().into())
-    }
-
-    pub fn sign_ed25519(
-        self,
-        signing_key: &SigningKey,
-        key_id: [u8; 8],
-    ) -> Result<WireEnvelope, TelemetryError> {
-        let canonical = self.to_canonical_bytes()?;
-        let signature = signing_key.sign(&canonical);
-
-        Ok(WireEnvelope {
-            packet: self,
-            key_id,
-            signature: signature.to_vec(),
-        })
-    }
+pub struct SlidingWindowAntiReplay {
+    base_sequence: u64,
+    window_mask: u128,
 }
 
-pub struct TelemetryValidator {
-    expected_sequence_id: u64,
-    last_parent_digest: [u8; 12],
-}
-
-impl TelemetryValidator {
-    pub fn new(expected_sequence_id: u64, initial_parent: [u8; 12]) -> Self {
+impl SlidingWindowAntiReplay {
+    pub fn new(initial_sequence: u64) -> Self {
         Self {
-            expected_sequence_id,
-            last_parent_digest: initial_parent,
+            base_sequence: initial_sequence,
+            window_mask: 0,
         }
     }
 
-    /// Complete deterministic gate: verifies signature, sequence linearity, and causal hash-chain
-    pub fn validate_and_advance(
+    /// Pure check; does not mutate internal state (SEC-04 Mitigation)
+    pub fn pre_check(&self, sequence: u64) -> Result<(), ZeroTrustError> {
+        if sequence < self.base_sequence {
+            return Err(ZeroTrustError::ReplayDetected);
+        }
+        let diff = sequence - self.base_sequence;
+        if diff < 128 {
+            if (self.window_mask & (1 << diff)) != 0 {
+                return Err(ZeroTrustError::ReplayDetected);
+            }
+        }
+        Ok(())
+    }
+
+    /// Mutates state only after successful cryptographic verification
+    pub fn commit(&mut self, sequence: u64) {
+        let diff = sequence - self.base_sequence;
+        if diff < 128 {
+            self.window_mask |= 1 << diff;
+        } else {
+            let shift = (diff - 127).min(128);
+            self.window_mask = if shift >= 128 { 0 } else { self.window_mask >> shift };
+            self.base_sequence = sequence - 127;
+            self.window_mask |= 1 << 127;
+        }
+    }
+}
+
+pub struct HardenedTelemetryGate {
+    pub replay_guard: SlidingWindowAntiReplay,
+    pub expected_parent_digest: [u8; DIGEST_LEN],
+    pub strict_ordering: bool,
+}
+
+impl HardenedTelemetryGate {
+    pub fn new(start_seq: u64, initial_parent: [u8; DIGEST_LEN], strict_ordering: bool) -> Self {
+        Self {
+            replay_guard: SlidingWindowAntiReplay::new(start_seq),
+            expected_parent_digest: initial_parent,
+            strict_ordering,
+        }
+    }
+
+    pub fn process_envelope(
         &mut self,
         envelope: &WireEnvelope,
         verifying_key: &VerifyingKey,
-    ) -> Result<(), TelemetryError> {
-        // 1. Signature Verification
-        if envelope.signature.len() != 64 {
-            return Err(TelemetryError::InvalidSignature);
+    ) -> Result<(), ZeroTrustError> {
+        // 1. Guard against memory exhaustion
+        if envelope.packet.payload.len() > MAX_TELEMETRY_PAYLOAD_SIZE {
+            return Err(ZeroTrustError::PayloadTooLarge);
         }
 
-        let canonical_bytes = envelope.packet.to_canonical_bytes()?;
-        let sig_bytes: [u8; 64] = envelope.signature.as_slice()
-            .try_into()
-            .map_err(|_| TelemetryError::InvalidSignature)?;
+        let seq = envelope.packet.header.sequence_id;
 
-        let sig = Signature::from_bytes(&sig_bytes);
+        // 2. Anti-Replay Bounds Evaluation (Non-mutating pre-check)
+        self.replay_guard.pre_check(seq)?;
 
+        // 3. Deterministic Canonicalization & Cryptographic Signature Check
+        let mut canonical_bytes = Vec::with_capacity(512);
+        ciborium::ser::into_writer(&envelope.packet, &mut canonical_bytes)
+            .map_err(|_| ZeroTrustError::SerializationError)?;
+
+        let sig = Signature::from_bytes(&envelope.signature);
         verifying_key
             .verify_strict(&canonical_bytes, &sig)
-            .map_err(|_| TelemetryError::InvalidSignature)?;
+            .map_err(|_| ZeroTrustError::InvalidSignature)?;
 
-        // 2. Strict Deterministic Sequence Progression
-        if envelope.packet.header.sequence_id != self.expected_sequence_id {
-            return Err(TelemetryError::SequenceViolation);
+        // 4. Strict vs Out-of-Order Causal Continuity Evaluation
+        if self.strict_ordering {
+            if envelope.packet.header.parent_digest != self.expected_parent_digest {
+                return Err(ZeroTrustError::BrokenHashChain);
+            }
+            // Update hash-chain pointer
+            let mut hasher = Sha256::new();
+            hasher.update(&canonical_bytes);
+            self.expected_parent_digest = hasher.finalize().into();
         }
 
-        // 3. Verify Causal Hash Chain
-        if envelope.packet.header.parent_digest != self.last_parent_digest {
-            return Err(TelemetryError::BrokenHashChain);
-        }
-
-        // Advance verification state
-        let full_digest = envelope.packet.digest()?;
-        self.last_parent_digest.copy_from_slice(&full_digest[..12]);
-        self.expected_sequence_id += 1;
+        // 5. Commit anti-replay state transition strictly post-verification
+        self.replay_guard.commit(seq);
 
         Ok(())
     }
-}
-```
+        }
