@@ -50,6 +50,21 @@ pytest --cov=. --cov-report=term-missing --cov-fail-under=70
 
 # Run the main entry point
 python vane_space_init.py
+
+# Export your Gemini API key
+export GEMINI_API_KEY="your_actual_api_key_here"
+
+# Create/update your audit and orchestrator files inside src/
+# (Paste the code blocks here)
+
+# Test your new tools
+python src/repo_audit.py
+python src/agent_orchestrator.py "Enhance telemetry packet validation with cryptographic verification"
+
+# Commit and push your updates to GitHub
+git add src/repo_audit.py src/agent_orchestrator.py
+git commit -m "feat: add automated repo audit and multi-agent orchestrator using Gemini 3.8 Flash"
+git push origin main
 ```
 ---
 
