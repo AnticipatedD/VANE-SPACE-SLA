@@ -1,8 +1,8 @@
 <p align="center" style="text-align:center;">
-  <img alt="HashiCorp Cloud Platform logo" src="hcp.svg" width="300" />
+  <img alt="mdah-org HashiCorp Cloud Platform logo" src="hcp.svg" width="300" />
 </p>
 
-# mdah-org HashiCorp Cloud Platform (HCP) Terraform Provider
+# HashiCorp Cloud Platform (HCP) Terraform Provider
 
 Available in the [Terraform Registry](https://registry.terraform.io/providers/hashicorp/hcp/latest).
 
