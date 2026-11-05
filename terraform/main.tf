@@ -10,7 +10,7 @@ terraform {
 
 provider "null" {}
 
-module "telemetry" {
+module "root_telemetry" {
   source      = "./modules/telemetry"
   environment = "production"
 }
