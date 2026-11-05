@@ -1,0 +1,83 @@
+name: TestAcc Vault
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  pull_request:
+    # Vault resources still use SDKv2 so we have to target files manually until migrated
+    paths:
+      - 'internal/clients/vault_cluster.go'
+      - 'internal/providersdkv2/resource_vault_*'
+      - 'internal/providersdkv2/data_source_vault_*'
+
+# This prevents more than one run of this workflow from executing at a time.
+# Up to 1 additional run will be queued, with anything futher being cancelled from the queue.
+concurrency:
+  group: testacc-vault
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  acceptance_tests:
+    name: Vault Acceptance Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.HCP_SDK_PIPELINE_TOKEN }}
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          cache: true
+          go-version-file: 'go.mod'
+          cache-dependency-path: go.sum
+        id: go
+      - name: Install Dependencies
+        env:
+          GOPRIVATE: 'github.com/hashicorp/*'
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.5
+          go mod tidy
+      - name: Run 'go mod tidy'
+        run: |
+          make depscheck
+      - name: Get dependencies
+        run: |
+          go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.5
+          go mod download
+      - name: Go Build
+        run: |
+          go build -v .
+      - name: Run TestAcc
+        env:
+          TF_ACC: 1
+
+          HCP_API_HOST: ${{ secrets.HCP_API_HOST_INT }}
+          HCP_AUTH_URL: ${{ secrets.HCP_AUTH_URL_INT }}
+
+          HCP_ORGANIZATION_ID: ${{ secrets.VAULT_HCP_ORGANIZATION_ID }}
+          HCP_PROJECT_ID: ${{ secrets.VAULT_HCP_PROJECT_ID }}
+          HCP_CLIENT_ID: ${{ secrets.VAULT_HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.VAULT_HCP_CLIENT_SECRET }}
+        run: |
+          go test ./internal/providersdkv2 \
+            -v \
+            -short \
+            -test.v \
+            -parallel=10 \
+            -timeout=360m \
+            -run=TestAcc_Vault.* \
+            -coverprofile=testacc-vault.out
+
+          go tool cover \
+            -html=testacc-vault.out \
+            -o testacc-vault.html
+      - name: Upload TestAcc Coverage Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: coverage-vault
+          path: testacc-vault.html
