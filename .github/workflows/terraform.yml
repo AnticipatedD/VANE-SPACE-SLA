@@ -1,14 +1,26 @@
-name: Terraform Validation
+name: Terraform CI
 
 on:
-  pull_request:
-    branches: [ main, master, production ]
   push:
-    branches: [ main, master, production ]
+    branches: [ "main", "master" ]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform.yml'
+  pull_request:
+    branches: [ "main", "master" ]
+    paths:
+      - 'terraform/**'
+      - '.github/workflows/terraform.yml'
 
 jobs:
-  terraform-ci:
+  terraform-validate:
+    name: Validate and Scan IaC
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./terraform
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -16,23 +28,20 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.5.0
+          terraform_version: 1.5.7
 
       - name: Verify Terraform Formatting
         run: terraform fmt -check -recursive
-        working-directory: ./terraform
 
       - name: Initialize Terraform
         run: terraform init -backend=false
-        working-directory: ./terraform
 
       - name: Validate Terraform Configuration
         run: terraform validate
-        working-directory: ./terraform
 
-      - name: Run tfsec Security Scanner
-        uses: aquasecurity/tfsec-action@v1.0.3
+      - name: Run Checkov Security Scan
+        uses: bridgecrewio/checkov-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: terraform/
+          framework: terraform
           soft_fail: false
-          working_directory: terraform
