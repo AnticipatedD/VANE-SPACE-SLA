@@ -113,7 +113,23 @@ VANE-SPACE-SLA/
 
 ---
 
-## Development 
+# Directory Structure & Files for terraform infra layout:
+
+terraform/
+├── modules/
+│   └── telemetry/
+│       ├── main.tf
+│       ├── variables.tf
+│       └── outputs.tf
+└── environments/
+    └── production/
+        ├── main.tf
+        ├── variables.tf
+        └── outputs.tf
+
+---
+
+## Development
 - All tests must pass locally before opening a PR.
 - Coverage gate is enforced in CI (--cov-fail-under=70).
 - Prefer small, focused commits that include both the change and its tests.
