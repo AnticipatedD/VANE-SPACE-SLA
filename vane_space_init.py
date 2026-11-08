@@ -8,18 +8,20 @@ import os
 import time
 import random
 import json
-import logging
+import structlog
 from typing import Dict, Any
 from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s | %(levelname)-8s | %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
+structlog.configure(
+    processors=[
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.add_log_level,
+        structlog.processors.JSONRenderer()
+    ]
 )
-logger = logging.getLogger("vane_space")
+logger = structlog.get_logger("vane_space")
 
 
 def validate_env():
@@ -71,11 +73,11 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = N
     if is_source_verified and gate_1_leak < 0.02:
         status_flag = "VERIFIED_TRUTH_BOUND"
         confidence_metric = vector_drift_score * 100
-        logger.info("Telemetry check passed – VERIFIED_TRUTH_BOUND")
+        logger.info("Telemetry check passed – VERIFIED_TRUTH_BOUND", status=status_flag)
     else:
         status_flag = "STOCHASTIC_DRIFT_INTERCEPTED"
         confidence_metric = (vector_drift_score * 0.8) * 100
-        logger.warning("Telemetry check flagged – STOCHASTIC_DRIFT_INTERCEPTED")
+        logger.warning("Telemetry check flagged – STOCHASTIC_DRIFT_INTERCEPTED", status=status_flag)
 
     measured_latency = round(total_latency_ms, 2)
     if measured_latency >= 45.00:
@@ -111,12 +113,12 @@ def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = N
 def main() -> None:
     validate_env()
     config = get_config()
-    logger.info(f"Initializing: {config['framework']}")
-    logger.info(f"EU Expert ID: {config['eu_expert_id']}")
+    logger.info("Initializing framework", framework=config["framework"])
+    logger.info("EU Expert ID configured", eu_expert_id=config["eu_expert_id"])
 
     faulty = "average = (num1 + num2 + num3 / 3"
     syntax_audit = verify_granite_syntax_gate(faulty)
-    logger.info(f"Syntax gate: {syntax_audit['validation_gate']}")
+    logger.info("Syntax gate evaluated", validation_gate=syntax_audit["validation_gate"])
 
     for i in range(1, 4):
         payload = {
@@ -124,7 +126,7 @@ def main() -> None:
             "solar_current_amps": round(random.uniform(41.5, 45.2), 2)
         }
         report = run_multi_gate_telemetry_check(payload)
-        logger.info(f"Transaction {i:03d} → {report['operational_status']}")
+        logger.info("Transaction processed", transaction=i, operational_status=report["operational_status"])
 
 
 if __name__ == "__main__":
