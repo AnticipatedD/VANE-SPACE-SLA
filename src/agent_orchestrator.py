@@ -39,9 +39,10 @@ def run_agent_phase(
     return "".join(output_parts)
 
 
-def run_agent_orchestrator(task_description: str, model: str = "gemini-2.5-flash") -> None:
+def run_agent_orchestrator(task_description: str, model: str = "gemini-2.5-flash", client: genai.Client | None = None) -> None:
     """Orchestrates multi-phase architecture and security analysis."""
-    client = genai.Client()
+    if client is None:
+        client = genai.Client()
 
     # Phase 1: Code Architect
     architect_system = (
@@ -65,13 +66,21 @@ def run_agent_orchestrator(task_description: str, model: str = "gemini-2.5-flash
         client=client,
         model=model,
         system_instruction=security_system,
-        user_input=f"Architectural Plan:\n{architect_plan}",                                                                  phase_header="=== [Agent 2: Security Auditor] ===",
+        user_input=f"Architectural Plan:\n{architect_plan}",
+        phase_header="=== [Agent 2: Security Auditor] ===",
     )
 
 
-def main() -> int:                                             """CLI execution entrypoint."""
-    parser = argparse.ArgumentParser(description="Multi-agent architectural orchestration via Gemini.")                   parser.add_argument(                                           "task",                                                    nargs="?",
-        default="Deploy a real-time zero-trust validation loop for ARM64 node telemetry.",                                    help="Task description for the agent pipeline",        )                                                          parser.add_argument(
+def main() -> int:
+    """CLI execution entrypoint."""
+    parser = argparse.ArgumentParser(description="Multi-agent architectural orchestration via Gemini.")
+    parser.add_argument(
+        "task",
+        nargs="?",
+        default="Deploy a real-time zero-trust validation loop for ARM64 node telemetry.",
+        help="Task description for the agent pipeline",
+    )
+    parser.add_argument(
         "--model",
         default="gemini-2.5-flash",
         help="Gemini model identifier (default: gemini-2.5-flash)",
@@ -80,7 +89,8 @@ def main() -> int:                                             """CLI execution 
 
     try:
         run_agent_orchestrator(args.task, model=args.model)
-        return 0                                               except APIError as exc:
+        return 0
+    except APIError as exc:
         print(f"API Error during orchestration: {exc.message}", file=sys.stderr)
         return 1
     except Exception as exc:
