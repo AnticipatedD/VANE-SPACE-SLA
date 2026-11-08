@@ -48,7 +48,7 @@ def build_audit_prompt(file_contents: dict[Path, str]) -> str:
     return "\n".join(sections)
 
 
-def audit_repository(target_path: Path, model: str = "gemini-2.5-flash") -> None:
+def audit_repository(target_path: Path, model: str = "gemini-2.5-flash", client: genai.Client | None = None) -> None:
     """Executes the repository health check with streaming output."""
     if not target_path.exists():
         raise FileNotFoundError(f"Target path '{target_path}' does not exist.")
@@ -59,7 +59,8 @@ def audit_repository(target_path: Path, model: str = "gemini-2.5-flash") -> None
         return
 
     prompt = build_audit_prompt(files)
-    client = genai.Client()
+    if client is None:
+        client = genai.Client()
 
     print(f"Auditing {len(files)} files with model '{model}'...\n")
     print("=== Automated Repository Health Report ===\n")
