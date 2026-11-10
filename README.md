@@ -167,3 +167,10 @@ MIT License – see [LICENSE](license.md) file.
 
 ---
 © 2026 MD ABUL HOSSAIN. All Rights Reserved.
+
+
+## Azure infrastructure reference deployment
+
+VANE-SPACE-SLA includes an optional Azure Terraform deployment under `terraform/environments/production`. It provisions a resource group, encrypted private telemetry archive storage, Log Analytics, and workspace-based Application Insights. It does not deploy the application runtime or create cloud resources during CI.
+
+See [Azure deployment guide](docs/azure-deployment.md) for prerequisites, plan review, deployment commands, security controls, and remote-state guidance. No AWS dependency is required.
