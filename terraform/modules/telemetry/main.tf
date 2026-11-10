@@ -25,8 +25,8 @@ resource "azurerm_storage_account" "telemetry" {
   https_traffic_only_enabled          = true
   allow_nested_items_to_be_public     = false
   shared_access_key_enabled           = false
-  infrastructure_encryption_enabled   = true
-  public_network_access_enabled        = true
+  infrastructure_encryption_enabled  = true
+  public_network_access_enabled      = true
 
   network_rules {
     default_action = "Deny"
