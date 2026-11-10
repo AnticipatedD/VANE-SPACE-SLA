@@ -32,6 +32,11 @@ run "creates_private_encrypted_telemetry_storage" {
   }
 
   assert {
+    condition     = azurerm_storage_account.telemetry.network_rules[0].default_action == "Deny"
+    error_message = "Telemetry storage must deny untrusted network traffic by default."
+  }
+
+  assert {
     condition     = azurerm_storage_container.telemetry.container_access_type == "private"
     error_message = "Telemetry archive container must remain private."
   }
