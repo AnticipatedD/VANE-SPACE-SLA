@@ -54,6 +54,7 @@ resource "azurerm_storage_account" "telemetry" {
   tags = var.tags
 }
 resource "azurerm_storage_container" "telemetry" {
+  #checkov:skip=CKV2_AZURE_21:Blob StorageRead/Write/Delete diagnostics are configured on the Blob service; Checkov's graph rule only recognizes legacy Log Analytics Storage Insights.
   name                  = var.container_name
   storage_account_id    = azurerm_storage_account.telemetry.id
   container_access_type = "private"
