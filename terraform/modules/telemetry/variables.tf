@@ -62,10 +62,14 @@ variable "log_retention_days" {
   }
 }
 
-variable "key_vault_ip_rules" {
-  description = "Optional public IPv4 CIDRs allowed to reach the Key Vault data plane during deployment."
-  type        = list(string)
-  default     = []
+variable "key_vault_id" {
+  description = "Azure Resource Manager ID of an existing private Key Vault with RBAC enabled."
+  type        = string
+}
+
+variable "key_vault_key_id" {
+  description = "Versionless HTTPS key ID of an existing Premium HSM-backed Key Vault key with an expiry date."
+  type        = string
 }
 
 variable "tags" {
