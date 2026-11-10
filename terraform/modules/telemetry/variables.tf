@@ -33,9 +33,9 @@ variable "container_name" {
 }
 
 variable "storage_replication_type" {
-  description = "Azure Storage replication tier."
+  description = "Azure Storage replication tier; geo-redundant by default."
   type        = string
-  default     = "LRS"
+  default     = "GRS"
   validation {
     condition     = contains(["LRS", "ZRS", "GRS", "RAGRS", "GZRS", "RAGZRS"], var.storage_replication_type)
     error_message = "Choose a supported Azure Storage replication type."
@@ -60,6 +60,12 @@ variable "log_retention_days" {
     condition     = var.log_retention_days >= 30 && var.log_retention_days <= 730
     error_message = "log_retention_days must be between 30 and 730."
   }
+}
+
+variable "key_vault_ip_rules" {
+  description = "Optional public IPv4 CIDRs allowed to reach the Key Vault data plane during deployment."
+  type        = list(string)
+  default     = []
 }
 
 variable "tags" {
