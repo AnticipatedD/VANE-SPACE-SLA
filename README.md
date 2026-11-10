@@ -174,3 +174,14 @@ MIT License – see [LICENSE](license.md) file.
 VANE-SPACE-SLA includes an optional Azure Terraform deployment under `terraform/environments/production`. It provisions a resource group, encrypted private telemetry archive storage, Log Analytics, and workspace-based Application Insights. It does not deploy the application runtime or create cloud resources during CI.
 
 See [Azure deployment guide](docs/azure-deployment.md) for prerequisites, plan review, deployment commands, security controls, and remote-state guidance. No AWS dependency is required.
+
+
+### Run the existing test suite in Docker
+
+The Compose service is a local test runner, not an HTTP application server. With Docker Engine and the Compose plugin installed, run:
+
+```bash
+docker compose run --build --rm test
+```
+
+Optional local settings can be placed in an untracked `.env` file; no demo signing key is hardcoded into the Compose configuration.
