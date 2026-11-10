@@ -1,5 +1,6 @@
 terraform {
   required_version = ">= 1.7.0"
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -33,24 +34,30 @@ resource "azurerm_storage_account" "telemetry" {
   shared_access_key_enabled         = false
   infrastructure_encryption_enabled = true
   public_network_access_enabled     = false
+
   identity {
     type         = "UserAssigned"
     identity_ids = [azurerm_user_assigned_identity.storage.id]
   }
+
   network_rules {
     default_action = "Deny"
     bypass         = ["AzureServices"]
     ip_rules       = []
   }
+
   blob_properties {
     versioning_enabled = true
+
     delete_retention_policy {
       days = var.blob_retention_days
     }
+
     container_delete_retention_policy {
       days = var.blob_retention_days
     }
   }
+
   queue_properties {
     logging {
       delete                = true
@@ -60,6 +67,7 @@ resource "azurerm_storage_account" "telemetry" {
       retention_policy_days = var.blob_retention_days
     }
   }
+
   tags = var.tags
 }
 
