@@ -1,5 +1,3 @@
-data "azurerm_client_config" "current" {}
-
 resource "azurerm_user_assigned_identity" "storage" {
   name                = "${var.name_prefix}-storage-cmk"
   location            = azurerm_resource_group.telemetry.location
@@ -7,36 +5,8 @@ resource "azurerm_user_assigned_identity" "storage" {
   tags                = var.tags
 }
 
-resource "azurerm_key_vault" "telemetry" {
-  name                          = substr("${var.storage_account_name}kv", 0, 24)
-  location                      = azurerm_resource_group.telemetry.location
-  resource_group_name           = azurerm_resource_group.telemetry.name
-  tenant_id                     = data.azurerm_client_config.current.tenant_id
-  sku_name                      = "standard"
-  rbac_authorization_enabled    = true
-  purge_protection_enabled      = true
-  soft_delete_retention_days    = 30
-  public_network_access_enabled = true
-
-  network_acls {
-    bypass         = "AzureServices"
-    default_action = "Deny"
-    ip_rules       = var.key_vault_ip_rules
-  }
-
-  tags = var.tags
-}
-
-resource "azurerm_key_vault_key" "telemetry" {
-  name         = "telemetry-cmk"
-  key_vault_id = azurerm_key_vault.telemetry.id
-  key_type     = "RSA"
-  key_size     = 2048
-  key_opts     = ["decrypt", "encrypt", "unwrapKey", "wrapKey"]
-}
-
 resource "azurerm_role_assignment" "storage_key_access" {
-  scope                = azurerm_key_vault.telemetry.id
+  scope                = var.key_vault_id
   role_definition_name = "Key Vault Crypto Service Encryption User"
   principal_id         = azurerm_user_assigned_identity.storage.principal_id
   principal_type       = "ServicePrincipal"
@@ -44,7 +14,7 @@ resource "azurerm_role_assignment" "storage_key_access" {
 
 resource "azurerm_storage_account_customer_managed_key" "telemetry" {
   storage_account_id        = azurerm_storage_account.telemetry.id
-  key_vault_key_id          = azurerm_key_vault_key.telemetry.id
+  key_vault_key_id          = var.key_vault_key_id
   user_assigned_identity_id = azurerm_user_assigned_identity.storage.id
 
   depends_on = [azurerm_role_assignment.storage_key_access]
@@ -65,6 +35,18 @@ resource "azurerm_subnet" "private_endpoints" {
   address_prefixes     = ["10.42.1.0/24"]
 
   private_endpoint_network_policies = "Disabled"
+}
+
+resource "azurerm_network_security_group" "private_endpoints" {
+  name                = "${var.name_prefix}-private-endpoints-nsg"
+  location            = azurerm_resource_group.telemetry.location
+  resource_group_name = azurerm_resource_group.telemetry.name
+  tags                = var.tags
+}
+
+resource "azurerm_subnet_network_security_group_association" "private_endpoints" {
+  subnet_id                 = azurerm_subnet.private_endpoints.id
+  network_security_group_id = azurerm_network_security_group.private_endpoints.id
 }
 
 resource "azurerm_private_dns_zone" "blob" {
