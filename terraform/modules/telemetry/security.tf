@@ -1,4 +1,4 @@
-resource "azurerm_user_assigned_identity" "storage" {
+resource "azurerm_user_assigned_identity" "storage_cmk" {
   name                = "${var.name_prefix}-storage-cmk"
   location            = azurerm_resource_group.telemetry.location
   resource_group_name = azurerm_resource_group.telemetry.name
@@ -8,14 +8,14 @@ resource "azurerm_user_assigned_identity" "storage" {
 resource "azurerm_role_assignment" "storage_key_access" {
   scope                = var.key_vault_id
   role_definition_name = "Key Vault Crypto Service Encryption User"
-  principal_id         = azurerm_user_assigned_identity.storage.principal_id
+  principal_id         = azurerm_user_assigned_identity.storage_cmk.principal_id
   principal_type       = "ServicePrincipal"
 }
 
 resource "azurerm_storage_account_customer_managed_key" "telemetry" {
   storage_account_id        = azurerm_storage_account.telemetry.id
   key_vault_key_id          = var.key_vault_key_id
-  user_assigned_identity_id = azurerm_user_assigned_identity.storage.id
+  user_assigned_identity_id = azurerm_user_assigned_identity.storage_cmk.id
 
   depends_on = [azurerm_role_assignment.storage_key_access]
 }
