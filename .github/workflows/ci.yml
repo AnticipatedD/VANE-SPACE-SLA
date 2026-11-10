@@ -86,5 +86,7 @@ jobs:
           fi
 
       - name: Execute Python Test Matrix Enforcing Coverage Threshold Limits
+        env:
+          PYTHONPATH: .
         run: |
-          pytest --cov=. --cov-fail-under=80 -v tests/
+          python -m pytest --cov=. --cov-fail-under=80 -v tests/
