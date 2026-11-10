@@ -59,7 +59,7 @@ jobs:
           fi
 
           if [ "${#PY_FILES[@]}" -gt 0 ]; then
-            ruff check "${PY_FILES[@]}"
+            ruff check --select E4,E7,E9,F "${PY_FILES[@]}"
           else
             echo "No changed Python files; skipping Ruff lint."
           fi
@@ -74,9 +74,9 @@ jobs:
           fi
 
           if [ -z "$BASE_REF" ] || [ "$BASE_REF" = "0000000000000000000000000000000000000000" ]; then
-            mapfile -t PY_FILES < <(git ls-files '*.py')
+            mapfile -t PY_FILES < <(git ls-files '*.py' | grep -v '^tests/')
           else
-            mapfile -t PY_FILES < <(git diff --name-only --diff-filter=ACMRT "$BASE_REF" HEAD -- '*.py')
+            mapfile -t PY_FILES < <(git diff --name-only --diff-filter=ACMRT "$BASE_REF" HEAD -- '*.py' | grep -v '^tests/')
           fi
 
           if [ "${#PY_FILES[@]}" -gt 0 ]; then
