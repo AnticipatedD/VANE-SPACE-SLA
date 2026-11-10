@@ -5,9 +5,8 @@ Author: MD ABUL HOSSAIN
 """
 
 import pytest
-import json
 import os
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from vane_space_init import (
     validate_env,
     get_config,
