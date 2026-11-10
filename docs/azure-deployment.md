@@ -5,7 +5,7 @@ VANE-SPACE-SLA keeps its Python/Rust/JavaScript application core separate from i
 ## What Terraform provisions
 
 - A dedicated Azure resource group.
-- A Standard Azure Storage account for telemetry archives, with HTTPS-only transport, TLS 1.2 minimum, infrastructure encryption, blob versioning, soft-delete retention, no anonymous container access, and shared-key access disabled.
+- A Standard Azure Storage account for telemetry archives, with HTTPS-only transport, TLS 1.2 minimum, infrastructure encryption, blob versioning, soft-delete retention, no anonymous container access, shared-key access disabled, and a deny-by-default storage firewall with the Azure trusted-services bypass.
 - A private blob container for telemetry archives.
 - A Log Analytics workspace.
 - Workspace-based Application Insights for application telemetry.
