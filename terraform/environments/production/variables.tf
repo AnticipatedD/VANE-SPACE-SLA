@@ -23,7 +23,7 @@ variable "storage_account_name" {
 variable "storage_replication_type" {
   description = "Storage replication tier."
   type        = string
-  default     = "LRS"
+  default     = "GRS"
 }
 
 variable "blob_retention_days" {
