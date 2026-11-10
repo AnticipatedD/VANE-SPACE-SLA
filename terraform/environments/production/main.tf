@@ -23,6 +23,7 @@ module "telemetry" {
   storage_replication_type = var.storage_replication_type
   blob_retention_days      = var.blob_retention_days
   log_retention_days       = var.log_retention_days
-  key_vault_ip_rules       = var.key_vault_ip_rules
+  key_vault_id             = var.key_vault_id
+  key_vault_key_id         = var.key_vault_key_id
   tags                     = var.tags
 }
