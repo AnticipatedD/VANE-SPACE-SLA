@@ -1,47 +1,59 @@
-name: Terraform CI
+name: Terraform Azure Infrastructure
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: ["main", "master"]
     paths:
-      - 'terraform/**'
-      - '.github/workflows/terraform.yml'
+      - "terraform/**"
+      - ".github/workflows/terraform.yml"
   pull_request:
-    branches: [ "main", "master" ]
+    branches: ["main", "master"]
     paths:
-      - 'terraform/**'
-      - '.github/workflows/terraform.yml'
+      - "terraform/**"
+      - ".github/workflows/terraform.yml"
+
+permissions:
+  contents: read
 
 jobs:
-  terraform-validate:
-    name: Validate and Scan IaC
+  terraform:
+    name: Format, validate, test and scan Azure IaC
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./terraform
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Terraform
+      - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.5.7
+          terraform_version: 1.7.5
 
-      - name: Verify Terraform Formatting
-        run: terraform fmt -check -recursive
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive terraform
 
-      - name: Initialize Terraform
-        run: terraform init -backend=false
+      - name: Initialize production configuration without remote state
+        run: terraform -chdir=terraform/environments/production init -backend=false -input=false
 
-      - name: Validate Terraform Configuration
-        run: terraform validate
+      - name: Validate production configuration
+        run: terraform -chdir=terraform/environments/production validate
 
-      - name: Run Checkov Security Scan
-        uses: bridgecrewio/checkov-action@master
+      - name: Initialize telemetry module test configuration
+        run: terraform -chdir=terraform/modules/telemetry init -backend=false -input=false
+
+      - name: Run mocked Terraform module tests
+        run: terraform -chdir=terraform/modules/telemetry test
+
+      - name: Scan production Terraform configuration with Checkov
+        uses: bridgecrewio/checkov-action@v12
         with:
-          directory: terraform/
+          directory: terraform/environments/production
+          framework: terraform
+          soft_fail: false
+
+      - name: Scan telemetry module with Checkov
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: terraform/modules/telemetry
           framework: terraform
           soft_fail: false

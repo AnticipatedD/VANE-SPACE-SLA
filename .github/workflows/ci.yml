@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Code Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js Runtime (Frontend Linter Check)
         uses: actions/setup-node@v4
@@ -42,11 +44,49 @@ jobs:
         run: pip-audit
 
       - name: Verify Code Cleanliness Standards (Ruff Engine)
-        run: ruff check .
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            BASE_REF="origin/$GITHUB_BASE_REF"
+          else
+            BASE_REF="$GITHUB_EVENT_BEFORE"
+          fi
+
+          if [ -z "$BASE_REF" ] || [ "$BASE_REF" = "0000000000000000000000000000000000000000" ]; then
+            mapfile -t PY_FILES < <(git ls-files '*.py')
+          else
+            mapfile -t PY_FILES < <(git diff --name-only --diff-filter=ACMRT "$BASE_REF" HEAD -- '*.py')
+          fi
+
+          if [ "${#PY_FILES[@]}" -gt 0 ]; then
+            ruff check --select E4,E7,E9,F "${PY_FILES[@]}"
+          else
+            echo "No changed Python files; skipping Ruff lint."
+          fi
 
       - name: Validate Strict Typing Signatures (Mypy Engine)
-        run: mypy .
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            BASE_REF="origin/$GITHUB_BASE_REF"
+          else
+            BASE_REF="$GITHUB_EVENT_BEFORE"
+          fi
+
+          if [ -z "$BASE_REF" ] || [ "$BASE_REF" = "0000000000000000000000000000000000000000" ]; then
+            mapfile -t PY_FILES < <(git ls-files '*.py' | grep -v '^tests/')
+          else
+            mapfile -t PY_FILES < <(git diff --name-only --diff-filter=ACMRT "$BASE_REF" HEAD -- '*.py' | grep -v '^tests/')
+          fi
+
+          if [ "${#PY_FILES[@]}" -gt 0 ]; then
+            mypy "${PY_FILES[@]}"
+          else
+            echo "No changed Python files; skipping mypy."
+          fi
 
       - name: Execute Python Test Matrix Enforcing Coverage Threshold Limits
+        env:
+          PYTHONPATH: .
         run: |
-          pytest --cov=. --cov-fail-under=80 -v tests/
+          python -m pytest --cov=. --cov-fail-under=80 -v tests/

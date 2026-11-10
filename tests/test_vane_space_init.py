@@ -5,9 +5,8 @@ Author: MD ABUL HOSSAIN
 """
 
 import pytest
-import json
 import os
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from vane_space_init import (
     validate_env,
     get_config,
@@ -253,18 +252,32 @@ class TestMainFunction:
         """Test main function executes without errors."""
         mock_config.return_value = {
             "framework": "Vane-Space-SLA (V1.0)",
-            "eu_expert_id": "TEST-EU-ID"
+            "eu_expert_id": "TEST-EU-ID",
+            "saas_account_id": "test-account",
+            "reseller_lic": "test-reseller",
+            "service_bpa": "test-bpa",
+            "customer_index": "test-customer",
+            "eu_cellar_id": "test-cellar"
         }
-        
-        # Should not raise exception
-        main()
+
+        with patch.dict(os.environ, {
+            "IBM_SAAS_ACCOUNT_ID": "test-account",
+            "EU_EXPERT_ID": "TEST-EU-ID",
+            "VANE_ACCOUNT_ID": "test-vane-id"
+        }):
+            main()
 
     @patch('vane_space_init.logger')
     def test_main_logs_initialization(self, mock_logger):
         """Test main logs initialization."""
-        main()
+        with patch.dict(os.environ, {
+            "IBM_SAAS_ACCOUNT_ID": "test-account",
+            "EU_EXPERT_ID": "TEST-EU-ID",
+            "VANE_ACCOUNT_ID": "test-vane-id"
+        }):
+            main()
         # Verify logging occurred
-        assert mock_logger.info.called or True  # Logger might be configured
+        assert mock_logger.info.called
 
 
 if __name__ == "__main__":
