@@ -3,42 +3,49 @@
 VANE-SPACE-SLA - Multi-Gate Telemetry Validation Engine (Enhanced)
 Deterministic Zero-Trust Anomaly Detection System
 Author: MD ABUL HOSSAIN
-""" 
+"""
+
 import math
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 import structlog
 
 logger = structlog.get_logger()
 
+
 class AnomalyDetector:
-    def __init__(self, window_size: int = 10):
+    def __init__(self, window_size: int = 10) -> None:
         self.window_size = window_size
         self.history: List[float] = []
 
     def add_value(self, value: float) -> bool:
-        """Analyzes streaming data arrays using actual standard deviation formulas."""
+        """Compare each sample with prior history so anomalies cannot mask themselves."""
         if not math.isfinite(value):
             raise ValueError("Telemetry metric input must be a valid real number.")
+
+        if len(self.history) < 3:
+            self.history.append(value)
+            if len(self.history) > self.window_size:
+                self.history.pop(0)
+            return False
+
+        mean = sum(self.history) / len(self.history)
+        variance = sum((sample - mean) ** 2 for sample in self.history) / len(self.history)
+        std_dev = math.sqrt(variance)
+
+        # Keep a 1% relative noise floor for stable/near-constant sensor baselines.
+        threshold = max(3 * std_dev, abs(mean) * 0.01, 1e-9)
+        is_anomalous = abs(value - mean) > threshold
 
         self.history.append(value)
         if len(self.history) > self.window_size:
             self.history.pop(0)
 
-        if len(self.history) < 3:
-            return False # Insufficient footprint sample sizes
+        return is_anomalous
 
-        mean = sum(self.history) / len(self.history)
-        variance = sum((x - mean) ** 2 for x in self.history) / len(self.history)
-        std_dev = math.sqrt(variance)
-
-        if std_dev == 0:
-            return False
-
-        # Flag metric structures drifting further than 3 standard deviations
-        return abs(value - mean) > (3 * std_dev)
 
 class MultiGateTelemetryValidator:
-    def __init__(self, tolerance: float = 0.95):
+    def __init__(self, tolerance: float = 0.95) -> None:
         self.tolerance = tolerance
         self.detector = AnomalyDetector()
 
@@ -53,7 +60,7 @@ class MultiGateTelemetryValidator:
 
         is_anomalous = self.detector.add_value(metric)
         if is_anomalous:
-            logger.error("Structural anomaly anomaly registered inside telemetry frame", value=metric)
+            logger.error("Structural anomaly registered inside telemetry frame", value=metric)
             return False
 
         return True
