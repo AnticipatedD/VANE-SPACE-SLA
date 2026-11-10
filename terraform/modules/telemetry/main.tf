@@ -7,11 +7,20 @@ terraform {
     }
   }
 }
+
 resource "azurerm_resource_group" "telemetry" {
   name     = var.resource_group_name
   location = var.location
   tags     = var.tags
 }
+
+resource "azurerm_user_assigned_identity" "storage" {
+  name                = "${var.name_prefix}-storage-identity"
+  location            = azurerm_resource_group.telemetry.location
+  resource_group_name = azurerm_resource_group.telemetry.name
+  tags                = var.tags
+}
+
 resource "azurerm_storage_account" "telemetry" {
   name                              = var.storage_account_name
   resource_group_name               = azurerm_resource_group.telemetry.name
@@ -53,12 +62,13 @@ resource "azurerm_storage_account" "telemetry" {
   }
   tags = var.tags
 }
+
 resource "azurerm_storage_container" "telemetry" {
-  #checkov:skip=CKV2_AZURE_21:Blob StorageRead/Write/Delete diagnostics are configured on the Blob service; Checkov's graph rule only recognizes legacy Log Analytics Storage Insights.
   name                  = var.container_name
   storage_account_id    = azurerm_storage_account.telemetry.id
   container_access_type = "private"
 }
+
 resource "azurerm_log_analytics_workspace" "telemetry" {
   name                = "${var.name_prefix}-logs"
   location            = azurerm_resource_group.telemetry.location
@@ -67,20 +77,25 @@ resource "azurerm_log_analytics_workspace" "telemetry" {
   retention_in_days   = var.log_retention_days
   tags                = var.tags
 }
+
 resource "azurerm_monitor_diagnostic_setting" "blob" {
   name                       = "${var.name_prefix}-blob-audit"
   target_resource_id         = "${azurerm_storage_account.telemetry.id}/blobServices/default"
   log_analytics_workspace_id = azurerm_log_analytics_workspace.telemetry.id
+
   enabled_log {
     category = "StorageRead"
   }
+
   enabled_log {
     category = "StorageWrite"
   }
+
   enabled_log {
     category = "StorageDelete"
   }
 }
+
 resource "azurerm_application_insights" "telemetry" {
   name                = "${var.name_prefix}-appinsights"
   location            = azurerm_resource_group.telemetry.location

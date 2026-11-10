@@ -1,29 +1,27 @@
 terraform {
-  required_version = ">= 1.7.0"
-
+  required_version = ">= 1.5.0"
   required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 4.0"
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.2.1"
     }
   }
 }
 
-provider "azurerm" {
-  features {}
-}
+provider "null" {}
 
-module "telemetry" {
+module "telemetry_prod" {
   source = "../../modules/telemetry"
 
-  resource_group_name      = var.resource_group_name
-  location                 = var.location
-  name_prefix              = var.name_prefix
-  storage_account_name     = var.storage_account_name
-  storage_replication_type = var.storage_replication_type
-  blob_retention_days      = var.blob_retention_days
-  log_retention_days       = var.log_retention_days
-  key_vault_id             = var.key_vault_id
-  key_vault_key_id         = var.key_vault_key_id
-  tags                     = var.tags
+  resource_group_name = "rg-vane-space-sla-prod"
+  location            = "eastus"
+  name_prefix         = "vaneprod"
+  storage_account_name = "vaneprodtelemetry"
+  key_vault_id        = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-placeholder/providers/Microsoft.KeyVault/vaults/placeholder"
+  key_vault_key_id    = "https://placeholder.vault.azure.net/keys/telemetry/00000000000000000000000000000000"
+}
+
+output "production_telemetry_status" {
+  value       = module.telemetry_prod.validation_id
+  description = "Production telemetry deployment verification identifier"
 }

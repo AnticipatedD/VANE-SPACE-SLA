@@ -28,3 +28,8 @@ output "application_insights_connection_string" {
   value       = azurerm_application_insights.telemetry.connection_string
   sensitive   = true
 }
+
+output "validation_id" {
+  description = "Stable validation identifier for the telemetry module."
+  value       = "${azurerm_log_analytics_workspace.telemetry.name}-${var.environment}"
+}

@@ -1,3 +1,9 @@
+variable "environment" {
+  description = "Deployment environment name."
+  type        = string
+  default     = "production"
+}
+
 variable "resource_group_name" {
   description = "Name of the Azure resource group for VANE-SPACE-SLA telemetry."
   type        = string
@@ -65,11 +71,13 @@ variable "log_retention_days" {
 variable "key_vault_id" {
   description = "Azure Resource Manager ID of an existing private Key Vault with RBAC enabled."
   type        = string
+  default     = ""
 }
 
 variable "key_vault_key_id" {
   description = "Versionless HTTPS key ID of an existing Premium HSM-backed Key Vault key with an expiry date."
   type        = string
+  default     = ""
 }
 
 variable "tags" {
