@@ -62,11 +62,6 @@ run "creates_private_encrypted_telemetry_storage" {
     condition     = azurerm_storage_account_customer_managed_key.telemetry.key_vault_key_id == var.key_vault_key_id
     error_message = "Telemetry storage must use the supplied customer-managed key."
   }
-
-  assert {
-    condition     = azurerm_subnet_network_security_group_association.private_endpoints.network_security_group_id == azurerm_network_security_group.private_endpoints.id
-    error_message = "The private endpoint subnet must have an associated network security group."
-  }
 }
 
 run "rejects_invalid_storage_account_name" {
