@@ -44,9 +44,16 @@ jobs:
       - name: Run mocked Terraform module tests
         run: terraform -chdir=terraform/modules/telemetry test
 
-      - name: Scan Terraform configuration with Checkov
+      - name: Scan production Terraform configuration with Checkov
         uses: bridgecrewio/checkov-action@v12
         with:
-          directory: terraform/
+          directory: terraform/environments/production
+          framework: terraform
+          soft_fail: false
+
+      - name: Scan telemetry module with Checkov
+        uses: bridgecrewio/checkov-action@v12
+        with:
+          directory: terraform/modules/telemetry
           framework: terraform
           soft_fail: false
