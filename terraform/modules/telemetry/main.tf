@@ -26,7 +26,11 @@ resource "azurerm_storage_account" "telemetry" {
   allow_nested_items_to_be_public   = false
   shared_access_key_enabled         = false
   infrastructure_encryption_enabled = true
-  public_network_access_enabled     = true
+  public_network_access_enabled     = false
+
+  identity {
+    type = "SystemAssigned"
+  }
 
   network_rules {
     default_action = "Deny"
@@ -46,6 +50,16 @@ resource "azurerm_storage_account" "telemetry" {
     }
   }
 
+  queue_properties {
+    logging {
+      delete                = true
+      read                  = true
+      write                 = true
+      version               = "1.0"
+      retention_policy_days = var.blob_retention_days
+    }
+  }
+
   tags = var.tags
 }
 
@@ -62,6 +76,24 @@ resource "azurerm_log_analytics_workspace" "telemetry" {
   sku                 = "PerGB2018"
   retention_in_days   = var.log_retention_days
   tags                = var.tags
+}
+
+resource "azurerm_monitor_diagnostic_setting" "blob" {
+  name                       = "${var.name_prefix}-blob-audit"
+  target_resource_id         = "${azurerm_storage_account.telemetry.id}/blobServices/default"
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.telemetry.id
+
+  enabled_log {
+    category = "StorageRead"
+  }
+
+  enabled_log {
+    category = "StorageWrite"
+  }
+
+  enabled_log {
+    category = "StorageDelete"
+  }
 }
 
 resource "azurerm_application_insights" "telemetry" {
