@@ -55,7 +55,7 @@ jobs:
           if [ -z "$BASE_REF" ] || [ "$BASE_REF" = "0000000000000000000000000000000000000000" ]; then
             mapfile -t PY_FILES < <(git ls-files '*.py')
           else
-            mapfile -t PY_FILES < <(git diff --name-only "$BASE_REF" HEAD -- '*.py')
+            mapfile -t PY_FILES < <(git diff --name-only --diff-filter=ACMRT "$BASE_REF" HEAD -- '*.py')
           fi
 
           if [ "${#PY_FILES[@]}" -gt 0 ]; then
@@ -76,7 +76,7 @@ jobs:
           if [ -z "$BASE_REF" ] || [ "$BASE_REF" = "0000000000000000000000000000000000000000" ]; then
             mapfile -t PY_FILES < <(git ls-files '*.py')
           else
-            mapfile -t PY_FILES < <(git diff --name-only "$BASE_REF" HEAD -- '*.py')
+            mapfile -t PY_FILES < <(git diff --name-only --diff-filter=ACMRT "$BASE_REF" HEAD -- '*.py')
           fi
 
           if [ "${#PY_FILES[@]}" -gt 0 ]; then
