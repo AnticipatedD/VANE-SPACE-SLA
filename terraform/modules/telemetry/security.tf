@@ -43,9 +43,8 @@ resource "azurerm_role_assignment" "storage_key_access" {
 }
 
 resource "azurerm_storage_account_customer_managed_key" "telemetry" {
-  storage_account_id = azurerm_storage_account.telemetry.id
-  key_vault_key_id   = azurerm_key_vault_key.telemetry.id
-
+  storage_account_id        = azurerm_storage_account.telemetry.id
+  key_vault_key_id          = azurerm_key_vault_key.telemetry.id
   user_assigned_identity_id = azurerm_user_assigned_identity.storage.id
 
   depends_on = [azurerm_role_assignment.storage_key_access]
@@ -79,8 +78,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "blob" {
   resource_group_name   = azurerm_resource_group.telemetry.name
   private_dns_zone_name = azurerm_private_dns_zone.blob.name
   virtual_network_id    = azurerm_virtual_network.telemetry.id
-  registration_enabled = false
-  tags                 = var.tags
+  registration_enabled  = false
+  tags                  = var.tags
 }
 
 resource "azurerm_private_endpoint" "blob" {
