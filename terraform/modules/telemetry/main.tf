@@ -71,8 +71,8 @@ resource "azurerm_storage_account" "telemetry" {
   tags = var.tags
 }
 
-#checkov:skip=CKV2_AZURE_21:Blob StorageRead logs are configured through azurerm_monitor_diagnostic_setting.blob_service; the Checkov graph rule only recognizes azurerm_log_analytics_storage_insights.
 resource "azurerm_storage_container" "telemetry" {
+  #checkov:skip=CKV2_AZURE_21:Blob StorageRead logs are configured through azurerm_monitor_diagnostic_setting.blob_service; the Checkov graph rule only recognizes azurerm_log_analytics_storage_insights.
   name                  = var.container_name
   storage_account_id    = azurerm_storage_account.telemetry.id
   container_access_type = "private"
