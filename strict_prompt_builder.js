@@ -79,9 +79,11 @@ class StrictPromptBuilder {
             mandate = "SOFT GUIDANCE: Use context as primary source.";
         }
 
-        const truthContext = auditedContexts
-            .filter(block => block && block.trim())
-            .map((block, i) => `[CONTEXT_BLOCK_${String(i).padStart(2, '0')}]: ${block.trim()}`)
+        const safeContexts = Array.isArray(auditedContexts)
+            ? auditedContexts.filter(block => typeof block === "string" && block.trim()).map(block => block.trim())
+            : [];
+        const truthContext = safeContexts
+            .map((block, i) => `[CONTEXT_BLOCK_${String(i).padStart(2, '0')}]: ${block}`)
             .join("\n");
 
         const prompt = `SYSTEM_MODEL_TARGET: ${this.modelId}\n` +
@@ -96,7 +98,7 @@ class StrictPromptBuilder {
             metadata: {
                 modelId: this.modelId,
                 groundingStrength: this.groundingStrength,
-                contextBlockCount: auditedContexts.length,
+                contextBlockCount: safeContexts.length,
                 timestamp: new Date().toISOString(),
                 pipelineVersion: "2.1.0-prod"
             }

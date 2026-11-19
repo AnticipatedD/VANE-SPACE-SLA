@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint strict_prompt_builder.js",
     "format": "prettier --write strict_prompt_builder.js",
-    "test": "echo \"No Node test suite yet – Python pytest is the primary test runner\" && exit 0",
+    "test": "node --test tests/js/*.test.js",
     "start": "echo \"This is a Python-first project. Run: python vane_space_init.py\""
   },
   "keywords": [

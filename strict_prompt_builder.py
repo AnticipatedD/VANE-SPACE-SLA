@@ -76,8 +76,13 @@ class StrictPromptBuilder:
         else:
             mandate = "SOFT GUIDANCE: Use context as primary source."
 
+        safe_contexts = [
+            block.strip()
+            for block in audited_contexts
+            if isinstance(block, str) and block.strip()
+        ]
         truth_context = "\n".join(
-            f"[CONTEXT_BLOCK_{i:02d}]: {block.strip()}" for i, block in enumerate(audited_contexts) if block
+            f"[CONTEXT_BLOCK_{i:02d}]: {block}" for i, block in enumerate(safe_contexts)
         )
 
         prompt = (
@@ -94,7 +99,7 @@ class StrictPromptBuilder:
             "metadata": {
                 "model_id": self.model_id,
                 "grounding_strength": self.grounding_strength,
-                "context_block_count": len(audited_contexts),
+                "context_block_count": len(safe_contexts),
                 "timestamp": datetime.now(timezone.utc).isoformat(),
                 "pipeline_version": "2.1.0-prod"
             }

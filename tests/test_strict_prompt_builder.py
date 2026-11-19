@@ -281,3 +281,16 @@ class TestIntegration:
 
 if __name__ == "__main__":
     pytest.main(["-v", __file__, "--cov=strict_prompt_builder", "--cov-report=term-missing"])
+
+
+def test_build_grounded_prompt_counts_only_nonempty_string_contexts():
+    builder = StrictPromptBuilder()
+    result = builder.build_grounded_prompt(
+        "Test query",
+        audited_contexts=[" first ", "", "   ", None, "second", 42],
+    )
+
+    assert result["metadata"]["context_block_count"] == 2
+    assert "[CONTEXT_BLOCK_00]: first" in result["prompt"]
+    assert "[CONTEXT_BLOCK_01]: second" in result["prompt"]
+    assert "[CONTEXT_BLOCK_02]" not in result["prompt"]
