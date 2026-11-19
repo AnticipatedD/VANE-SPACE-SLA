@@ -23,7 +23,7 @@ structlog.configure(
 logger = structlog.get_logger("vane_space")
 
 
-def validate_env():
+def validate_env() -> None:
     """Basic check that required environment variables are not empty."""
     required = [
         "IBM_SAAS_ACCOUNT_ID",
@@ -58,7 +58,7 @@ def verify_granite_syntax_gate(code_snippet: str) -> Dict[str, str]:
     return {"validation_gate": "PASS", "error_detected": "None", "granite_remediation": "None"}
 
 
-def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int = None) -> Dict[str, Any]:
+def run_multi_gate_telemetry_check(sensor_payload: Dict[str, Any], seed: int | None = None) -> Dict[str, Any]:
     if seed is not None:
         random.seed(seed)
 

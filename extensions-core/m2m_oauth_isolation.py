@@ -6,6 +6,7 @@ Advanced zero-trust request isolation patterns
 
 from m2m_oauth_gateway import M2MOAuthGateway
 import logging
+from typing import Any
 
 logger = logging.getLogger("m2m_isolation")
 
@@ -17,19 +18,22 @@ class IsolatedRequestHandler:
         self.gateway = gateway
         self.request_count = 0
 
-    def handle_request(self, client_id: str, token: str, resource: str, action: str, payload=None):
-        """Process request with full isolation checks."""
+    def handle_request(
+        self,
+        client_id: str,
+        token: str,
+        resource: str,
+        action: str,
+        payload: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Process a request after token and scope validation."""
         self.request_count += 1
-        
-        # Verify token
-        valid, claims = self.gateway.verify_token(token)
-        if not valid:
+
+        if not self.gateway.validate_token(token):
             return {"status": "unauthorized", "error": "Invalid or expired token"}
-        
-        # Authorize request
-        authorized, msg = self.gateway.authorize_request(client_id, resource, action)
-        if not authorized:
-            return {"status": "forbidden", "error": msg}
+
+        if not self.gateway.matrix.can_access(client_id, action):
+            return {"status": "forbidden", "error": "Requested scope is not permitted"}
         
         # Process request
         return {

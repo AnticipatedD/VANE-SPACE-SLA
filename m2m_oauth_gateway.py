@@ -42,9 +42,10 @@ class IsolationMatrix:
 
 class M2MOAuthGateway:
     def __init__(self) -> None:
-        self.signing_key = os.environ.get("M2M_SIGNING_KEY")
-        if not self.signing_key:
+        signing_key = os.environ.get("M2M_SIGNING_KEY")
+        if not signing_key:
             raise ValueError("M2M_SIGNING_KEY runtime variable must be initialized by the operator.")
+        self.signing_key: str = signing_key
         self.matrix = IsolationMatrix()
 
     def _verify_client_secret(self, creds: ClientCredentials) -> bool:

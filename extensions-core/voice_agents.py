@@ -53,7 +53,7 @@ class VoiceDuplexStreamOrchestrator:
                 logger.error("Failed to initialize TTS engine", error=str(e))
                 self.enable_speech = False
 
-    def speak(self, text: str):
+    def speak(self, text: str) -> None:
         """Produce real audio output"""
         logger.info("🔊 SPEAKING", text=text)
         if self.enable_speech and self.engine:
@@ -122,7 +122,7 @@ class VoiceDuplexStreamOrchestrator:
         logger.info("Voice Stream telemetry fully operational.")
         return audit_metrics
 
-    def generate_bob_report_payload(self, run_metrics: dict = None, status: Any = None, metrics: Any = None) -> str:
+    def generate_bob_report_payload(self, run_metrics: dict[str, Any] | None = None, status: Any = None, metrics: Any = None) -> str:
         """
         Generates structured JSON execution summary payload conforming to the 
         expected verification report schemas. Supports status and metrics overrides.
