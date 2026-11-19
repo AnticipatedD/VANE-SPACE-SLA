@@ -9,14 +9,21 @@ description = "Enterprise Telemetry Validation and Prompt Grounding Backend Serv
 authors = ["AnticipatedD"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.11"
-pydantic = "2.10.4"
-pydantic-settings = "2.7.0"
-structlog = "24.3.0"
-python-dotenv = "1.0.1"
-pyjwt = "2.10.1"
-google-genai = ">=1.0.0"
+[project]
+name = "vane-space-sla"
+version = "1.0.0"
+description = "Enterprise Telemetry Validation and Prompt Grounding Backend Service Engine"
+authors = [{ name = "AnticipatedD" }]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "pydantic==2.10.4",
+    "pydantic-settings==2.7.0",
+    "structlog==24.3.0",
+    "python-dotenv==1.0.1",
+    "PyJWT==2.10.1",
+    "google-genai>=1.0.0",
+]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.4"
