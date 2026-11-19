@@ -142,7 +142,9 @@ jobs:
         run: python -m pip install poetry==2.1.4
 
       - name: Generate complete Poetry lockfile
-        run: poetry lock
+        run: |
+          rm -f poetry.lock
+          poetry lock
 
       - name: Verify pyproject and lockfile consistency
         run: poetry check --lock
