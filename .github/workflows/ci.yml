@@ -24,7 +24,7 @@ jobs:
       - name: Run Javascript Quality Checks
         run: |
           if [ -f package.json ]; then
-            npm ci
+            npm install
             npm run lint
             npm test
           fi
