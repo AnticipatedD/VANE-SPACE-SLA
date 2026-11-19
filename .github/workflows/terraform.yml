@@ -38,6 +38,22 @@ jobs:
       - name: Validate production configuration
         run: terraform -chdir=terraform/environments/production validate
 
+      # Planning is enabled only after the repository owner configures an Azure
+      # service-principal JSON secret. No infrastructure is applied by this workflow.
+      - name: Authenticate to Azure for production plan
+        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create production Terraform plan
+        if: ${{ secrets.AZURE_CREDENTIALS != '' }}
+        run: terraform -chdir=terraform/environments/production plan -input=false -lock=false -out=tfplan
+
+      - name: Explain why production plan was not run
+        if: ${{ secrets.AZURE_CREDENTIALS == '' }}
+        run: echo "Production plan skipped: configure the AZURE_CREDENTIALS repository secret to enable authenticated Azure planning."
+
       - name: Initialize telemetry module test configuration
         run: terraform -chdir=terraform/modules/telemetry init -backend=false -input=false
 
