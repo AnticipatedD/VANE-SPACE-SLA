@@ -6,6 +6,7 @@ Author: MD ABUL HOSSAIN
 """
 import os
 import time
+import hmac
 from typing import Dict, Optional
 import jwt
 import structlog
@@ -46,10 +47,23 @@ class M2MOAuthGateway:
             raise ValueError("M2M_SIGNING_KEY runtime variable must be initialized by the operator.")
         self.matrix = IsolationMatrix()
 
+    def _verify_client_secret(self, creds: ClientCredentials) -> bool:
+        """Compare the supplied client secret with its environment-managed value."""
+        secret_name = f"M2M_CLIENT_SECRET_{creds.client_id.upper().replace('-', '_')}"
+        expected_secret = os.environ.get(secret_name)
+        return bool(
+            expected_secret
+            and creds.client_secret
+            and hmac.compare_digest(creds.client_secret, expected_secret)
+        )
+
     def generate_token(self, creds: ClientCredentials, scope: str) -> Optional[str]:
-        """Issues short-lived cryptographically signed M2M access claims."""
+        """Issue a short-lived token only after scope and client-secret verification."""
         if not self.matrix.can_access(creds.client_id, scope):
             logger.error("Scope authorization denied for client identity", client=creds.client_id, scope=scope)
+            return None
+        if not self._verify_client_secret(creds):
+            logger.error("Client credential verification failed", client=creds.client_id)
             return None
 
         payload = {
@@ -63,8 +77,19 @@ class M2MOAuthGateway:
     def validate_token(self, token_str: str) -> bool:
         """Validates incoming tokens against structural signatures."""
         try:
-            jwt.decode(token_str, self.signing_key, algorithms=["HS256"])
-            return True
+            claims = jwt.decode(
+                token_str,
+                self.signing_key,
+                algorithms=["HS256"],
+                issuer="vane-space-auth",
+            )
+            client_id = claims.get("sub")
+            scope = claims.get("scope")
+            return (
+                isinstance(client_id, str)
+                and isinstance(scope, str)
+                and self.matrix.can_access(client_id, scope)
+            )
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError) as e:
             logger.error("Token verification failure caught", reasons=str(e))
             return False
