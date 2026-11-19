@@ -1,10 +1,17 @@
-```toml
+[package]
+name = "vane-space-sla-edge-engine"
+version = "0.1.0"
+edition = "2021"
+publish = false
+description = "VANE-SPACE-SLA deterministic telemetry verification core"
+
+[lib]
+path = "Rust-Edge-Engine/lib.rs"
+
 [dependencies]
 ciborium = "0.2"
 ed25519-dalek = { version = "2.1", default-features = false, features = ["std", "fast"] }
-sha2 = { version = "0.10", default-features = false }
-blake3 = "1.5"
 serde = { version = "1.0", default-features = false, features = ["derive"] }
-byteorder = "1.5"
+serde_bytes = "0.11"
+sha2 = { version = "0.10", default-features = false }
 thiserror = "1.0"
-```
