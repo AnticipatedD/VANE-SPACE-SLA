@@ -72,6 +72,8 @@ jobs:
   rust-edge-engine:
     name: Rust verification core
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Code Repository
         uses: actions/checkout@v4
@@ -82,12 +84,19 @@ jobs:
       - name: Run Rust verification tests
         run: cargo test --manifest-path Cargo.toml
 
-      - name: Export generated Cargo lockfile for repository pinning
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-cargo-lockfile
-          path: Cargo.lock
-          if-no-files-found: error
+      - name: Commit Cargo.lock when bootstrapping the Rust crate
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if ! git ls-files --error-unmatch Cargo.lock >/dev/null 2>&1; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add Cargo.lock
+            git commit -m "build(deps): add Cargo.lock"
+            git push origin HEAD:main
+          fi
+
+      - name: Verify locked Rust dependency graph
+        run: cargo test --locked --manifest-path Cargo.toml
 
       - name: Run Rust static analysis
-        run: cargo clippy --manifest-path Cargo.toml --all-targets -- -D warnings
+        run: cargo clippy --locked --manifest-path Cargo.toml --all-targets -- -D warnings
