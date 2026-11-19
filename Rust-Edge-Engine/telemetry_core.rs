@@ -55,7 +55,8 @@ pub struct WireEnvelope {
     pub packet: TelemetryPacket,
     pub key_id: [u8; 8],
     /// Enforce fixed array to prevent heap exhaustion allocation bombs (SEC-05)
-    pub signature: [u8; 64],
+    #[serde(with = "serde_bytes")]
+    pub signature: Vec<u8>,
 }
 
 pub struct SlidingWindowAntiReplay {
@@ -134,7 +135,8 @@ impl HardenedTelemetryGate {
         ciborium::ser::into_writer(&envelope.packet, &mut canonical_bytes)
             .map_err(|_| ZeroTrustError::SerializationError)?;
 
-        let sig = Signature::from_bytes(&envelope.signature);
+        let sig = Signature::from_slice(&envelope.signature)
+            .map_err(|_| ZeroTrustError::MalformedBuffer)?;
         verifying_key
             .verify_strict(&canonical_bytes, &sig)
             .map_err(|_| ZeroTrustError::InvalidSignature)?;

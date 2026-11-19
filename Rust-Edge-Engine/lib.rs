@@ -11,7 +11,7 @@ mod tests {
     fn anti_replay_guard_rejects_a_committed_sequence() {
         let mut guard = SlidingWindowAntiReplay::new(10);
 
-        assert_eq!(guard.pre_check(10), Ok(()));
+        assert!(guard.pre_check(10).is_ok());
         guard.commit(10);
 
         assert!(matches!(
