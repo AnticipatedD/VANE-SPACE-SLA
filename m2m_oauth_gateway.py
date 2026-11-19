@@ -68,3 +68,13 @@ class M2MOAuthGateway:
         except (jwt.ExpiredSignatureError, jwt.InvalidTokenError) as e:
             logger.error("Token verification failure caught", reasons=str(e))
             return False
+
+def health_check() -> Dict[str, object]:
+    """Return a non-secret readiness snapshot for the M2M signing dependency."""
+    configured = bool(os.environ.get("M2M_SIGNING_KEY"))
+    return {
+        "status": "ok" if configured else "error",
+        "checks": {
+            "m2m_signing_key": "configured" if configured else "missing",
+        },
+    }
