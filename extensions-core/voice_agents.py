@@ -63,11 +63,21 @@ class VoiceDuplexStreamOrchestrator:
             except Exception as e:
                 logger.error("Speech execution failed", error=str(e))
 
-    def execute_as_agent_mode(self, frame_count: int = 3, prompt: Any = None, context: Any = None) -> Dict[str, Any]:
+    def execute_as_agent_mode(
+        self,
+        frame_count: int = 3,
+        prompt: Any = None,
+        context: Any = None,
+        seed: int | None = None,
+    ) -> Dict[str, Any]:
         """
         Executes voice verification stream. Accepts optional prompt and context arguments 
         to ensure interface conformity across testing framework runners.
         """
+        if frame_count < 0:
+            raise ValueError("frame_count must be zero or greater")
+        rng = random.Random(seed)
+
         self.speak("Initializing VANE-SPACE-SLA Voice Duplex Stream Orchestrator.")
         self.speak(f"Partner entity {self.company_name} verified.")
           
@@ -80,9 +90,9 @@ class VoiceDuplexStreamOrchestrator:
         for frame_id in range(1, frame_count + 1):
             time.sleep(0.1)  
               
-            measured_jitter_ms = round(random.uniform(1.1, 4.5), 2)
-            verification_alignment = round(random.uniform(94.2, 99.1), 2)
-            processing_latency = round(random.uniform(41.0, 45.0), 2)
+            measured_jitter_ms = round(rng.uniform(1.1, 4.5), 2)
+            verification_alignment = round(rng.uniform(94.2, 99.1), 2)
+            processing_latency = round(rng.uniform(41.0, 45.0), 2)
 
             if processing_latency >= 45.00:
                 sync_alert = "CRITICAL / SPIKE"
