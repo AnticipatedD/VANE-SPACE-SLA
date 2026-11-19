@@ -84,3 +84,14 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "environment" {
+  description = "Deployment environment label included in the validation identifier."
+  type        = string
+  default     = "production"
+
+  validation {
+    condition     = contains(["development", "staging", "production", "test"], var.environment)
+    error_message = "environment must be development, staging, production, or test."
+  }
+}
