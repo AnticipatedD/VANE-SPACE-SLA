@@ -48,7 +48,7 @@ jobs:
         run: |
           mapfile -t PY_FILES < <(git ls-files '*.py')
           if [ "${#PY_FILES[@]}" -gt 0 ]; then
-            ruff check "${PY_FILES[@]}"
+            ruff check --select E4,E7,E9,F "${PY_FILES[@]}"
           else
             echo "No tracked Python files found."
           fi
