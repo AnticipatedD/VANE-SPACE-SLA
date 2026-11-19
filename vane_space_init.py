@@ -7,7 +7,6 @@ Author: MD ABUL HOSSAIN (SVP & Head of Strategic Partnerships, TARU Global Acces
 import os
 import time
 import random
-import json
 import structlog
 from typing import Dict, Any
 from dotenv import load_dotenv

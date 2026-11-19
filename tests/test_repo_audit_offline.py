@@ -1,4 +1,3 @@
-import pytest
 from pathlib import Path
 from unittest.mock import MagicMock
 from src.repo_audit import audit_repository, collect_python_files, build_audit_prompt

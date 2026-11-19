@@ -6,7 +6,7 @@ Author: MD ABUL HOSSAIN
 """ 
 
 import structlog
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 logger = structlog.get_logger()
 

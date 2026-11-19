@@ -1,4 +1,3 @@
-import pytest
 from telemetry_validator import AnomalyDetector, MultiGateTelemetryValidator
 
 def test_anomaly_detector_statistical_bounds():
