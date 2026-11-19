@@ -19,6 +19,8 @@ jobs:
   terraform:
     name: Format, validate, test and scan Azure IaC
     runs-on: ubuntu-latest
+    env:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
     steps:
       - name: Checkout repository
@@ -43,15 +45,11 @@ jobs:
       - name: Authenticate to Azure for production plan
         if: ${{ env.AZURE_CREDENTIALS != '' }}
         uses: azure/login@v2
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         with:
           creds: ${{ env.AZURE_CREDENTIALS }}
 
       - name: Create production Terraform plan
         if: ${{ env.AZURE_CREDENTIALS != '' }}
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
         run: terraform -chdir=terraform/environments/production plan -input=false -lock=false -out=tfplan
 
       - name: Explain why production plan was not run
