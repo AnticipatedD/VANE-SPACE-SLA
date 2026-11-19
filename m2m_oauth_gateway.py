@@ -5,6 +5,7 @@ Machine-to-Machine OAuth 2.0 Zero-Trust Authentication & Isolation Layer
 Author: MD ABUL HOSSAIN
 """
 import os
+import json
 import time
 import hmac
 from typing import Dict, Optional
@@ -104,3 +105,14 @@ def health_check() -> Dict[str, object]:
             "m2m_signing_key": "configured" if configured else "missing",
         },
     }
+
+
+def main() -> int:
+    """Emit a machine-readable readiness status for CLI health probes."""
+    result = health_check()
+    print(json.dumps(result))
+    return 0 if result["status"] == "ok" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
