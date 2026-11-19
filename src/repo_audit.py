@@ -10,7 +10,6 @@ import sys
 import structlog
 from google import genai
 from google.genai import types
-from google.genai.errors import APIError
 
 logger = structlog.get_logger(__name__)
 
