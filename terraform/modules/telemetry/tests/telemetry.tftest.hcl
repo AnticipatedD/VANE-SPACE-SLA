@@ -59,6 +59,11 @@ run "creates_private_encrypted_telemetry_storage" {
   }
 
   assert {
+    condition     = contains([for log in azurerm_monitor_diagnostic_setting.blob_service.enabled_log : log.category], "StorageRead")
+    error_message = "Blob Storage read operations must be sent to Log Analytics."
+  }
+
+  assert {
     condition     = azurerm_storage_account_customer_managed_key.telemetry.key_vault_key_id == var.key_vault_key_id
     error_message = "Telemetry storage must use the supplied customer-managed key."
   }
