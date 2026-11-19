@@ -7,9 +7,12 @@ import argparse
 import os
 from pathlib import Path
 import sys
+import structlog
 from google import genai
 from google.genai import types
 from google.genai.errors import APIError
+
+logger = structlog.get_logger(__name__)
 
 IGNORED_DIRS: set[str] = {
     ".git", ".venv", "venv", "__pycache__", ".mypy_cache", ".pytest_cache", "dist", "build"
@@ -98,7 +101,8 @@ def main() -> int:
     try:
         audit_repository(args.target, model=args.model)
         return 0
-    except (FileNotFoundError, APIError, Exception) as exc:
+    except Exception as exc:
+        logger.exception("Repository audit failed", error=str(exc))
         print(f"Audit failure: {exc}", file=sys.stderr)
         return 1
 

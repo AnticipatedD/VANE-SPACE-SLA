@@ -5,9 +5,12 @@ from __future__ import annotations
 
 import argparse
 import sys
+import structlog
 from google import genai
 from google.genai import types
 from google.genai.errors import APIError
+
+logger = structlog.get_logger(__name__)
 
 
 def run_agent_phase(
@@ -91,9 +94,11 @@ def main() -> int:
         run_agent_orchestrator(args.task, model=args.model)
         return 0
     except APIError as exc:
+        logger.exception("Gemini API orchestration failed", error=exc.message)
         print(f"API Error during orchestration: {exc.message}", file=sys.stderr)
         return 1
     except Exception as exc:
+        logger.exception("Unexpected orchestration failure", error=str(exc))
         print(f"Orchestration failure: {exc}", file=sys.stderr)
         return 1
 
