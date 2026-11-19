@@ -4,7 +4,7 @@ Extension: M2M OAuth Isolation Module
 Advanced zero-trust request isolation patterns
 """
 
-from m2m_oauth_gateway import M2MOAuthGateway, IsolationLevel
+from m2m_oauth_gateway import M2MOAuthGateway
 import logging
 
 logger = logging.getLogger("m2m_isolation")
@@ -38,7 +38,7 @@ class IsolatedRequestHandler:
             "client_id": client_id,
             "resource": resource,
             "action": action,
-            "message": f"Request processed successfully"
+            "message": "Request processed successfully"
         }
 
 

@@ -6,8 +6,6 @@ Description: Programmatically manages asset parameters, checks video render boun
              and validates media compilation states.
 """
 
-import os
-import sys
 import logging
 
 # Configure structured logging to replace raw print statements
@@ -32,7 +30,9 @@ def assemble_submission_video() -> bool:
     are discoverable within the workspace boundaries.
     """
     try:
-        import moviepy.editor as mp
+        import importlib.util
+        if importlib.util.find_spec("moviepy") is None:
+            raise ImportError("moviepy package is not installed")
         logger.info("[1/3] MoviePy detected. Initializing asset ingest hooks...")
     except ImportError:
         logger.warning("[1/3] 'moviepy' not available locally. Falling back to asset mock check.")

@@ -1,5 +1,3 @@
-import pytest
-import os
 import time
 from m2m_oauth_gateway import M2MOAuthGateway, ClientCredentials, AccessToken
 

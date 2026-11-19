@@ -7,7 +7,6 @@ Description: Enforces hard context boundaries on LLM prompt construction to
 """
 
 import os
-import re
 import logging
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
