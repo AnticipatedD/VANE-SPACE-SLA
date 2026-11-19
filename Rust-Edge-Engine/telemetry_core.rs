@@ -78,10 +78,8 @@ impl SlidingWindowAntiReplay {
             return Err(ZeroTrustError::ReplayDetected);
         }
         let diff = sequence - self.base_sequence;
-        if diff < 128 {
-            if (self.window_mask & (1 << diff)) != 0 {
-                return Err(ZeroTrustError::ReplayDetected);
-            }
+        if diff < 128 && (self.window_mask & (1 << diff)) != 0 {
+            return Err(ZeroTrustError::ReplayDetected);
         }
         Ok(())
     }
